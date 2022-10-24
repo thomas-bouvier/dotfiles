@@ -37,3 +37,8 @@ telescope.load_extension('file_browser')
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', ';f', '<cmd>lua require("telescope.builtin").find_files({ no_ignore = false, hidden = true })<cr>', opts)
+vim.keymap.set('n', ';r', '<cmd>lua require("telescope.builtin").live_grep({ no_ignore = false, hidden = true })<cr>', opts)
+vim.keymap.set('n', ';gc', '<cmd>lua require("telescope.builtin").git_commits({ no_ignore = false, hidden = true })<cr>', opts)
+vim.keymap.set('n', ';gs', '<cmd>lua require("telescope.builtin").git_status({ no_ignore = false, hidden = true })<cr>', opts)
+vim.keymap.set('n', ';gb', '<cmd>lua require("telescope.builtin").git_branch({ no_ignore = false, hidden = true })<cr>', opts)
+
