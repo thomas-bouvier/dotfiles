@@ -8,11 +8,11 @@ end
 vim.cmd [[packadd packer.nvim]]
 
 packer.startup(function(use)
-	use 'wbthomason/packer.nvim'
+  use 'wbthomason/packer.nvim'
 
-	use 'nvim-lua/plenary.nvim'
-	use 'nvim-telescope/telescope.nvim'
-	use 'nvim-telescope/telescope-file-browser.nvim'
+  use 'neovim/nvim-lspconfig'
 
-  use {'neoclide/coc.nvim', branch = 'release'}
+  use 'nvim-lua/plenary.nvim'
+  use 'nvim-telescope/telescope.nvim'
+  use 'nvim-telescope/telescope-file-browser.nvim'
 end)
