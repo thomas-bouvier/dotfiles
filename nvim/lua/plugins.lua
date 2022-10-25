@@ -13,4 +13,6 @@ packer.startup(function(use)
 	use 'nvim-lua/plenary.nvim'
 	use 'nvim-telescope/telescope.nvim'
 	use 'nvim-telescope/telescope-file-browser.nvim'
+
+  use {'neoclide/coc.nvim', branch = 'release'}
 end)
