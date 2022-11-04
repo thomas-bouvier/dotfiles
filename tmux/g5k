@@ -1,2 +1,9 @@
-tmux split-window -v -p 66
-tmux split-window -v -p 50
+# Split session into FOUR EQUAL quadrants
+tmux selectp -t 0    # select the first (0) pane
+tmux splitw -h -p 50 # split it into two halves
+tmux selectp -t 0    # select the first (0) pane
+tmux splitw -v -p 50 # split it into two halves
+
+tmux selectp -t 2    # select the new, second (2) pane
+tmux splitw -v -p 50 # split it into two halves
+tmux selectp -t 0    # go back to the first pane
