@@ -20,6 +20,7 @@ packer.startup(function(use)
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-file-browser.nvim'
+    use 'nvim-tree/nvim-tree.lua'
     use 'alexghergh/nvim-tmux-navigation'
 
     use 'shaunsingh/nord.nvim'
