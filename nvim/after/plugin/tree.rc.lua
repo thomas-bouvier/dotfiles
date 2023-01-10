@@ -3,6 +3,8 @@ if (not status) then return end
 
 tree.setup {
     sort_by = "case_sensitive",
+    open_on_setup = true,
+    open_on_setup_file = true,
     view = {
         adaptive_size = true,
         mappings = {
