@@ -21,12 +21,10 @@ packer.startup(function(use)
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-file-browser.nvim'
     use 'nvim-tree/nvim-tree.lua'
+    use 'nvim-tree/nvim-web-devicons'
     use 'alexghergh/nvim-tmux-navigation'
 
     use 'shaunsingh/nord.nvim'
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
+    use 'nvim-lualine/lualine.nvim'
     use 'lewis6991/gitsigns.nvim'
 end)
