@@ -1,5 +1,9 @@
 # dotfiles
 
+```console
+git clone git@github.com:thomas-bouvier/dotfiles.git /home/tbouvier/Dev
+```
+
 ## General utilities
 
 ```
