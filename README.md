@@ -17,14 +17,15 @@ Install [atui](https://docs.atuin.sh/guide/installation/). Set up the [sync](htt
 ## Shell utilities
 
 ```
-ln -s ~/Dev/dotfiles/.zshrc /home/tbouvier
-ln -s ~/Dev/dotfiles/.zsh_aliases /home/tbouvier
-ln -s ~/Dev/dotfiles/tmux/.tmux.conf /home/tbouvier
+ln -s /home/tbouvier/Dev/dotfiles/.zshrc /home/tbouvier
+ln -s /home/tbouvier/Dev/dotfiles/.zsh_aliases /home/tbouvier
+ln -s /home/tbouvier/Dev/dotfiles/tmux/.tmux.conf /home/tbouvier
+ln -s /home/tbouvier/Dev/dotfiles/ssh/config /home/tbouvier/.ssh
 
-cp ~/Dev/dotfiles/tmux/ide /usr/local/bin/ide
-cp ~/Dev/dotfiles/tmux/g5k /usr/local/bin/g5k
+cp /home/tbouvier/Dev/dotfiles/tmux/ide /usr/local/bin/ide
+cp /home/tbouvier/Dev/dotfiles/tmux/g5k /usr/local/bin/g5k
 ```
 
 ```
-tmux source-file ~/.tmux.conf
+tmux source-file /home/tbouvier/.tmux.conf
 ```
