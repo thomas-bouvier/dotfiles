@@ -7,7 +7,7 @@ git clone git@github.com:thomas-bouvier/dotfiles.git /home/tbouvier/Dev
 ## General utilities
 
 ```
-dnf install zsh tmux
+dnf install zsh tmux vim eza
 ```
 
 ## SSH key
