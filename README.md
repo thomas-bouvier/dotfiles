@@ -16,8 +16,11 @@ dnf install zsh tmux vim eza
 
 ## Notes (obsidian)
 
+Open Obsidian and sync your notes. Close the program.
+
 ```console
-ln -s /home/tbouvier/Dev/dotfiles/.obsidian /home/tbouvier/Documents/Obsidian/<Vault>
+mv /home/tbouvier/Obsidian/<Vault>/.obsidian /home/tbouvier/Obsidian/<Vault>/.obsidian.old
+ln -s /home/tbouvier/Dev/dotfiles/.obsidian /home/tbouvier/Obsidian/<Vault>
 ```
 
 ## Shell history (atuin)
