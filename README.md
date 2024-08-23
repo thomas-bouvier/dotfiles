@@ -4,12 +4,6 @@
 git clone git@github.com:thomas-bouvier/dotfiles.git /home/tbouvier/Dev
 ```
 
-## General utilities
-
-```
-dnf install zsh tmux vim eza
-```
-
 ## SSH key
 
 [Generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new key.
@@ -57,9 +51,6 @@ ln -s /home/tbouvier/Dev/dotfiles/ssh/config /home/tbouvier/.ssh
 
 [JetBrains Mono](https://www.jetbrains.com/lp/mono/).
 
-```console
-dnf install texlive-scheme-full
-```
 
 ## NixOS
 
@@ -67,4 +58,10 @@ To rebuild the system:
 
 ```console
 sudo nixos-rebuild switch -I nixos-config=./system/configuration.nix
+```
+
+To rebuild the user environment:
+
+```console
+home-manager switch -f ./users/thomas/home.nix
 ```
