@@ -60,3 +60,11 @@ ln -s /home/tbouvier/Dev/dotfiles/ssh/config /home/tbouvier/.ssh
 ```console
 dnf install texlive-scheme-full
 ```
+
+## NixOS
+
+To rebuild the system:
+
+```console
+sudo nixos-rebuild switch -I nixos-config=./system/configuration.nix
+```
