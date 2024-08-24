@@ -57,11 +57,5 @@ ln -s /home/tbouvier/Dev/dotfiles/ssh/config /home/tbouvier/.ssh
 To rebuild the system:
 
 ```console
-sudo nixos-rebuild switch -I nixos-config=./system/configuration.nix
-```
-
-To rebuild the user environment:
-
-```console
-home-manager switch -f ./users/thomas/home.nix
+sudo nixos-rebuild switch --flake .
 ```

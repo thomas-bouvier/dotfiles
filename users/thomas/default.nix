@@ -2,7 +2,6 @@
 
 {
   imports = [
-    <plasma-manager/modules>
     ./plasma.nix
   ];
 
