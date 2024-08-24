@@ -63,22 +63,25 @@
     isNormalUser = true;
     initialPassword = "pw123";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
+    packages = with pkgs; [ ];
+  };
+
+  #users.defaultUserShell = pkgs.zsh;
+
+  # Enable the Flakes feature and the accompanying new nix command-line tool
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
       firefox
       vim
       zsh
       tmux
       git
       tailscale
-    ];
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #   wget
-  # ];
+      wget
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
