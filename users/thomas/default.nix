@@ -3,6 +3,8 @@
 {
   imports = [
     ./plasma.nix
+    ./ssh.nix
+    ./tmux.nix
     ./zsh.nix
   ];
 
