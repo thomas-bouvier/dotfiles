@@ -53,6 +53,8 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    (writeShellScriptBin "g5k" (builtins.readFile ./assets/g5k))
+    (writeShellScriptBin "ide" (builtins.readFile ./assets/ide))
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

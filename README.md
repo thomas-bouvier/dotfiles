@@ -1,6 +1,12 @@
-# dotfiles
+# NixOS dotfiles
 
-[Generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key.
+If you set up a new machinem you should probable [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key.
+
+To rebuild the system:
+
+```console
+sudo nixos-rebuild switch --flake .
+```
 
 ## Notes (obsidian)
 
@@ -18,12 +24,3 @@ Install [atui](https://docs.atuin.sh/guide/installation/). Set up the [sync](htt
 ## Font
 
 [JetBrains Mono](https://www.jetbrains.com/lp/mono/).
-
-
-## NixOS
-
-To rebuild the system:
-
-```console
-sudo nixos-rebuild switch --flake .
-```
