@@ -6,6 +6,8 @@
 
 {
   imports = [
+      ./nvidia.nix
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -84,6 +86,14 @@
   ];
 
   programs.zsh.enable = true;
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      # Nvidia
+      "nvidia-x11"
+      "nvidia-settings"
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
