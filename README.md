@@ -42,8 +42,6 @@ cp /home/tbouvier/Dev/dotfiles/tmux/g5k /usr/local/bin/g5k
 ## Shell configuration
 
 ```
-ln -s /home/tbouvier/Dev/dotfiles/.zshrc /home/tbouvier
-ln -s /home/tbouvier/Dev/dotfiles/.zsh_aliases /home/tbouvier
 ln -s /home/tbouvier/Dev/dotfiles/ssh/config /home/tbouvier/.ssh
 ```
 

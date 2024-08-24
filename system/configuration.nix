@@ -63,10 +63,10 @@
     isNormalUser = true;
     initialPassword = "pw123";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [ ];
+    shell = pkgs.zsh;
   };
 
-  #users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.zsh;
 
   # Enable the Flakes feature and the accompanying new nix command-line tool
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -82,6 +82,8 @@
       tailscale
       wget
   ];
+
+  programs.zsh.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
