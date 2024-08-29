@@ -21,6 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -31,6 +36,7 @@
       home-manager,
       plasma-manager,
       sops-nix,
+      lix-module,
       ...
     }@inputs:
     let
@@ -55,6 +61,8 @@
               nixpkgs.overlays = [ overlay-unstable ];
             }
           )
+
+          lix-module.nixosModules.default
 
           ./system/configuration.nix
 
