@@ -65,7 +65,6 @@
     isNormalUser = true;
     initialPassword = "pw123";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.zsh;
   };
 
   users.defaultUserShell = pkgs.zsh;
