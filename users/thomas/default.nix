@@ -101,7 +101,8 @@
   #  /etc/profiles/per-user/thomas/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "vim";
+    VISUAL = "vim";
   };
 
   # Let Home Manager install and manage itself.
