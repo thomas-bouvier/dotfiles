@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./librewolf.nix
     ./plasma.nix
     ./ssh.nix
     ./tmux.nix
