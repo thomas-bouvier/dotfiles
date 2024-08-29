@@ -6,6 +6,7 @@
 
 {
   imports = [
+      ./bluetooth.nix
       ./nvidia.nix
 
       # Include the results of the hardware scan.
@@ -15,6 +16,10 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Enable system modules
+  bluetooth.enable = true;
+  #nvidia.enable = true;
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
