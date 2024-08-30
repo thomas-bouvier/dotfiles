@@ -22,10 +22,19 @@
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
-    lix-module = {
+    lix = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nur = {
+      url = "github:nix-community/nur";
+    };
+
+    #firefox-addons = {
+    #  url = "git+https://git.sr.ht/~rycee/nur-expressions?dir=pkgs/firefox-addons";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
   outputs =
@@ -36,7 +45,8 @@
       home-manager,
       plasma-manager,
       sops-nix,
-      lix-module,
+      lix,
+      nur,
       ...
     }@inputs:
     let
@@ -58,11 +68,14 @@
           (
             { config, pkgs, ... }:
             {
-              nixpkgs.overlays = [ overlay-unstable ];
+              nixpkgs.overlays = [ 
+                overlay-unstable
+                nur.overlay
+              ];
             }
           )
 
-          lix-module.nixosModules.default
+          lix.nixosModules.default
 
           ./system/configuration.nix
 
@@ -78,6 +91,7 @@
                 plasma-manager.homeManagerModules.plasma-manager
                 inputs.sops-nix.homeManagerModules.sops
               ];
+
               users.thomas = import ./users/thomas;
             };
           }
