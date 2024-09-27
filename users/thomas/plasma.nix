@@ -96,7 +96,8 @@
       "kwinrc"."Plugins"."squashEnabled" = false;
       "kwinrc"."Wayland"."VirtualKeyboardEnabled" = true;
       "kwinrc"."Xwayland"."Scale" = 1.75;
-      "kxkbrc"."Layout"."LayoutList" = "eu,fr";
+      "kxkbrc"."Layout"."LayoutList" = "eu,fr,fr";
+      "kxkbrc"."Layout"."VariantList" = ",,mac";
       "plasma-localerc"."Formats"."LANG" = "en_US.utf8";
     };
   };
