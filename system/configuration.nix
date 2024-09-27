@@ -7,6 +7,7 @@
 {
   imports = [
       ./bluetooth.nix
+      ./stylix.nix
       ./nvidia.nix
 
       # Include the results of the hardware scan.
@@ -19,7 +20,7 @@
 
   # Enable system modules
   bluetooth.enable = true;
-  #nvidia.enable = true;
+  stylix.enable = true;
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.

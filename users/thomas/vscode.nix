@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  # The Nordic package does a better job at theming VSCode
+  stylix.targets.vscode.enable = false;
+
   programs.vscode = {
     enable = true;
     package = pkgs.unstable.vscodium;

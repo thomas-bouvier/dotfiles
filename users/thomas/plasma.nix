@@ -1,5 +1,8 @@
 { ... }:
 {
+  # The Nordic package does a better job at theming Plasma
+  #stylix.targets.kde.enable = false;
+
   programs.plasma = {
     enable = true;
 
