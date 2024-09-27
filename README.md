@@ -1,26 +1,43 @@
-# NixOS dotfiles
+# Lix dotfiles
 
-If you set up a new machinem you should probable [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key.
+My declarative, reproducible system built using [Lix](https://lix.systems/).
+
+## Installation
+
+If you set up a new machine you should probably [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key.
+
+Put your age keys here:
+
+```console
+cd /home/thomas/.config/sops/age/keys.txt
+```
 
 To rebuild the system:
 
 ```console
-sudo nixos-rebuild switch --flake .
+nixos-rebuild switch --flake . --use-remote-sudo
 ```
 
-## Notes (obsidian)
+I got some inspiration from [geraldwuhoo](https://github.com/geraldwuhoo/nixos-config) to setup my system.
+
+### Atuin
+
+If you imported age keys, just login to retrieve your shell history:
+
+```console
+atuin login
+atuin sync
+```
+
+## TODO
+
+These are not fully integrated yet.
+
+### Obsidian
 
 Open Obsidian and sync your notes. Close the program.
 
 ```console
-mv /home/tbouvier/Obsidian/<Vault>/.obsidian /home/tbouvier/Obsidian/<Vault>/.obsidian.old
-ln -s /home/tbouvier/Dev/dotfiles/.obsidian /home/tbouvier/Obsidian/<Vault>
+mv /home/thomas/Obsidian/<Vault>/.obsidian /home/thomas/Obsidian/<Vault>/.obsidian.old
+ln -s /home/thomas/Dev/dotfiles/.obsidian /home/thomas/Obsidian/<Vault>
 ```
-
-## Shell history (atuin)
-
-Install [atui](https://docs.atuin.sh/guide/installation/). Set up the [sync](https://docs.atuin.sh/guide/sync/) using your credentials and secret key.
-
-## Font
-
-[JetBrains Mono](https://www.jetbrains.com/lp/mono/).
