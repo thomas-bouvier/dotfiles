@@ -8,10 +8,11 @@
 
     workspace = {
       theme = "Nordic-darker";
-      colorScheme = "Nordic-Darker"; # Doesnt work
+      # plasma-apply-cursortheme --list-themes
+      cursor.theme = "breeze_cursors"; # Does not work
+      colorScheme = "Nordic-Darker"; # Does not work
       lookAndFeel = "Nordic-darker"; # Works (Plasma Style)
       iconTheme = "Nordic-bluish";
-      # Missing: Window Decorations
     };
 
     panels = [
@@ -63,8 +64,6 @@
       "dolphinrc"."KFileDialog Settings"."Places Icons Static Size" = 22;
       "dolphinrc"."PreviewSettings"."Plugins" = "audiothumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegth
   umbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs";
-      "kcminputrc"."Mouse"."cursorSize" = 32;
-      "kcminputrc"."Mouse"."cursorTheme" = "Banana";
       "kdeglobals"."KFileDialog Settings"."Allow Expansion" = false;
       "kdeglobals"."KFileDialog Settings"."Automatically select filename extension" = true;
       "kdeglobals"."KFileDialog Settings"."Breadcrumb Navigation" = true;
