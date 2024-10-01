@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./konsole.nix
     ./librewolf.nix
     ./plasma.nix
     ./ssh.nix
