@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, my-secrets, ... }:
+let
+  secretsPath = builtins.toString my-secrets;
+in
 {
   imports = [
+    (import ./atuin.nix { inherit config pkgs; secretsPath = secretsPath; })
     ./konsole.nix
     ./librewolf.nix
     ./plasma.nix
@@ -16,6 +19,17 @@
   home.username = "thomas";
   home.homeDirectory = "/home/thomas";
 
+  # Configure sops location
+  # https://github.com/Mic92/sops-nix?tab=readme-ov-file#use-with-home-manager
+  sops = {
+    defaultSopsFile = "${secretsPath}/secrets/secrets.sops.yaml";
+    defaultSopsFormat = "yaml";
+
+    age = {
+      keyFile = "/home/thomas/.config/sops/age/keys.txt";
+    };
+  };
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -28,21 +42,24 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    librewolf
     thunderbird
     neovim
     eza
-    atuin
     ryujinx
     nicotine-plus
     inkscape
-    obsidian
+    #obsidian
+
+    python312
     texliveFull
     texstudio
+
     localsend
     vlc
     docker
     nordic
+    age
+    sops
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

@@ -3,6 +3,16 @@
   programs.ssh = {
     enable = true;
 
+    matchBlocks = {
+      "hosts" = {
+        host = "github.com";
+        identitiesOnly = true;
+        identityFile = [
+          "~/.ssh/id_ed25519"
+        ];
+      };
+    };
+
     extraConfig = ''
       Host g5k
         User tbouvier

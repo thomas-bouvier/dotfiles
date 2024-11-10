@@ -37,6 +37,11 @@
       url = "github:nix-community/nur";
     };
 
+    my-secrets = {
+      url = "git+ssh://git@github.com/thomas-bouvier/secrets.git?ref=main&shallow=1";
+      flake = false;
+    };
+
     #firefox-addons = {
     #  url = "git+https://git.sr.ht/~rycee/nur-expressions?dir=pkgs/firefox-addons";
     #  inputs.nixpkgs.follows = "nixpkgs";
@@ -54,6 +59,7 @@
       sops-nix,
       lix,
       nur,
+      my-secrets,
       ...
     }@inputs:
     let
@@ -95,6 +101,10 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "bak";
+
+              extraSpecialArgs = {
+                inherit my-secrets;
+              };
 
               sharedModules = [
                 plasma-manager.homeManagerModules.plasma-manager

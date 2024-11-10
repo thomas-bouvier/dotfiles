@@ -252,6 +252,24 @@
         "url": "https://git.lix.systems/lix-project/lix/archive/2.91.0.tar.gz"
       }
     },
+    "my-secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1731249585,
+        "narHash": "sha256-dXER9tkayrLdAsKo/uBmBFr+ZUDQRa+CrPXXzMZ8a60=",
+        "ref": "main",
+        "rev": "28497de0fc455e124db7fce86f8bebcd679b0307",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/thomas-bouvier/secrets.git"
+      },
+      "original": {
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/thomas-bouvier/secrets.git"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1729665710,
@@ -327,6 +345,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "lix": "lix",
+        "my-secrets": "my-secrets",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
