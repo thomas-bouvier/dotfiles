@@ -90,6 +90,7 @@
       "nvidia-settings"
       # Apple
       "apple_cursor"
+      "obsidian"
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
