@@ -81,6 +81,15 @@ in
     enable = true;
     userName = "Thomas Bouvier";
     userEmail = "contact@thomas-bouvier.io";
+
+    extraConfig = {
+      init.defaultBranch = "main";
+      url = {
+        "git@github.com:" = {
+          insteadOf = "https://github.com/";
+        };
+      };
+    };
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
