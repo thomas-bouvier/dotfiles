@@ -98,6 +98,7 @@
       # Nvidia
       "nvidia-x11"
       "nvidia-settings"
+      "apple_cursor"
     ];
 
   # Some programs need SUID wrappers, can be configured further or are

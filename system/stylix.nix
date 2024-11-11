@@ -34,9 +34,9 @@
     };
 
     cursor = {
-      package = pkgs.nordzy-cursor-theme;
-      name = "Nordzy-cursors";
-      size = 32;
+      name = "macOS";
+      package = pkgs.apple-cursor;
+      size = 24;
     };
 
     opacity.terminal = 1;
