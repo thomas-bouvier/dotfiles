@@ -34,23 +34,13 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
   # KDE Plasma 6
   services.displayManager.defaultSession = "plasma";
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  security.pam.services.sddm.enableKwallet = true;
+  security.pam.services.kdewallet.enableKwallet = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -98,6 +88,7 @@
       # Nvidia
       "nvidia-x11"
       "nvidia-settings"
+      # Apple
       "apple_cursor"
     ];
 
