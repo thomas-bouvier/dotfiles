@@ -53,6 +53,7 @@ in
     python312
     texliveFull
     texstudio
+    zotero
 
     localsend
     vlc
