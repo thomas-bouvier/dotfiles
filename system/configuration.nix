@@ -76,6 +76,7 @@
       zsh
       tmux
       git
+      devenv
       tailscale
       wget
   ];
