@@ -8,8 +8,6 @@
 
     workspace = {
       theme = "Nordic-darker";
-      # plasma-apply-cursortheme --list-themes
-      cursor.theme = "breeze_cursors"; # Does not work
       colorScheme = "Nordic-Darker"; # Does not work
       lookAndFeel = "Nordic-darker"; # Works (Plasma Style)
       iconTheme = "Nordic-bluish";
@@ -33,16 +31,24 @@
           }
           "org.kde.plasma.pager"
           {
-            name = "org.kde.plasma.digitalclock";
-            config.Appearance = {
-              dateFormat = "isoDate";
+            digitalClock = {
+              date = {
+                  format = "isoDate";
+                  position = "belowTime";
+                };
+                calendar.firstDayOfWeek = "monday";
+                time = {
+                  format = "24h";
+                  showSeconds = "never";
+                };
             };
           }
           # Taskbar icons
           {
-            name = "org.kde.plasma.icontasks";
-            config = {
-              General.launchers = [ ];
+            iconTasks = {
+              launchers = [
+                "applications:librewolf.desktop"
+              ];
             };
           }
           "org.kde.plasma.panelspacer"
