@@ -63,7 +63,17 @@
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
+  # Adding trusted users is required for devenv.
+  # A list of names of users that have additional rights when connecting
+  # to the Nix daemon, such as the ability to specify additional binary
+  # caches. You can also specify groups by prefixing them with @; for
+  # instance, @wheel means all users in the wheel group.
+  nix.extraOptions = ''
+    trusted-users = root thomas
+  '';
+
   users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
 
   # Enable the Flakes feature and the accompanying new nix command-line tool
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -80,8 +90,6 @@
       tailscale
       wget
   ];
-
-  programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfreePredicate =
     pkg:
