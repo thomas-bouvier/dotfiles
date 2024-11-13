@@ -46,9 +46,11 @@
           # Taskbar icons
           {
             iconTasks = {
-              launchers = [
-                "applications:librewolf.desktop"
-              ];
+              behavior = {
+                grouping = {
+                  method = "none";
+                };
+              };
             };
           }
           "org.kde.plasma.panelspacer"
