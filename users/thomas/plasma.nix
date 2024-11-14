@@ -13,6 +13,28 @@
       iconTheme = "Nordic-bluish";
     };
 
+    kwin = {
+      effects = {
+        minimization = {
+          animation = "magiclamp";
+        };
+      };
+
+      nightLight = {
+        enable = true;
+        mode = "location";
+        location = {
+          latitude = "48.86";
+          longitude = "2.34";
+        };
+
+        temperature = {
+          day = 6500;
+          night = 5000;
+        };
+      };
+    };
+
     panels = [
       # Taskbar
       {
@@ -95,12 +117,8 @@
       "kiorc"."Confirmations"."ConfirmEmptyTrash" = true;
       "kiorc"."Confirmations"."ConfirmTrash" = false;
       "kiorc"."Executable scripts"."behaviourOnLaunch" = "alwaysAsk";
-      "kwalletrc"."Wallet"."First Use" = false;
       "kwinrc"."Desktops"."Number" = 2;
       "kwinrc"."Desktops"."Rows" = 1;
-      "kwinrc"."Plugins"."magiclampEnabled" = true;
-      "kwinrc"."Plugins"."mousemarkEnabled" = true;
-      "kwinrc"."Plugins"."squashEnabled" = false;
       "kwinrc"."Wayland"."VirtualKeyboardEnabled" = true;
       "kwinrc"."Xwayland"."Scale" = 1.75;
       "kxkbrc"."Layout"."LayoutList" = "eu,fr,fr";
