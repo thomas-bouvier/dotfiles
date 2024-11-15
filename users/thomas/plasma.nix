@@ -55,23 +55,20 @@
           {
             digitalClock = {
               date = {
-                  format = "isoDate";
-                  position = "belowTime";
-                };
-                calendar.firstDayOfWeek = "monday";
-                time = {
-                  format = "24h";
-                  showSeconds = "never";
-                };
+                format = "isoDate";
+                position = "belowTime";
+              };
+              calendar.firstDayOfWeek = "monday";
+              time = {
+                format = "24h";
+                showSeconds = "never";
+              };
             };
           }
           # Taskbar icons
           {
             iconTasks = {
               launchers = [ ];
-              appearance = {
-                iconOnly = false;
-              };
               behavior = {
                 grouping = {
                   method = "none";

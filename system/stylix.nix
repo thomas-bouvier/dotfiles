@@ -36,7 +36,7 @@
     cursor = {
       name = "macOS";
       package = pkgs.apple-cursor;
-      size = 24;
+      size = 28;
     };
 
     opacity.terminal = 1;
