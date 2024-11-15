@@ -68,6 +68,10 @@
           # Taskbar icons
           {
             iconTasks = {
+              launchers = [ ];
+              appearance = {
+                iconOnly = false;
+              };
               behavior = {
                 grouping = {
                   method = "none";
@@ -86,6 +90,61 @@
       "KDE Keyboard Layout Switcher"."Switch keyboard layout to EurKEY (US)" = [ ];
       "KDE Keyboard Layout Switcher"."Switch keyboard layout to French" = [ ];
       "KDE Keyboard Layout Switcher"."Switch keyboard layout to French (AZERTY)" = [ ];
+    };
+
+    powerdevil = {
+      AC = {
+        autoSuspend.action = "sleep";
+        autoSuspend.idleTimeout = 1200;
+        dimDisplay.enable = false;
+        dimDisplay.idleTimeout = null;
+        displayBrightness = null;
+        inhibitLidActionWhenExternalMonitorConnected = true;
+        powerButtonAction = "showLogoutScreen";
+        powerProfile = "performance";
+        turnOffDisplay.idleTimeout = "never";
+        turnOffDisplay.idleTimeoutWhenLocked = null;
+        whenLaptopLidClosed = "sleep";
+        whenSleepingEnter = "standby";
+      };
+
+      battery = {
+        autoSuspend.action = "sleep";
+        autoSuspend.idleTimeout = 600;
+        dimDisplay.enable = true;
+        dimDisplay.idleTimeout = 300;
+        displayBrightness = null;
+        inhibitLidActionWhenExternalMonitorConnected = true;
+        powerButtonAction = "showLogoutScreen";
+        powerProfile = "balanced";
+        turnOffDisplay.idleTimeout = 900;
+        turnOffDisplay.idleTimeoutWhenLocked = null;
+        whenLaptopLidClosed = "sleep";
+        whenSleepingEnter = "standbyThenHibernate";
+      };
+
+      lowBattery = {
+        autoSuspend.action = "sleep";
+        autoSuspend.idleTimeout = 300;
+        dimDisplay.enable = true;
+        dimDisplay.idleTimeout = 30;
+        displayBrightness = 15;
+        inhibitLidActionWhenExternalMonitorConnected = true;
+        powerButtonAction = "showLogoutScreen";
+        powerProfile = "powerSaving";
+        turnOffDisplay.idleTimeout = 120;
+        turnOffDisplay.idleTimeoutWhenLocked = "immediately";
+        whenLaptopLidClosed = "hibernate";
+        whenSleepingEnter = null;
+      };
+
+      batteryLevels = {
+        lowLevel = 15;
+        criticalLevel = 3;
+        criticalAction = "hibernate";
+      };
+
+      general.pausePlayersOnSuspend = false;
     };
 
     configFile = {
