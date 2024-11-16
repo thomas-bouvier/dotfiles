@@ -8,6 +8,7 @@
   imports = [
       ./bluetooth.nix
       ./stylix.nix
+      ./tailscale.nix
       ./nvidia.nix
 
       # Include the results of the hardware scan.

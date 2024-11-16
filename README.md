@@ -29,6 +29,16 @@ atuin login
 atuin sync
 ```
 
+## Tailscale
+
+Connect your machine to your Tailscale network and authenticate in your browser:
+
+```console
+sudo tailscale up
+```
+
+In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB share.
+
 ## TODO
 
 These are not fully integrated yet.
