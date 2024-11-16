@@ -144,6 +144,13 @@
       general.pausePlayersOnSuspend = false;
     };
 
+    kscreenlocker = {
+      autoLock = true;
+      lockOnResume = true;
+      timeout = 3;
+      passwordRequired = true;
+    };
+
     configFile = {
       "dolphinrc"."IconsMode"."PreviewSize" = 32;
       "dolphinrc"."KFileDialog Settings"."Places Icons Auto-resize" = false;
