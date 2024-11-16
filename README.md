@@ -29,7 +29,7 @@ atuin login
 atuin sync
 ```
 
-## Tailscale
+### Tailscale
 
 Connect your machine to your Tailscale network and authenticate in your browser:
 
