@@ -17,7 +17,7 @@
     };
 
     stylix = {
-      url = "github:danth/stylix/release-24.05";
+      url = "github:danth/stylix/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
@@ -25,7 +25,6 @@
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
 
     lix = {
