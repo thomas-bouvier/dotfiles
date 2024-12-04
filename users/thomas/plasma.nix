@@ -69,6 +69,7 @@
           {
             iconTasks = {
               launchers = [ ];
+              iconsOnly = false;
               behavior = {
                 grouping = {
                   method = "none";
