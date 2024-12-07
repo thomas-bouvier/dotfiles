@@ -56,6 +56,7 @@ in
     age
     sops
     docker
+    docker-compose
 
     # Development
     python312
