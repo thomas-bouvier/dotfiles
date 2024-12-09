@@ -93,7 +93,7 @@
     powerdevil = {
       AC = {
         autoSuspend.action = "sleep";
-        autoSuspend.idleTimeout = 1200;
+        autoSuspend.idleTimeout = 3600;
         dimDisplay.enable = false;
         dimDisplay.idleTimeout = null;
         displayBrightness = null;
@@ -148,7 +148,7 @@
     kscreenlocker = {
       autoLock = true;
       lockOnResume = true;
-      timeout = 3;
+      timeout = 5;
       passwordRequired = true;
     };
 
@@ -169,7 +169,7 @@
       "kdeglobals"."KFileDialog Settings"."Show Inline Previews" = true;
       "kdeglobals"."KFileDialog Settings"."Show Preview" = false;
       "kdeglobals"."KFileDialog Settings"."Show Speedbar" = true;
-      "kdeglobals"."KFileDialog Settings"."Show hidden files" = false;
+      "kdeglobals"."KFileDialog Settings"."Show hidden files" = true;
       "kdeglobals"."KFileDialog Settings"."Sort by" = "Name";
       "kdeglobals"."KFileDialog Settings"."Sort directories first" = true;
       "kdeglobals"."KFileDialog Settings"."Sort hidden files last" = false;
@@ -179,7 +179,7 @@
       "kdeglobals"."PreviewSettings"."MaximumRemoteSize" = 10485760;
       "kiorc"."Confirmations"."ConfirmDelete" = true;
       "kiorc"."Confirmations"."ConfirmEmptyTrash" = true;
-      "kiorc"."Confirmations"."ConfirmTrash" = false;
+      "kiorc"."Confirmations"."ConfirmTrash" = true;
       "kiorc"."Executable scripts"."behaviourOnLaunch" = "alwaysAsk";
       "kwinrc"."Desktops"."Number" = 2;
       "kwinrc"."Desktops"."Rows" = 1;
