@@ -10,7 +10,7 @@
       theme = "Nordic-darker";
       colorScheme = "Nordic-Darker"; # Does not work
       lookAndFeel = "Nordic-darker"; # Works (Plasma Style)
-      iconTheme = "Nordic-bluish";
+      iconTheme = "Wings-Dark-Icons";
     };
 
     kwin = {
