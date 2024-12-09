@@ -29,6 +29,10 @@ atuin login
 atuin sync
 ```
 
+### Obsidian
+
+Just open Obsidian, login and sync everything including community plugins and settings (`Active community plugin list` and `Installed community plugins` options). Wait for the end of the synchronization, and restart the app.
+
 ### Tailscale
 
 Connect your machine to your Tailscale network and authenticate in your browser:
@@ -39,15 +43,13 @@ sudo tailscale up
 
 In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB share.
 
-## TODO
+## Future work
+
+These would be nice to have.
+
+- I would like to install the [Ophirofox](https://ophirofox.ophir.dev/) extension, which is not available on the Mozilla store.
 
 These are not fully integrated yet.
 
-### Obsidian
-
-Open Obsidian and sync your notes. Close the program.
-
-```console
-mv /home/thomas/Obsidian/<Vault>/.obsidian /home/thomas/Obsidian/<Vault>/.obsidian.old
-ln -s /home/thomas/Dev/dotfiles/.obsidian /home/thomas/Obsidian/<Vault>
-```
+- SDDM doesn't offer a keyboard layout selection, which is very annoying for non-US keyboard users. SDDM should be incubated into Plasma [at some point](https://invent.kde.org/plasma/plasma-desktop/-/issues/91).
+- [Pinned favorites in kickoff menu](https://github.com/nix-community/plasma-manager/issues/376) is not supported by `plasma-manager` yet.
