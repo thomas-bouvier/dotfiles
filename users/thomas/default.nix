@@ -62,6 +62,9 @@ in
     python312
     uv
 
+    # Android
+    android-tools
+
     # Research
     texliveFull
     texstudio
