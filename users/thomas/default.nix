@@ -78,6 +78,7 @@ in
     ryujinx
     nicotine-plus
     vlc
+    gpodder
 
     # Theme
     nordic
