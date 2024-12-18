@@ -9,6 +9,7 @@
       ./bluetooth.nix
       ./stylix.nix
       ./tailscale.nix
+      ./networking.nix
       ./nvidia.nix
 
       # Include the results of the hardware scan.
@@ -22,11 +23,6 @@
   # Enable system modules
   bluetooth.enable = true;
   stylix.enable = true;
-
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -115,11 +111,6 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # Localsend: port 53317
-  networking.firewall.allowedTCPPorts = [ 53317 ];
-  networking.firewall.allowedUDPPorts = [ 53317 ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
