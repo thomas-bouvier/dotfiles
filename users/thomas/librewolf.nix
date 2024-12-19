@@ -32,12 +32,14 @@
       "extensions.pocket.enabled" = false;
       "browser.tabs.tabmanager.enabled" = false;
       "browser.firefox-view.virtual-list.enabled" = false;
+      "browser.urlbar.suggest.recentsearches" = false;
+      "browser.urlbar.suggest.history" = false;
+      "browser.urlbar.suggest.bookmark" = true;
       "browser.urlbar.suggest.weather" = false;
       "browser.urlbar.suggest.trending" = false;
       "browser.urlbar.suggest.yelp" = false;
       "browser.urlbar.suggest.pocket" = false;
       "browser.urlbar.suggest.addons" = false;
-      "browser.urlbar.suggest.history" = true;
       "browser.urlbar.suggest.mdn" = false;
       "browser.urlbar.suggest.clipboard" = false;
 
