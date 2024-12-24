@@ -49,6 +49,7 @@ in
     kcharselect
     kfind
     kompare
+    libreoffice
 
     # Command line
     neovim
