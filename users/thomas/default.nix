@@ -62,6 +62,8 @@ in
     # Development
     python312
     uv
+    go
+    hugo
 
     # Android
     android-tools
