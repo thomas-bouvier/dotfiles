@@ -82,7 +82,7 @@
             {
               nixpkgs.overlays = [ 
                 overlay-unstable
-                nur.overlay
+                nur.overlays.default
               ];
             }
           )
