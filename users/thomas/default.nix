@@ -78,7 +78,7 @@ in
     kdenlive
 
     # Entertainment
-    ryujinx
+    ryujinx-greemdev
     nicotine-plus
     vlc
     gpodder
