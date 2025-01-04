@@ -1,7 +1,7 @@
 { ... }:
 {
   networking = {
-    #hostName = "nixos";
+    hostName = "bolet";
     networkmanager.enable = true;
 
     firewall = {
