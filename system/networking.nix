@@ -1,7 +1,6 @@
 { ... }:
 {
   networking = {
-    hostName = "bolet";
     networkmanager.enable = true;
 
     firewall = {

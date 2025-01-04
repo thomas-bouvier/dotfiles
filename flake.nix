@@ -71,7 +71,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.bolet = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
         };
@@ -89,7 +89,7 @@
 
           lix.nixosModules.default
 
-          ./system/configuration.nix
+          ./hosts/bolet/default.nix
 
           stylix.nixosModules.stylix
 
