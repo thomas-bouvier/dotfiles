@@ -19,10 +19,6 @@
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # KDE Plasma 6
   services.displayManager = {
     defaultSession = "plasma";
@@ -49,22 +45,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.thomas = {
-    isNormalUser = true;
-    initialPassword = "pw123";
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-  };
-
-  # Adding trusted users is required for devenv.
-  # A list of names of users that have additional rights when connecting
-  # to the Nix daemon, such as the ability to specify additional binary
-  # caches. You can also specify groups by prefixing them with @; for
-  # instance, @wheel means all users in the wheel group.
-  nix.extraOptions = ''
-    trusted-users = root thomas
-  '';
-
+  # Shell
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 

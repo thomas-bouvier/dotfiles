@@ -7,6 +7,9 @@
 
       # We need Nvidia drivers
       ../../system/nvidia.nix
+
+      # Users
+      ../../users/thomas.nix
     ];
 
   boot = {
