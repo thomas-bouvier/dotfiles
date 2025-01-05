@@ -10,7 +10,6 @@
       ./stylix.nix
       ./tailscale.nix
       ./networking.nix
-      ./nvidia.nix
     ];
 
   # Enable system modules
@@ -25,10 +24,14 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # KDE Plasma 6
-  services.displayManager.defaultSession = "plasma";
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager = {
+    defaultSession = "plasma";
+    sddm.enable = true;
+    sddm.wayland.enable = true;
+  };
   services.desktopManager.plasma6.enable = true;
+
+  # Kwallet
   security.pam.services.sddm.enableKwallet = true;
   security.pam.services.kdewallet.enableKwallet = true;
 

@@ -4,6 +4,9 @@
   imports = [
       (modulesPath + "/installer/scan/not-detected.nix")
       ../../system/configuration.nix
+
+      # We need Nvidia drivers
+      ../../system/nvidia.nix
     ];
 
   boot = {
