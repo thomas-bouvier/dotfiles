@@ -39,6 +39,7 @@ in
     localsend
     kcharselect
     kfind
+    filelight
     kompare
     libreoffice
 
