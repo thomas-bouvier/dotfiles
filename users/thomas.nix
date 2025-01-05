@@ -16,4 +16,9 @@
   nix.extraOptions = ''
     trusted-users = root thomas
   '';
+
+  # Home-manager configuration
+  home-manager = {
+    users.thomas = import ./thomas;
+  };
 }

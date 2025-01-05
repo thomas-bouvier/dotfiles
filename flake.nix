@@ -109,8 +109,6 @@
                 plasma-manager.homeManagerModules.plasma-manager
                 inputs.sops-nix.homeManagerModules.sops
               ];
-
-              users.thomas = import ./users/thomas;
             };
           }
         ];
