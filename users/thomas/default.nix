@@ -50,6 +50,7 @@ in
     sops
     docker
     docker-compose
+    jq
 
     # Development
     python312
