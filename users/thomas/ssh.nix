@@ -12,6 +12,14 @@
         ];
       };
 
+      # Allows to securely use local SSH agent to authenticate on the remote machine.
+      # It has the same effect as adding cli option `ssh -A user@host`
+      "local" = {
+        host = "192.168.*";
+        user = "thomas";
+        forwardAgent = true;
+      };
+
       "g5k" = {
         host = "g5k";
         user = "tbouvier";
