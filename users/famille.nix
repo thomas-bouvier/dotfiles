@@ -7,4 +7,9 @@
     initialPassword = "pw123";
     extraGroups = [ "networkmanager" ];
   };
+
+  # Home-manager configuration
+  home-manager = {
+    users.famille = import ./famille;
+  };
 }
