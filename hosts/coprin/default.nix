@@ -11,9 +11,9 @@
     ];
 
   boot = {
-    # Use GRUB as this machine relies on BIOS.
-    loader.grub.enable = true;
-    loader.grub.device = "/dev/sda";
+    # Use the systemd-boot EFI boot loader.
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
 
     initrd.availableKernelModules = [ "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "sdhci_acpi" ];
     initrd.kernelModules = [ ];
