@@ -16,6 +16,7 @@
       "privacy.clearOnShutdown.cache" = false;
       "privacy.clearOnShutdown.offlineApps" = false;
       "services.sync.prefs.sync.privacy.clearOnShutdown.history" = false;
+      "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
       "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
 
       "identity.fxaccounts.enabled" = true;
