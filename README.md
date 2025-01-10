@@ -9,7 +9,7 @@ If you set up a new machine you should probably [generate](https://docs.github.c
 Put your age keys here:
 
 ```console
-cd /home/thomas/.config/sops/age/keys.txt
+vim /home/thomas/.config/sops/age/keys.txt
 ```
 
 To rebuild the system:

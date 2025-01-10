@@ -17,7 +17,7 @@
     };
 
     stylix = {
-      url = "github:danth/stylix/release-24.11";
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
@@ -71,90 +71,92 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      nixosConfigurations.bolet = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
+      nixosConfigurations = {
+        bolet = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ 
+                  overlay-unstable
+                  nur.overlays.default
+                ];
+              }
+            )
+
+            lix.nixosModules.default
+
+            ./hosts/bolet/default.nix
+
+            stylix.nixosModules.stylix
+
+            # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "bak";
+
+                extraSpecialArgs = {
+                  inherit my-secrets;
+                };
+
+                sharedModules = [
+                  plasma-manager.homeManagerModules.plasma-manager
+                  inputs.sops-nix.homeManagerModules.sops
+                ];
+              };
+            }
+          ];
         };
 
-        modules = [
-          (
-            { config, pkgs, ... }:
+        coprin = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+                nixpkgs.overlays = [ 
+                  overlay-unstable
+                  nur.overlays.default
+                ];
+              }
+            )
+
+            lix.nixosModules.default
+
+            ./hosts/coprin/default.nix
+
+            stylix.nixosModules.stylix
+
+            # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
+            home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = [ 
-                overlay-unstable
-                nur.overlays.default
-              ];
-            }
-          )
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "bak";
 
-          lix.nixosModules.default
+                extraSpecialArgs = {
+                  inherit my-secrets;
+                };
 
-          ./hosts/bolet/default.nix
-
-          stylix.nixosModules.stylix
-
-          # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "bak";
-
-              extraSpecialArgs = {
-                inherit my-secrets;
+                sharedModules = [
+                  plasma-manager.homeManagerModules.plasma-manager
+                  inputs.sops-nix.homeManagerModules.sops
+                ];
               };
-
-              sharedModules = [
-                plasma-manager.homeManagerModules.plasma-manager
-                inputs.sops-nix.homeManagerModules.sops
-              ];
-            };
-          }
-        ];
-      };
-
-      nixosConfigurations.coprin = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
+            }
+          ];
         };
-
-        modules = [
-          (
-            { config, pkgs, ... }:
-            {
-              nixpkgs.overlays = [ 
-                overlay-unstable
-                nur.overlays.default
-              ];
-            }
-          )
-
-          lix.nixosModules.default
-
-          ./hosts/coprin/default.nix
-
-          stylix.nixosModules.stylix
-
-          # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "bak";
-
-              extraSpecialArgs = {
-                inherit my-secrets;
-              };
-
-              sharedModules = [
-                plasma-manager.homeManagerModules.plasma-manager
-                inputs.sops-nix.homeManagerModules.sops
-              ];
-            };
-          }
-        ];
       };
     };
 }
