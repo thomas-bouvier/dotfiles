@@ -19,31 +19,35 @@
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
-  # KDE Plasma 6
-  services.displayManager = {
-    defaultSession = "plasma";
-    sddm.enable = true;
-    sddm.wayland.enable = true;
+  services = {
+    # KDE Plasma 6
+    displayManager = {
+      defaultSession = "plasma";
+      sddm.enable = true;
+      sddm.wayland.enable = true;
+    };
+
+    desktopManager.plasma6.enable = true;
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
+    # Enable sound.
+    pulseaudio.enable = false;
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
   };
-  services.desktopManager.plasma6.enable = true;
 
   # Kwallet
   security.pam.services.sddm.enableKwallet = true;
   security.pam.services.kdewallet.enableKwallet = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-
-  # Enable sound.
-  hardware.pulseaudio.enable = false;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
 
   # Shell
   users.defaultUserShell = pkgs.zsh;
