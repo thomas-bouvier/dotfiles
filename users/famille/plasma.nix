@@ -51,7 +51,6 @@
               General.icon = "nix-snowflake-white";
             };
           }
-          "org.kde.plasma.pager"
           {
             digitalClock = {
               date = {
@@ -86,8 +85,7 @@
 
     powerdevil = {
       AC = {
-        autoSuspend.action = "sleep";
-        autoSuspend.idleTimeout = 3600;
+        autoSuspend.action = "nothing";
         dimDisplay.enable = false;
         dimDisplay.idleTimeout = null;
         displayBrightness = null;
