@@ -28,10 +28,10 @@
   services.openssh.enable = true;
 
   # https://discourse.nixos.org/t/nixos-rebuild-remote-deployments-non-root-pam/50477
-  security.pam = {
-    sshAgentAuth.enable = true;
-    services.sudo.sshAgentAuth = true;
-  };
+  # security.pam = {
+  #   sshAgentAuth.enable = true;
+  #   services.sudo.sshAgentAuth = true;
+  # };
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/ROOT";

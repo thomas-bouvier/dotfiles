@@ -13,6 +13,7 @@
   };
 
   # Adding trusted users is required for devenv.
+  # Also required to build from a remote device https://nixos.wiki/wiki/Nixos-rebuild.
   # A list of names of users that have additional rights when connecting
   # to the Nix daemon, such as the ability to specify additional binary
   # caches. You can also specify groups by prefixing them with @; for

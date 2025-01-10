@@ -18,7 +18,11 @@ To rebuild the system:
 nixos-rebuild switch --flake . --use-remote-sudo
 ```
 
-I got some inspiration from [geraldwuhoo](https://github.com/geraldwuhoo/nixos-config) to setup my system.
+To rebuild a remote system locally, and deploy it:
+
+```console
+nixos-rebuild switch --flake .#coprin --target-host thomas@192.168.1.30 --use-remote-sudo
+```
 
 ### Atuin
 
@@ -57,5 +61,6 @@ These are not fully integrated yet.
 ## Some resources I found useful
 
 - [Introduction to Nix and NixOS](https://www.youtube.com/watch?v=QKoQ1gKJY5A&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-) by Wil T
+- I got some inspiration from [geraldwuhoo](https://github.com/geraldwuhoo/nixos-config)
 - [NixOS Secrets Management](https://www.youtube.com/watch?v=6EMNHDOY-wo) by EmergentMind
 - [Flakes + Home Manager Multiuser/Multihost Configuration](https://www.youtube.com/watch?v=e8vzW5Y8Gzg) by Chris McDonough
