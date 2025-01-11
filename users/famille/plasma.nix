@@ -85,7 +85,8 @@
 
     powerdevil = {
       AC = {
-        autoSuspend.action = "nothing";
+        autoSuspend.action = "sleep";
+        autoSuspend.idleTimeout = 3600;
         dimDisplay.enable = false;
         dimDisplay.idleTimeout = null;
         displayBrightness = null;
@@ -140,8 +141,8 @@
     kscreenlocker = {
       autoLock = true;
       lockOnResume = true;
-      timeout = 5;
-      passwordRequired = true;
+      timeout = 15;
+      passwordRequired = false;
     };
 
     configFile = {
