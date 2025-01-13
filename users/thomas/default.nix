@@ -51,6 +51,7 @@ in
     docker
     docker-compose
     jq
+    unrar
 
     # Development
     python312

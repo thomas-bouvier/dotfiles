@@ -71,6 +71,7 @@
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
+      "unrar"
       # Nvidia
       "nvidia-x11"
       "nvidia-settings"
