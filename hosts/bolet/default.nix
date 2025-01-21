@@ -36,6 +36,12 @@
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+  
+  fileSystems."/storage" =
+    { device = "/dev/disk/by-label/STORAGE";
+      fsType = "ext4";
+      options = [ "users" "nofail" ]; 
+    };
 
   swapDevices = [
     {
