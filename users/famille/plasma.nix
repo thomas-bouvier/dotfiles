@@ -54,7 +54,7 @@
           {
             digitalClock = {
               date = {
-                format = "isoDate";
+                format = "longDate";
                 position = "belowTime";
               };
               calendar.firstDayOfWeek = "monday";
@@ -174,12 +174,12 @@
       "kiorc"."Confirmations"."ConfirmEmptyTrash" = true;
       "kiorc"."Confirmations"."ConfirmTrash" = true;
       "kiorc"."Executable scripts"."behaviourOnLaunch" = "alwaysAsk";
-      "kwinrc"."Desktops"."Number" = 2;
+      "kwinrc"."Desktops"."Number" = 1;
       "kwinrc"."Desktops"."Rows" = 1;
       "kwinrc"."Wayland"."VirtualKeyboardEnabled" = true;
       "kwinrc"."Xwayland"."Scale" = 1.75;
       "kxkbrc"."Layout"."LayoutList" = "fr";
-      "plasma-localerc"."Formats"."LANG" = "fr_FR.utf8";
+      "plasma-localerc"."Formats"."LANG" = "fr_FR.UTF-8";
     };
   };
 }

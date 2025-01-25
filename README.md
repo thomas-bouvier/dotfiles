@@ -49,6 +49,10 @@ In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB s
 
 ## Future work
 
+Bugs:
+
+- (coprin) Some UI elements (especially in Dolphin) are not displayed in french.
+
 These would be nice to have.
 
 - I would like to install the [Ophirofox](https://ophirofox.ophir.dev/) extension, which is not available on the Mozilla store.

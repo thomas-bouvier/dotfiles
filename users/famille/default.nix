@@ -11,6 +11,10 @@
   home.username = "famille";
   home.homeDirectory = "/home/famille";
 
+  home.language = {
+    base = "fr_FR.utf8";
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
