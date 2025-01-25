@@ -24,6 +24,10 @@
 
   # Home-manager configuration
   home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "bak";
+
     users.thomas = import ./thomas;
   };
 }
