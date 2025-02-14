@@ -30,12 +30,21 @@
     desktopManager.plasma6.enable = true;
 
     # Enable CUPS to print documents.
-    printing.enable = true;
-
     avahi = {
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+    };
+    printing = {
+      enable = true;
+      listenAddresses = [ "*:631" ];
+      allowFrom = [ "all" ];
+      browsing = true;
+      defaultShared = true;
     };
 
     # Enable sound.

@@ -7,8 +7,9 @@
       enable = true;
 
       # Localsend: port 53317
-      allowedTCPPorts = [ 53317 ];
-      allowedUDPPorts = [ 53317 ];
+      # CUPS: port 631
+      allowedTCPPorts = [ 53317 631 ];
+      allowedUDPPorts = [ 53317 631 ];
     };
 
     # Use dns0.eu
