@@ -55,6 +55,7 @@ in
 
     # Development
     python312
+    mypy
     uv
     go
     hugo

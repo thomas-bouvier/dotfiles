@@ -15,10 +15,13 @@
       jnoortheen.nix-ide
 
       # Python
+      ms-vscode.cpptools
       ms-python.python
       ms-python.black-formatter
       ms-toolsai.jupyter
+      matangover.mypy
       bierner.github-markdown-preview
+      eamodio.gitlens
 
       # Theming
       arcticicestudio.nord-visual-studio-code

@@ -66,6 +66,12 @@
       overlay-unstable = final: prev: {
         unstable = import nixpkgs-unstable {
           inherit system;
+          config.allowUnfreePredicate =
+            pkg:
+            builtins.elem (nixpkgs.lib.getName pkg) [
+              # VSCode extensions
+              "vscode-extension-ms-vscode-cpptools"
+            ];
         };
       };
       pkgs = nixpkgs.legacyPackages.${system};
