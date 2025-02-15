@@ -45,6 +45,7 @@
       allowFrom = [ "all" ];
       browsing = true;
       defaultShared = true;
+      drivers = [ pkgs.cnijfilter2 ];
     };
 
     # Enable sound.
@@ -80,6 +81,7 @@
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
+      "cnijfilter2"
       "unrar"
       # Nvidia
       "nvidia-x11"
