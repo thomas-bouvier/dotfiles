@@ -13,16 +13,17 @@
     };
 
     # Use dns0.eu
-    nameservers = [
-      "193.110.81.0#dns0.eu"
-      "2a0f:fc80::#dns0.eu"
-      "185.253.5.0#dns0.eu"
-      "2a0f:fc81::#dns0.eu"
-    ];
+    # Break LocalSend which can't receive files anymore when enabled
+    #nameservers = [
+    #  "193.110.81.0#dns0.eu"
+    #  "2a0f:fc80::#dns0.eu"
+    #  "185.253.5.0#dns0.eu"
+    #  "2a0f:fc81::#dns0.eu"
+    #];
   };
 
-  services.resolved = {
-    enable = true;
-    dnsovertls = "true";
-  };
+  #services.resolved = {
+  #  enable = true;
+  #  dnsovertls = "true";
+  #};
 }

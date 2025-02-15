@@ -51,6 +51,7 @@ In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB s
 
 Bugs:
 
+- (all) LocalSend can't receive files when dns0 is enabled.
 - (coprin) Some UI elements (especially in Dolphin) are not displayed in french.
 
 These would be nice to have.
