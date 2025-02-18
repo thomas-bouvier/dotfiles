@@ -15,7 +15,6 @@
       "privacy.clearOnShutdown.cookies" = false;
       "privacy.clearOnShutdown.cache" = true;
       "privacy.clearOnShutdown.offlineApps" = false;
-      "services.sync.prefs.sync.privacy.clearOnShutdown.history" = false;
       "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
       "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
 
@@ -26,11 +25,12 @@
 
       "signon.rememberSignons" = false;
       "signon.rememberSignons.visibilityToggle" = false;
+
+      "services.sync.prefs.sync.privacy.clearOnShutdown.history" = false;
       "services.sync.prefs.sync.signon.rememberSignons" = false;
       "services.sync.prefs.sync-seen.services.sync.prefs.sync.signon.rememberSignons" = false;
 
       "browser.translations.enable" = false;
-      "extensions.pocket.enabled" = false;
       "browser.tabs.tabmanager.enabled" = false;
       "browser.firefox-view.virtual-list.enabled" = false;
       "browser.urlbar.suggest.recentsearches" = false;
@@ -44,7 +44,11 @@
       "browser.urlbar.suggest.mdn" = false;
       "browser.urlbar.suggest.clipboard" = false;
 
+      "extensions.pocket.enabled" = false;
+
       "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = true;
+
+      "webgl.disabled" = false;
     };
   };
 }
