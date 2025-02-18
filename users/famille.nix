@@ -8,6 +8,15 @@
     extraGroups = [ "networkmanager" ];
   };
 
+  # https://github.com/nix-community/home-manager/issues/4199
+  system.userActivationScripts = {
+    removeConflictingFiles = {
+      text = ''
+        rm -f /home/famille/.gtkrc-2.0.bak
+      '';
+    };
+  };
+
   # Home-manager configuration
   home-manager = {
     useGlobalPkgs = true;
