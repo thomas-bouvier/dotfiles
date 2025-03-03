@@ -14,7 +14,11 @@
 
   # Enable system modules
   bluetooth.enable = true;
-  stylix.enable = true;
+  
+  stylix = {
+    enable = true;
+    #targets.qt.platform = "qtct";
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";

@@ -3,8 +3,8 @@
   programs.librewolf = {
     enable = true;
 
-    profiles.default = {
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    profiles.default.extensions = {
+      packages = with pkgs.nur.repos.rycee.firefox-addons; [
         kristofferhagen-nord-theme # I would prefer https://github.com/dragonejt/nord-firefox
       ];
     };

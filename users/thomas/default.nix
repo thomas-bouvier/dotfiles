@@ -37,10 +37,10 @@ in
     thunderbird
     obsidian
     localsend
-    kcharselect
-    kfind
-    filelight
-    kompare
+    kdePackages.kcharselect
+    kdePackages.kfind
+    kdePackages.filelight
+    kdePackages.kompare
     libreoffice
 
     # Command line
@@ -70,7 +70,7 @@ in
 
     # Graphics
     inkscape
-    kdenlive
+    kdePackages.kdenlive
 
     # Entertainment
     ryujinx-greemdev

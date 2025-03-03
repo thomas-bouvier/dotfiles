@@ -20,10 +20,10 @@
   home.packages = with pkgs; [
     # Everyday life
     localsend
-    kcharselect
-    kfind
-    filelight
-    kompare
+    kdePackages.kcharselect
+    kdePackages.kfind
+    kdePackages.filelight
+    kdePackages.kompare
     libreoffice
 
     # Entertainment
