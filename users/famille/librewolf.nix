@@ -3,8 +3,8 @@
   programs.librewolf = {
     enable = true;
 
-    profiles.default = {
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    profiles.default.extensions = {
+      packages = with pkgs.nur.repos.rycee.firefox-addons; [
         kristofferhagen-nord-theme # I would prefer https://github.com/dragonejt/nord-firefox
       ];
     };
@@ -18,6 +18,7 @@
       "services.sync.prefs.sync.privacy.clearOnShutdown.history" = false;
       "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
       "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
+      "privacy.resistFingerprinting" = false;
 
       "identity.fxaccounts.enabled" = true;
 

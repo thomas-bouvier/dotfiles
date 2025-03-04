@@ -17,6 +17,7 @@
       "privacy.clearOnShutdown.offlineApps" = false;
       "privacy.clearOnShutdown_v2.cookiesAndStorage" = false;
       "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = false;
+      "privacy.resistFingerprinting" = false;
 
       "identity.fxaccounts.enabled" = true;
 

@@ -51,8 +51,9 @@ In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB s
 
 Bugs:
 
-- (all) LocalSend can't receive files when dns0 is enabled.
-- (coprin) Some UI elements (especially in Dolphin) are not displayed in french.
+- (localsend) LocalSend can't receive files when dns0 is enabled.
+- (coprin/dolphin) Some UI elements (especially in Dolphin) are not displayed in french.
+- (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 
 These would be nice to have.
 
