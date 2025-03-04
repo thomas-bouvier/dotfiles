@@ -7,31 +7,36 @@
     enable = true;
     package = pkgs.unstable.vscodium;
 
-    extensions = with pkgs.unstable.vscode-extensions; [
-      # Vim keybindings
-      vscodevim.vim
+    profiles.default = {
+      extensions = with pkgs.unstable.vscode-extensions; [
+        # Vim keybindings
+        vscodevim.vim
 
-      # Nix
-      jnoortheen.nix-ide
+        # Nix
+        jnoortheen.nix-ide
 
-      # Python
-      ms-vscode.cpptools
-      ms-python.python
-      ms-python.black-formatter
-      ms-toolsai.jupyter
-      matangover.mypy
-      bierner.github-markdown-preview
-      eamodio.gitlens
+        # Python
+        ms-vscode.cpptools
+        ms-python.python
+        ms-python.black-formatter
+        ms-toolsai.jupyter
+        matangover.mypy
+        bierner.github-markdown-preview
+        eamodio.gitlens
 
-      # Theming
-      arcticicestudio.nord-visual-studio-code
-      pkief.material-icon-theme
-    ];
+        # Webdev
+        vue.volar
 
-    userSettings = {
-      # Theming
-      "workbench.colorTheme" = "Nord";
-      "workbench.iconTheme" = "material-icon-theme";
+        # Theming
+        arcticicestudio.nord-visual-studio-code
+        pkief.material-icon-theme
+      ];
+
+      userSettings = {
+        # Theming
+        "workbench.colorTheme" = "Nord";
+        "workbench.iconTheme" = "material-icon-theme";
+      };
     };
   };
 }
