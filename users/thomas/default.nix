@@ -34,6 +34,7 @@ in
   # environment.
   home.packages = with pkgs; [
     # Everyday life
+    anki
     thunderbird
     obsidian
     localsend
