@@ -47,6 +47,26 @@ sudo tailscale up
 
 In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB share.
 
+## Useful commands
+
+Optimize the Nix store by hard linking duplicate binaries:
+
+```console
+nix-store --optimise
+```
+
+The Nix store accumulates entries which are no longer useful. They can be deleted:
+
+```console
+nix-store --gc
+```
+
+Delete all generations older than a specific period (e.g. 30 days):
+
+```console
+nix-collect-garbage --delete-older-than 30d
+```
+
 ## Future work
 
 Bugs:
