@@ -48,6 +48,7 @@ in
     neovim
     eza
     age
+    htop
     sops
     docker
     docker-compose
