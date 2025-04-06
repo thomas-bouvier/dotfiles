@@ -1,11 +1,21 @@
 { pkgs, ... }:
 
+let
+  # Import the user-icons module
+  userIconsModule = import ../system/icon.nix;
+in
 {
+  imports = [
+    userIconsModule
+  ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.thomas = {
     isNormalUser = true;
     initialPassword = "pw123";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+
+    icon = ./thomas/assets/avatar.png;
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIwyCOXTY+2S+UlllvyKqU9qx0fyvWICHRiduOR2Kwxx contact@thomas-bouvier.io"
