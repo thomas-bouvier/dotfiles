@@ -98,6 +98,9 @@
       # Apple
       "apple_cursor"
       "obsidian"
+      # VSCode extensions
+      "vscode-extension-ms-vscode-cpptools"
+      "vscode-extension-ms-vscode-remote-remote-ssh"
     ];
 
   programs.ssh.startAgent = true;

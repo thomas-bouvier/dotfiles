@@ -8,15 +8,20 @@
     package = pkgs.unstable.vscodium;
 
     profiles.default = {
-      extensions = with pkgs.unstable.vscode-extensions; [
+      extensions = with pkgs.vscode-marketplace; [
+        christian-kohler.path-intellisense
+        ms-vscode-remote.remote-ssh
+
         # Vim keybindings
         vscodevim.vim
 
         # Nix
         jnoortheen.nix-ide
 
-        # Python
+        # C++
         ms-vscode.cpptools
+
+        # Python
         ms-python.python
         ms-python.black-formatter
         ms-toolsai.jupyter
@@ -30,12 +35,17 @@
         # Theming
         arcticicestudio.nord-visual-studio-code
         pkief.material-icon-theme
-      ];
+      ]
+      ++ (with pkgs.open-vsx; [
+        marlosirapuan.nord-deep
+      ]);
 
       userSettings = {
         # Theming
-        "workbench.colorTheme" = "Nord";
+        "workbench.colorTheme" = "Nord Deep";
         "workbench.iconTheme" = "material-icon-theme";
+        "editor.fontFamily" = "'JetBrains Mono', 'monospace', monospace";
+        "editor.fontSize" = 13;
       };
     };
   };

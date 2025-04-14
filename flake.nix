@@ -45,6 +45,11 @@
       url = "git+https://git.sr.ht/~rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -59,6 +64,7 @@
       lix,
       nur,
       my-secrets,
+      nix-vscode-extensions,
       ...
     }@inputs:
     let
@@ -66,13 +72,6 @@
       overlay-unstable = final: prev: {
         unstable = import nixpkgs-unstable {
           inherit system;
-          config.allowUnfreePredicate =
-            pkg:
-            builtins.elem (nixpkgs.lib.getName pkg) [
-              # VSCode extensions
-              "vscode-extension-ms-vscode-cpptools"
-              "vscode-extension-ms-vscode-remote-remote-ssh"
-            ];
         };
       };
       pkgs = nixpkgs.legacyPackages.${system};
@@ -91,6 +90,7 @@
                 nixpkgs.overlays = [ 
                   overlay-unstable
                   nur.overlays.default
+                  nix-vscode-extensions.overlays.default
                 ];
               }
             )
@@ -130,6 +130,7 @@
                 nixpkgs.overlays = [ 
                   overlay-unstable
                   nur.overlays.default
+                  nix-vscode-extensions.overlays.default
                 ];
               }
             )
