@@ -72,7 +72,6 @@ nix-collect-garbage --delete-older-than 30d
 Bugs:
 
 - (localsend) LocalSend can't receive files when dns0 is enabled.
-- (coprin/dolphin) Some UI elements (especially in Dolphin) are not displayed in french.
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 
 These would be nice to have.
