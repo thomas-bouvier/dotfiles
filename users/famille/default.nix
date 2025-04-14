@@ -24,7 +24,7 @@
     kdePackages.kfind
     kdePackages.filelight
     kdePackages.kompare
-    libreoffice
+    libreoffice-qt6-fresh
 
     # Entertainment
     vlc

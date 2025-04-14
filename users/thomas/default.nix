@@ -42,7 +42,7 @@ in
     kdePackages.kfind
     kdePackages.filelight
     kdePackages.kompare
-    libreoffice
+    libreoffice-qt6-fresh
 
     # Command line
     neovim
