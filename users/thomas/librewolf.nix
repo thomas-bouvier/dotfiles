@@ -49,6 +49,9 @@
 
       "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = true;
 
+      # Use native file picker instead of GTK file picker
+      "widget.use-xdg-desktop-portal.file-picker" = 1;
+
       "webgl.disabled" = false;
     };
   };
