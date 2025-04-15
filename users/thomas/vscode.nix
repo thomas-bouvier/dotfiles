@@ -5,7 +5,7 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.unstable.vscodium;
+    package = pkgs.unstable.code-cursor;
 
     profiles.default = {
       extensions = with pkgs.vscode-marketplace; [
