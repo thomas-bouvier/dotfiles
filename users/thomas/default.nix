@@ -30,6 +30,14 @@ in
     };
   };
 
+  # Stylix configuration for user-specific wallpaper
+  stylix = {
+    image = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/thomas-bouvier/wallpapers/main/forest.png";
+      sha256 = "sha256-eLPhjn7LymtjTdwPPK/4GMj4rVuEyMTx7ftUWEwPdts=";
+    };
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [

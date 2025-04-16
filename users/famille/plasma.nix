@@ -1,7 +1,5 @@
 { ... }:
 {
-  stylix.targets.kde.enable = false;
-
   programs.plasma = {
     enable = true;
 
