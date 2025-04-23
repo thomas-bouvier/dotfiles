@@ -11,6 +11,7 @@
       extensions = with pkgs.vscode-marketplace; [
         christian-kohler.path-intellisense
         ms-vscode-remote.remote-ssh
+        charliermarsh.ruff
 
         # Vim keybindings
         vscodevim.vim
