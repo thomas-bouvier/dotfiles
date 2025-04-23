@@ -17,7 +17,7 @@
   
   stylix = {
     enable = true;
-    #targets.qt.platform = "qtct";
+    #targets.qt.platform = "kde6";
   };
 
   # Set your time zone.
@@ -72,19 +72,28 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 
-  # Enable the Flakes feature and the accompanying new nix command-line tool
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Nix settings
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ]; # Enable the Flakes feature and the accompanying new nix command-line tool
+    auto-optimise-store = true; # Optimise the store after each and every build (for the built path)
+  };
+
+  # Garbage collect up to 1GiB whenever there is less than 512 MiB left
+  nix.extraOptions = ''
+    min-free = ${toString (512 * 1024 * 1024)}
+    max-free = ${toString (1024 * 1024 * 1024)}
+  '';
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-      vim
-      zsh
-      tmux
-      git
-      devenv
-      tailscale
-      wget
+    vim
+    zsh
+    tmux
+    git
+    devenv
+    tailscale
+    wget
   ];
 
   nixpkgs.config.allowUnfreePredicate =
