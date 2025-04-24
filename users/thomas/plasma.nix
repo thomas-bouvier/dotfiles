@@ -10,6 +10,12 @@
       iconTheme = "Wings-Dark-Icons";
     };
 
+    input = {
+      keyboard = {
+        numlockOnStartup = "on";
+      };
+    };
+
     kwin = {
       effects = {
         minimization = {

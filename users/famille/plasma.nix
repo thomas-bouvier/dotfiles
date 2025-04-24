@@ -3,6 +3,12 @@
   programs.plasma = {
     enable = true;
 
+    input = {
+      keyboard = {
+        numlockOnStartup = "on";
+      };
+    };
+
     kwin = {
       effects = {
         minimization = {
