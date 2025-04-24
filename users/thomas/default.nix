@@ -46,6 +46,7 @@ in
     thunderbird
     obsidian
     localsend
+    signal-desktop-bin
     kdePackages.kcharselect
     kdePackages.kfind
     kdePackages.filelight
