@@ -13,6 +13,19 @@
     input = {
       keyboard = {
         numlockOnStartup = "on";
+        layouts = [
+          {
+            layout = "eu";
+          }
+          {
+            layout = "fr";
+            variant = "azerty";
+          }
+          {
+            layout = "fr";
+            variant = "mac";
+          }
+        ];
       };
     };
 
@@ -86,12 +99,6 @@
         ];
       }
     ];
-
-    shortcuts = {
-      "KDE Keyboard Layout Switcher"."Switch keyboard layout to EurKEY (US)" = [ ];
-      "KDE Keyboard Layout Switcher"."Switch keyboard layout to French" = [ ];
-      "KDE Keyboard Layout Switcher"."Switch keyboard layout to French (AZERTY)" = [ ];
-    };
 
     powerdevil = {
       AC = {
@@ -188,8 +195,6 @@
       "kwinrc"."Desktops"."Rows" = 1;
       "kwinrc"."Wayland"."VirtualKeyboardEnabled" = true;
       "kwinrc"."Xwayland"."Scale" = 1.75;
-      "kxkbrc"."Layout"."LayoutList" = "eu,fr,fr";
-      "kxkbrc"."Layout"."VariantList" = ",,mac";
       "plasma-localerc"."Formats"."LANG" = "en_US.utf8";
     };
   };
