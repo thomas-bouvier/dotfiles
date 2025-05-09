@@ -178,8 +178,6 @@
       "kiorc"."Executable scripts"."behaviourOnLaunch" = "alwaysAsk";
       "kwinrc"."Desktops"."Number" = 1;
       "kwinrc"."Desktops"."Rows" = 1;
-      "kwinrc"."Wayland"."VirtualKeyboardEnabled" = true;
-      "kwinrc"."Xwayland"."Scale" = 1.75;
       "plasma-localerc"."Formats"."LANG" = "fr_FR.UTF-8";
     };
   };

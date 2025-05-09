@@ -47,7 +47,7 @@ sudo tailscale up
 
 In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB share.
 
-## Flox
+### Flox
 
 ```
 sudo -H nix profile install \

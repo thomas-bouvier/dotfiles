@@ -76,7 +76,7 @@
   nix.settings = {
     # Enable the Flakes feature and the accompanying new nix command-line tool
     experimental-features = [ "nix-command" "flakes" ];
-    
+
     # Flox
     trusted-substituters = [ "https://cache.flox.dev" ];
     trusted-public-keys = [ "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs=" ];
@@ -93,15 +93,21 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    zsh
-    tmux
-    git
-    devenv
-    tailscale
-    wget
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      vim
+      zsh
+      tmux
+      git
+      devenv
+      tailscale
+      wget
+    ];
+
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
+  };
 
   nixpkgs.config.allowUnfreePredicate =
     pkg:
