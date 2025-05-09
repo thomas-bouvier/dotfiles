@@ -74,8 +74,15 @@
 
   # Nix settings
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ]; # Enable the Flakes feature and the accompanying new nix command-line tool
-    auto-optimise-store = true; # Optimise the store after each and every build (for the built path)
+    # Enable the Flakes feature and the accompanying new nix command-line tool
+    experimental-features = [ "nix-command" "flakes" ];
+    
+    # Flox
+    trusted-substituters = [ "https://cache.flox.dev" ];
+    trusted-public-keys = [ "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs=" ];
+
+    # Optimise the store after each and every build (for the built path)
+    auto-optimise-store = true;
   };
 
   # Garbage collect up to 1GiB whenever there is less than 512 MiB left

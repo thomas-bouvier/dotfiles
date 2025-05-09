@@ -47,9 +47,19 @@ sudo tailscale up
 
 In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB share.
 
+## Flox
+
+```
+sudo -H nix profile install \
+      --profile /nix/var/nix/profiles/default \
+      --experimental-features "nix-command flakes" \
+      --accept-flake-config \
+      'github:flox/flox'
+```
+
 ## Useful commands
 
-Optimize the Nix store by hard linking duplicate binaries:
+Optimize the Nix store by hard linking duplicate binaries. This shouldn't be needed with my current dotfiles though, as optimizations are performed automatically at build time.
 
 ```console
 nix-store --optimise
