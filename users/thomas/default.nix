@@ -72,6 +72,7 @@ in
     uv
     go
     hugo
+    marimo
 
     # Android
     android-tools
