@@ -123,6 +123,8 @@
       # VSCode extensions
       "vscode-extension-ms-vscode-cpptools"
       "vscode-extension-ms-vscode-remote-remote-ssh"
+      "vscode-extension-github-copilot"
+      "vscode-extension-github-copilot-chat"
     ];
 
   programs.ssh.startAgent = true;

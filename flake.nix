@@ -72,11 +72,6 @@
       overlay-unstable = final: prev: {
         unstable = import nixpkgs-unstable {
           inherit system;
-          config.allowUnfreePredicate =
-            pkg:
-            builtins.elem (nixpkgs.lib.getName pkg) [
-              "cursor"
-            ];
         };
       };
       pkgs = nixpkgs.legacyPackages.${system};

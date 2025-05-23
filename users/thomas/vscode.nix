@@ -5,13 +5,16 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.unstable.code-cursor;
+    package = pkgs.unstable.vscodium;
 
     profiles.default = {
       extensions = with pkgs.vscode-marketplace; [
         christian-kohler.path-intellisense
         ms-vscode-remote.remote-ssh
         charliermarsh.ruff
+
+        github.copilot
+        github.copilot-chat
 
         # Vim keybindings
         vscodevim.vim
