@@ -1,4 +1,5 @@
 { config, pkgs, nur, ... }:
+
 {
   programs.librewolf = {
     enable = true;
@@ -49,6 +50,22 @@
 
       # Use native file picker instead of GTK file picker
       "widget.use-xdg-desktop-portal.file-picker" = 1;
+
+      # Activate HTTPS-Only Mode in all windows
+      # Forces secure HTTPS connections for all sites
+      "dom.security.https_only_mode" = true;
+      "dom.security.https_only_mode_ever_enabled" = true;
+
+      # DNS over HTTPS (DoH) with NextDNS
+      # Mode 3 = DoH only, no fallback to traditional DNS
+      "network.trr.mode" = 3;
+      "network.trr.custom_uri" = "https://dns0.eu";
+      "network.trr.uri" = "https://dns0.eu";
+      "network.trr.confirmationNS" = "skip";
+      "network.dns.skipTRR-when-parental-control-enabled" = false;
+
+      # Enable HTTP/3 (QUIC) for better performance and security
+      "network.http.http3.enabled" = true;
     };
   };
 }
