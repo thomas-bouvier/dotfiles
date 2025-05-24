@@ -1,2 +1,4 @@
 result
 *.js
+*.tar.gz
+kernelcache.*

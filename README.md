@@ -4,7 +4,7 @@ My declarative, reproducible system built using [Lix](https://lix.systems/).
 
 ## Installation
 
-If you set up a new machine you should probably [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key.
+If you set up a new machine you should probably [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key pair. Put your keys in `/home/thomas/.ssh/`.
 
 Put your age keys here:
 
@@ -23,6 +23,14 @@ To rebuild a remote system locally, and deploy it:
 ```console
 nixos-rebuild switch --flake .#coprin --target-host thomas@192.168.1.30 --use-remote-sudo
 ```
+
+### Apple Silicon machine
+
+Copy the peripheral firmware files off the EFI system partition (e.g. on the installation ISO `mkdir -p /mnt/etc/nixos/firmware && cp /mnt/boot/asahi/{all_firmware.tar.gz,kernelcache*} /mnt/etc/nixos/firmware`). Then, once a NixOS is installed, copy these firmware files to the current configuration `cp /mnt/etc/nixos/firmware* <current_config>/system/asahi-firmware`.
+
+## Manual configuration
+
+Some packages require manual configuration.
 
 ### Atuin
 
@@ -81,6 +89,7 @@ nix-collect-garbage --delete-older-than 30d
 
 Bugs:
 
+- (zotero) Zotero is not available yet on aarch64 platforms.
 - (localsend) LocalSend can't receive files when dns0 is enabled.
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 
@@ -99,3 +108,4 @@ These are not fully integrated yet.
 - I got some inspiration from [geraldwuhoo](https://github.com/geraldwuhoo/nixos-config)
 - [NixOS Secrets Management](https://www.youtube.com/watch?v=6EMNHDOY-wo) by EmergentMind
 - [Flakes + Home Manager Multiuser/Multihost Configuration](https://www.youtube.com/watch?v=e8vzW5Y8Gzg) by Chris McDonough
+- [NixOS on Apple Silicon](https://yusef.napora.org/blog/nixos-asahi/) by sef

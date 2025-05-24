@@ -5,6 +5,9 @@
       (modulesPath + "/installer/scan/not-detected.nix")
       ../../system/configuration.nix
 
+      # We need printing drivers
+      ../../system/printing.nix
+
       # Users
       ../../users/thomas.nix
       ../../users/famille.nix

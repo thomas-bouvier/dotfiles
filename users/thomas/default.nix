@@ -1,4 +1,5 @@
 { config, pkgs, my-secrets, ... }:
+
 let
   secretsPath = builtins.toString my-secrets;
 in
@@ -54,7 +55,6 @@ in
     kdePackages.partitionmanager
     libreoffice-qt6-fresh
 
-
     # Command line
     neovim
     eza
@@ -80,7 +80,6 @@ in
     # Research
     texliveFull
     texstudio
-    zotero
 
     # Graphics
     inkscape
@@ -109,7 +108,8 @@ in
     # '')
     (writeShellScriptBin "g5k" (builtins.readFile ./assets/g5k))
     (writeShellScriptBin "ide" (builtins.readFile ./assets/ide))
-  ];
+  ]
+  ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [ zotero ] else [ ]);
 
   programs.git = {
     enable = true;

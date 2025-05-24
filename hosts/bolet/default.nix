@@ -8,6 +8,9 @@
       # We need Nvidia drivers
       ../../system/nvidia.nix
 
+      # We need printing drivers
+      ../../system/printing.nix
+
       # Users
       ../../users/thomas.nix
     ];

@@ -54,7 +54,6 @@
       allowFrom = [ "all" ];
       browsing = true;
       defaultShared = true;
-      drivers = [ pkgs.cnijfilter2 ];
     };
 
     # Enable sound.
