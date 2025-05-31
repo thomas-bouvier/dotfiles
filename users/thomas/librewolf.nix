@@ -4,10 +4,40 @@
   programs.librewolf = {
     enable = true;
 
-    profiles.default.extensions = {
-      packages = with pkgs.nur.repos.rycee.firefox-addons; [
-        kristofferhagen-nord-theme # I would prefer https://github.com/dragonejt/nord-firefox
-      ];
+    profiles.default = {
+      isDefault = true;
+
+      search = {
+        engines = {
+          "Kagi" = {
+            urls = [{
+              template = "https://kagi.com/search";
+              params = [ { name = "q"; value = "{searchTerms}"; } ];
+            }];
+            icon = "https://assets.kagi.com/v1/kagi_assets/logos/yellow_3.svg";
+            updateInterval = 24 * 60 * 60 * 1000; # Daily
+            definedAliases = [ "@kagi" ];
+          };
+
+          "GitHub" = {
+            urls = [{
+              template =
+                "https://github.com/search?q={searchTerms}&type=repositories";
+            }];
+            definedAliases = [ "!gh" ];
+          };
+
+          "YouTube" = {
+            urls = [{
+              template =
+                "https://www.youtube.com/results?search_query={searchTerms}";
+            }];
+            definedAliases = [ "!y" ];
+          };
+        };
+        default = "Kagi";
+        privateDefault = "Kagi";
+      };
     };
 
     settings = {
@@ -48,7 +78,23 @@
 
       "extensions.pocket.enabled" = false;
 
-      "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = true;
+      "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = false;
+      "browser.newtabpage.activity-stream.showSearch" = true;
+      "browser.newtabpage.activity-stream.showShortcuts" = false;
+      "browser.newtabpage.activity-stream.shortcuts.enabled" = false;
+      "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+      "browser.newtabpage.activity-stream.showSponsored" = false;
+      "browser.newtabpage.activity-stream.feeds.section.topsites" = false;
+      "browser.newtabpage.activity-stream.feeds.system.topsites" = false;
+      "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
+      "browser.newtabpage.activity-stream.feeds.system.topstories" = false;
+      "browser.newtabpage.activity-stream.feeds.section.highlights" = true;
+      "browser.newtabpage.activity-stream.feeds.system.highlights" = true;
+      "browser.newtabpage.activity-stream.section.highlights.includeVisited" = false;
+      "browser.newtabpage.activity-stream.section.highlights.includeBookmarks" = true;
+      "browser.newtabpage.activity-stream.section.highlights.includeDownloads" = false;
+      "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+      "browser.newtabpage.activity-stream.feeds.recommendationprovider" = false;
 
       # Use native file picker instead of GTK file picker
       "widget.use-xdg-desktop-portal.file-picker" = 1;
@@ -70,6 +116,9 @@
 
       # Enable HTTP/3 (QUIC) for better performance and security
       "network.http.http3.enabled" = true;
+
+      # Always ask where to download
+      "browser.download.useDownloadDir" = false;
     };
   };
 }

@@ -66,6 +66,9 @@
 
       # Enable HTTP/3 (QUIC) for better performance and security
       "network.http.http3.enabled" = true;
+
+      # Always ask where to download
+      "browser.download.useDownloadDir" = false;
     };
   };
 }
