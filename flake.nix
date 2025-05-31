@@ -6,7 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     apple-silicon = {
-      url = "github:tpwrules/nixos-apple-silicon";
+      url = "github:nix-community/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
