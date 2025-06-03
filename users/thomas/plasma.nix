@@ -1,4 +1,5 @@
-{ ... }:
+{ config, ... }:
+
 {
   programs.plasma = {
     enable = true;
@@ -7,7 +8,7 @@
       theme = "Nordic-darker";
       colorScheme = "Nordic-Darker"; # Does not work
       lookAndFeel = "Nordic-darker"; # Works (Plasma Style)
-      iconTheme = "Wings-Dark-Icons";
+      iconTheme = "WhiteSur-dark";
     };
 
     input = {
