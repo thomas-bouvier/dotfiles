@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 {
   programs.plasma = {
@@ -28,6 +28,16 @@
           }
         ];
       };
+
+      touchpads = [
+        {
+          name = "Apple MTP multi-touch";
+          vendorId = "05ac";
+          productId = "0352";
+          naturalScroll = false;
+          rightClickMethod = "twoFingers";
+        }
+      ];
     };
 
     kwin = {
