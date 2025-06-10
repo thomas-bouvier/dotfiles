@@ -113,16 +113,16 @@
 
     powerdevil = {
       AC = {
-        autoSuspend.action = "sleep";
-        autoSuspend.idleTimeout = 3600;
-        dimDisplay.enable = false;
-        dimDisplay.idleTimeout = null;
+        autoSuspend.action = "nothing";
+        autoSuspend.idleTimeout = null;
+        dimDisplay.enable = true;
+        dimDisplay.idleTimeout = 300;
         displayBrightness = null;
         inhibitLidActionWhenExternalMonitorConnected = true;
         powerButtonAction = "showLogoutScreen";
         powerProfile = "performance";
-        turnOffDisplay.idleTimeout = "never";
-        turnOffDisplay.idleTimeoutWhenLocked = null;
+        turnOffDisplay.idleTimeout = 1800;
+        turnOffDisplay.idleTimeoutWhenLocked = 1800;
         whenLaptopLidClosed = "sleep";
         whenSleepingEnter = "standby";
       };
@@ -153,14 +153,14 @@
         powerProfile = "powerSaving";
         turnOffDisplay.idleTimeout = 120;
         turnOffDisplay.idleTimeoutWhenLocked = "immediately";
-        whenLaptopLidClosed = "hibernate";
+        whenLaptopLidClosed = "sleep";
         whenSleepingEnter = null;
       };
 
       batteryLevels = {
         lowLevel = 15;
         criticalLevel = 3;
-        criticalAction = "hibernate";
+        criticalAction = "sleep";
       };
 
       general.pausePlayersOnSuspend = false;
