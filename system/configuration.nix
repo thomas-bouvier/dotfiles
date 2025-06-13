@@ -116,6 +116,8 @@
       # Nvidia
       "nvidia-x11"
       "nvidia-settings"
+      "nsight_systems"
+      "cuda_cudart"
       # Apple
       "apple_cursor"
       "obsidian"

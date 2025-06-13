@@ -73,6 +73,7 @@ in
     go
     hugo
     marimo
+    cudaPackages.nsight_systems
 
     # Android
     android-tools
