@@ -169,7 +169,7 @@
     kscreenlocker = {
       autoLock = true;
       lockOnResume = true;
-      timeout = 5;
+      timeout = 15;
       passwordRequired = true;
     };
 
