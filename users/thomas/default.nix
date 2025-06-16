@@ -91,6 +91,7 @@ in
     nicotine-plus
     vlc
     gpodder
+    mixxx
 
     # Theme
     nordic
