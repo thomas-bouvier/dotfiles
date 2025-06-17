@@ -92,6 +92,7 @@ in
     vlc
     gpodder
     mixxx
+    yt-dlp
 
     # Theme
     nordic
