@@ -91,8 +91,12 @@ in
     nicotine-plus
     vlc
     gpodder
+
+    # Audio
+    kdePackages.elisa
     mixxx
     yt-dlp
+    audacity
 
     # Theme
     nordic
