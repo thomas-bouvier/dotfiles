@@ -8,13 +8,14 @@
     package = pkgs.unstable.vscodium;
 
     profiles.default = {
+      # pkgs.vscode-marketplace are the pre-release extensions
       extensions = with pkgs.vscode-marketplace; [
         christian-kohler.path-intellisense
         ms-vscode-remote.remote-ssh
         charliermarsh.ruff
 
-        github.copilot
-        github.copilot-chat
+        pkgs.vscode-marketplace-release.github.copilot
+        pkgs.vscode-marketplace-release.github.copilot-chat
 
         # Vim keybindings
         vscodevim.vim
