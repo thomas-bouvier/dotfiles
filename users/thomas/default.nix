@@ -94,7 +94,6 @@ in
 
     # Audio
     kdePackages.elisa
-    mixxx
     yt-dlp
     audacity
 
@@ -120,7 +119,10 @@ in
     (writeShellScriptBin "g5k" (builtins.readFile ./assets/g5k))
     (writeShellScriptBin "ide" (builtins.readFile ./assets/ide))
   ]
-  ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [ zotero ] else [ ]);
+  ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [
+    zotero
+    mixxx
+  ] else [ ]);
 
   programs.git = {
     enable = true;
