@@ -15,13 +15,13 @@ vim /home/thomas/.config/sops/age/keys.txt
 To rebuild the system:
 
 ```console
-nixos-rebuild switch --flake . --use-remote-sudo
+nixos-rebuild switch --flake . --sudo
 ```
 
 To rebuild a remote system locally, and deploy it:
 
 ```console
-nixos-rebuild switch --flake .#coprin --target-host thomas@192.168.1.30 --use-remote-sudo
+nixos-rebuild switch --flake .#coprin --target-host thomas@192.168.1.30 --sudo
 ```
 
 ### Apple Silicon machine
