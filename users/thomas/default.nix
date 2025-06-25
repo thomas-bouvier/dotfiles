@@ -96,6 +96,7 @@ in
     kdePackages.elisa
     yt-dlp
     audacity
+    ffmpeg
 
     # Theme
     nordic
