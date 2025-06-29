@@ -8,6 +8,8 @@
       isDefault = true;
 
       search = {
+        force = true; # Override default search engines
+
         engines = {
           "Kagi" = {
             urls = [{
@@ -27,7 +29,7 @@
             definedAliases = [ "!gh" ];
           };
 
-          "YouTube" = {
+          youtube = {
             urls = [{
               template =
                 "https://www.youtube.com/results?search_query={searchTerms}";
@@ -51,6 +53,9 @@
       "privacy.resistFingerprinting" = false;
 
       "identity.fxaccounts.enabled" = true;
+
+      "dom.forms.autocomplete.formautofill" = false;
+      "dom.payments.defaults.saveAddress" = false;
 
       "browser.tabs.loadInBackground" = true;
       "browser.toolbars.bookmarks.visibility" = "newtab";
