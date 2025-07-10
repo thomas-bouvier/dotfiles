@@ -4,10 +4,26 @@
   programs.librewolf = {
     enable = true;
 
-    profiles.default.extensions = {
-      packages = with pkgs.nur.repos.rycee.firefox-addons; [
-        kristofferhagen-nord-theme # I would prefer https://github.com/dragonejt/nord-firefox
-      ];
+    profiles.default = {
+      isDefault = true;
+
+      search = {
+        force = true; # Override default search engines
+
+        engines = {
+          "Qwant" = {
+            urls = [{
+              template = "https://www.qwant.com/?q={searchTerms}";
+            }];
+            icon = "https://upload.wikimedia.org/wikipedia/commons/2/2b/Qwant-Icone-2022.svg";
+            updateInterval = 24 * 60 * 60 * 1000;
+            definedAliases = [ "!q" ];
+          };
+        };
+
+        default = "Qwant";
+        privateDefault = "Qwant";
+      };
     };
 
     settings = {

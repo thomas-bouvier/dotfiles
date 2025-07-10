@@ -18,7 +18,7 @@
             }];
             icon = "https://assets.kagi.com/v1/kagi_assets/logos/yellow_3.svg";
             updateInterval = 24 * 60 * 60 * 1000; # Daily
-            definedAliases = [ "@kagi" ];
+            definedAliases = [ "!k" ];
           };
 
           "GitHub" = {
