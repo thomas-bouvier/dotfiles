@@ -9,7 +9,7 @@
       ../../system/printing.nix
 
       # Users
-      ../../users/thomas.nix
+      ../../users/thomas-famille.nix
       ../../users/famille.nix
     ];
 

@@ -5,14 +5,13 @@ let
 in
 {
   imports = [
-    (import ./atuin.nix { inherit config pkgs; secretsPath = secretsPath; })
-    ./konsole.nix
-    ./librewolf.nix
-    ./plasma.nix
-    ./ssh.nix
-    ./tmux.nix
-    ./vscode.nix
-    ./zsh.nix
+    (import ../thomas/atuin.nix { inherit config pkgs; secretsPath = secretsPath; })
+    ../thomas/konsole.nix
+    ../thomas/librewolf.nix
+    ../thomas/plasma.nix
+    ../thomas/ssh.nix
+    ../thomas/tmux.nix
+    ../thomas/zsh.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -43,12 +42,8 @@ in
   # environment.
   home.packages = with pkgs; [
     # Everyday life
-    anki
-    thunderbird
-    obsidian
     localsend
     vlc
-    signal-desktop-bin
     kdePackages.kcharselect
     kdePackages.kfind
     kdePackages.filelight
@@ -66,37 +61,6 @@ in
     docker-compose
     jq
     unrar
-
-    # Development
-    python312
-    mypy
-    uv
-    go
-    hugo
-    marimo
-    cudaPackages.nsight_systems
-
-    # Android
-    android-tools
-
-    # Research
-    texliveFull
-    texstudio
-
-    # Graphics
-    inkscape
-    kdePackages.kdenlive
-
-    # Entertainment
-    ryujinx-greemdev
-    nicotine-plus
-    gpodder
-
-    # Audio
-    kdePackages.elisa
-    yt-dlp
-    audacity
-    ffmpeg
 
     # Theme
     nordic
@@ -117,13 +81,9 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    (writeShellScriptBin "g5k" (builtins.readFile ./assets/g5k))
-    (writeShellScriptBin "ide" (builtins.readFile ./assets/ide))
-  ]
-  ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [
-    zotero
-    mixxx
-  ] else [ ]);
+    (writeShellScriptBin "g5k" (builtins.readFile ../thomas/assets/g5k))
+    (writeShellScriptBin "ide" (builtins.readFile ../thomas/assets/ide))
+  ];
 
   programs.git = {
     enable = true;

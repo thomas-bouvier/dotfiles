@@ -28,14 +28,12 @@
   home.packages = with pkgs; [
     # Everyday life
     localsend
+    vlc
     kdePackages.kcharselect
     kdePackages.kfind
     kdePackages.filelight
     kdePackages.kompare
     libreoffice-qt6-fresh
-
-    # Entertainment
-    vlc
 
     # Theme
     nordic
