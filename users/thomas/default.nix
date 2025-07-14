@@ -91,6 +91,7 @@ in
     ryujinx-greemdev
     nicotine-plus
     gpodder
+    mixxx
 
     # Audio
     kdePackages.elisa
@@ -122,7 +123,6 @@ in
   ]
   ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [
     zotero
-    mixxx
   ] else [ ]);
 
   programs.git = {
