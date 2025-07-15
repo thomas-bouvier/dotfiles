@@ -5,17 +5,48 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.unstable.vscodium;
+    #package = pkgs.unstable.vscodium;
+
+    # This patch is needed to enable GitHub Copilot Chat in VSCodium.
+    # https://github.com/VSCodium/vscodium/discussions/1487
+    # https://github.com/jtrrll/dotfiles/blob/main/modules/dotfiles/editors/vscode.nix
+    package = pkgs.unstable.vscodium.overrideAttrs (old: {
+      nativeBuildInputs =
+        (old.nativeBuildInputs or [])
+        ++ [
+          pkgs.jq
+          pkgs.uutils-coreutils-noprefix
+        ];
+      postInstall =
+        (old.postInstall or "")
+        + (let
+          vscodeProductJSON = "lib/vscode/resources/app/product.json";
+          vscodiumProductJSON = "lib/vscode/resources/app/product.json";
+        in ''
+          product_file="$out/${vscodiumProductJSON}"
+
+          if [ -f "$product_file" ]; then
+            printf "Patching product.json to enable GitHub Copilot Chat\n"
+
+            tmp_file="$product_file.tmp"
+
+            jq --slurpfile vscode "${pkgs.vscode}/${vscodeProductJSON}" '
+              .defaultChatAgent = $vscode[0]["defaultChatAgent"]
+            ' "$product_file" > "$tmp_file"
+
+            mv "$tmp_file" "$product_file"
+          else
+            printf "product.json not found at %s\n" "$product_file"
+          fi
+        '');
+    });
 
     profiles.default = {
-      # pkgs.vscode-marketplace are the pre-release extensions
-      extensions = with pkgs.vscode-marketplace; [
-        christian-kohler.path-intellisense
-        ms-vscode-remote.remote-ssh
-        charliermarsh.ruff
+      enableUpdateCheck = false;
+      enableExtensionUpdateCheck = false;
 
-        pkgs.vscode-marketplace-release.github.copilot
-        pkgs.vscode-marketplace-release.github.copilot-chat
+      extensions = with pkgs.vscode-extensions; [
+        charliermarsh.ruff
 
         # Vim keybindings
         vscodevim.vim
@@ -38,11 +69,14 @@
         vue.volar
 
         # Theming
-        arcticicestudio.nord-visual-studio-code
         pkief.material-icon-theme
       ]
-      ++ (with pkgs.open-vsx; [
+      ++ (with pkgs.nix-vscode-extensions.open-vsx; [
         marlosirapuan.nord-deep
+      ])
+      ++ (with pkgs.vscode-extensions; [
+        github.copilot
+        github.copilot-chat
       ]);
 
       userSettings = {
