@@ -87,9 +87,10 @@ nix-collect-garbage --delete-older-than 30d
 
 ## Future work
 
-Bugs:
+Limitations:
 
-- (zotero) Zotero is not available yet on aarch64 platforms.
+- (vscodium) I am currently using the VSCode spyware instead of VSCodium because of an incompatibility with Copilot Chat. This should [eventually be fixed](https://code.visualstudio.com/blogs/2025/06/30/openSourceAIEditorFirstMilestone).
+- (zotero) Zotero is [not available yet on aarch64 platforms](https://github.com/zotero/zotero/issues/3515).
 - (localsend) LocalSend can't receive files when dns0 is enabled.
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 
