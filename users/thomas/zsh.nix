@@ -6,14 +6,14 @@
     enable = true;
 
     initContent = ''
-      autoload -Uz vcs_info # enable vcs_info
-      precmd () { vcs_info } # always load before displaying the prompt
+      autoload -Uz vcs_info
+      precmd() { vcs_info }
       setopt prompt_subst
-      #PS1='%n@%m %F{red}%/%f$vcs_info_msg_0_ $ '
-      PS1="%3~ ''${vcs_info_msg_0_}%# "
+
+      zstyle ':vcs_info:*' formats ' %s(%F{green}%b%f)' # git(main)
+      PS1='%m %3~$vcs_info_msg_0_ $ '
 
       eval "$(atuin init zsh)"
-
       # Source everything from ~/.zsh/*.zsh
       for f ("$HOME"/.zsh/*.zsh) . $f
     '';
