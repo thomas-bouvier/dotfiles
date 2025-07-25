@@ -29,7 +29,6 @@
 
   hardware.asahi = {
     peripheralFirmwareDirectory = ../../system/asahi-firmware;
-    withRust = true;
     useExperimentalGPUDriver = true;
     experimentalGPUInstallMode = "replace";
   };
