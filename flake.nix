@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    flox.url = "github:flox/flox";
 
     apple-silicon = {
       url = "github:nix-community/nixos-apple-silicon";
@@ -67,6 +68,7 @@
       self,
       nixpkgs,
       nixpkgs-unstable,
+      flox,
       apple-silicon,
       home-manager,
       plasma-manager,
@@ -112,6 +114,7 @@
             }
           )
 
+          flox.nixosModules.flox
           lix-module.nixosModules.default
           ./hosts/bolet/default.nix
           stylix.nixosModules.stylix
@@ -147,6 +150,7 @@
             }
           )
 
+          flox.nixosModules.flox
           lix-module.nixosModules.default
           ./hosts/coprin/default.nix
           stylix.nixosModules.stylix
@@ -185,6 +189,7 @@
             }
           )
 
+          flox.nixosModules.flox
           apple-silicon.nixosModules.apple-silicon-support
           lix-module.nixosModules.default
           ./hosts/amanite/default.nix
