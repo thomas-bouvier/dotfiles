@@ -81,14 +81,14 @@ Limitations:
 
 - (vscodium) I am currently using the VSCode spyware instead of VSCodium because of an incompatibility with Copilot Chat. This should [eventually be fixed](https://code.visualstudio.com/blogs/2025/06/30/openSourceAIEditorFirstMilestone).
 - (zotero) Zotero is [not available yet on aarch64 platforms](https://github.com/zotero/zotero/issues/3515).
-- (localsend) LocalSend can't receive files when dns0 is enabled.
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
+- (nixos) new generations are sometimes [not pushed into the boot menu](https://nixos.wiki/wiki/Bootloader#New_generations_are_not_in_the_boot_menu).
 
-These would be nice to have.
+These would be nice to have:
 
 - I would like to install the [Ophirofox](https://ophirofox.ophir.dev/) extension, which is not available on the Mozilla store.
 
-These are not fully integrated yet.
+These are not fully integrated yet:
 
 - SDDM doesn't offer a keyboard layout selection, which is very annoying for non-US keyboard users. SDDM should be incubated into Plasma [at some point](https://invent.kde.org/plasma/plasma-desktop/-/issues/91).
 - [Pinned favorites in kickoff menu](https://github.com/nix-community/plasma-manager/issues/376) is not supported by `plasma-manager` yet.
