@@ -128,7 +128,7 @@
               };
 
               sharedModules = [
-                plasma-manager.homeManagerModules.plasma-manager
+                plasma-manager.homeModules.plasma-manager
                 inputs.sops-nix.homeManagerModules.sops
               ];
             };
@@ -164,7 +164,7 @@
               };
 
               sharedModules = [
-                plasma-manager.homeManagerModules.plasma-manager
+                plasma-manager.homeModules.plasma-manager
                 inputs.sops-nix.homeManagerModules.sops
               ];
             };
@@ -204,7 +204,7 @@
               };
 
               sharedModules = [
-                plasma-manager.homeManagerModules.plasma-manager
+                plasma-manager.homeModules.plasma-manager
                 inputs.sops-nix.homeManagerModules.sops
               ];
             };
