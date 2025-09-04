@@ -25,6 +25,9 @@
 
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
+
+    # Use the latest kernel
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   networking.hostName = "bolet";

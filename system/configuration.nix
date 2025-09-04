@@ -121,8 +121,8 @@
       # Apple
       "apple_cursor"
       "obsidian"
-      # VSCode extensions
-      "vscode" # needed as I'am patching VSCodium to enable GitHub Copilot Chat
+      # VSCode
+      "vscode"
       "vscode-extension-ms-vscode-cpptools"
       "vscode-extension-ms-vscode-remote-remote-ssh"
       "vscode-extension-github-copilot"

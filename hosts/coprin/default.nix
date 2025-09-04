@@ -23,6 +23,9 @@
 
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
+
+    # Use the latest kernel
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   networking.hostName = "coprin";
