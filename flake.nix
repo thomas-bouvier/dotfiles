@@ -23,7 +23,9 @@
     };
 
     stylix = {
-      url = "github:danth/stylix";
+      # url = "github:danth/stylix";
+      # https://github.com/nix-community/stylix/pull/1866
+      url = "github:thomas-bouvier/stylix?ref=fix/qt-platformtheme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
