@@ -77,6 +77,7 @@
       ]
       ++ (with pkgs.nix-vscode-extensions.open-vsx; [
         marlosirapuan.nord-deep
+        marimo-team.vscode-marimo
       ]);
 
       userSettings = {
