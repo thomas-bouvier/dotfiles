@@ -11,7 +11,7 @@
         force = true; # Override default search engines
 
         engines = {
-          "Qwant" = {
+          "qwant" = {
             urls = [{
               template = "https://www.qwant.com/?q={searchTerms}";
             }];
@@ -21,8 +21,8 @@
           };
         };
 
-        default = "Qwant";
-        privateDefault = "Qwant";
+        default = "qwant";
+        privateDefault = "qwant";
       };
     };
 
