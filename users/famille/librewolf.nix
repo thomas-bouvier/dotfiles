@@ -26,7 +26,12 @@
       };
     };
 
+    languagePacks = ["fr"];
+
     settings = {
+      "intl.accept_languages" = "fr,en-US";
+      "intl.locale.requested" = "fr,en-US";
+
       "privacy.clearOnShutdown.history" = false;
       "privacy.clearOnShutdown.dowloads" = true;
       "privacy.clearOnShutdown.cookies" = false;
