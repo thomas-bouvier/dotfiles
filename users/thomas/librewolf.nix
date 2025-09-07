@@ -57,6 +57,7 @@
       "dom.forms.autocomplete.formautofill" = false;
       "dom.payments.defaults.saveAddress" = false;
 
+      "browser.formfill.enable" = false;
       "browser.tabs.loadInBackground" = true;
       "browser.toolbars.bookmarks.visibility" = "newtab";
 
