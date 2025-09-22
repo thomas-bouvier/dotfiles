@@ -85,7 +85,10 @@
                 format = "isoDate";
                 position = "belowTime";
               };
-              calendar.firstDayOfWeek = "monday";
+              calendar = {
+                firstDayOfWeek = "monday";
+                showWeekNumbers = true;
+              };
               time = {
                 format = "24h";
                 showSeconds = "never";
