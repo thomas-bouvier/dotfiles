@@ -34,8 +34,8 @@ in
   # Stylix configuration for user-specific wallpaper
   stylix = {
     image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/thomas-bouvier/wallpapers/main/mont-saint-michel.jpg";
-      sha256 = "sha256-IVcBW3Cd2TMyvGPtB88pyLeeNFt1jkxGWssQ9yuhFdQ=";
+      url = "https://raw.githubusercontent.com/thomas-bouvier/wallpapers/main/davis-county.jpg";
+      sha256 = "sha256-fd4K7qyQM0k3ffowrBBmhbyPYeeUoU8hMr5rZ33hUAI=";
     };
   };
 
