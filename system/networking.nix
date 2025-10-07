@@ -21,8 +21,7 @@
 
   services.resolved = {
     enable = true;
-    # Disable because of https://github.com/systemd/systemd/issues/38509
-    dnsovertls = "false";
+    dnsovertls = "true";
     dnssec = "false";
 
     # Configure dns0.eu with .local domain resolution
