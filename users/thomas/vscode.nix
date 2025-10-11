@@ -48,8 +48,6 @@
 
       extensions = with pkgs.vscode-extensions; [
         charliermarsh.ruff
-
-        # Vim keybindings
         vscodevim.vim
 
         # Nix
@@ -64,7 +62,6 @@
         ms-toolsai.jupyter
         matangover.mypy
         bierner.github-markdown-preview
-        eamodio.gitlens
 
         # Webdev
         vue.volar
@@ -78,6 +75,7 @@
       ++ (with pkgs.nix-vscode-extensions.open-vsx; [
         marlosirapuan.nord-deep
         marimo-team.vscode-marimo
+        mk12.better-git-line-blame
       ]);
 
       userSettings = {
