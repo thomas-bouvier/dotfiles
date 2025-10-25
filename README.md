@@ -79,6 +79,7 @@ nix-collect-garbage --delete-older-than 30d
 
 Limitations:
 
+- (DNS4EU) I should find a way to enable DNSoverTLS with DNS4EU
 - (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (nixos) error during stage 1: can’t mount `/mnt-root`
 - (vscodium) I am currently using the VSCode spyware instead of VSCodium because of an incompatibility with Copilot Chat. This should [eventually be fixed](https://code.visualstudio.com/blogs/2025/06/30/openSourceAIEditorFirstMilestone).

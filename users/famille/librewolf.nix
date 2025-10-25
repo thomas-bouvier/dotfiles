@@ -80,8 +80,8 @@
       # DNS over HTTPS (DoH) with NextDNS
       # Mode 3 = DoH only, no fallback to traditional DNS
       "network.trr.mode" = 3;
-      "network.trr.custom_uri" = "https://dns0.eu";
-      "network.trr.uri" = "https://dns0.eu";
+      "network.trr.custom_uri" = "https://noads.joindns4.eu/dns-query";
+      "network.trr.uri" = "https://noads.joindns4.eu/dns-query";
       "network.trr.confirmationNS" = "skip";
       "network.dns.skipTRR-when-parental-control-enabled" = false;
 
