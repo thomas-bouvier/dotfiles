@@ -108,26 +108,42 @@
     };
   };
 
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "cnijfilter2"
-      "unrar"
-      # Nvidia
-      "nvidia-x11"
-      "nvidia-settings"
-      "nsight_systems"
-      "cuda_cudart"
-      # Apple
-      "apple_cursor"
-      "obsidian"
-      # VSCode
-      "vscode"
-      "vscode-extension-ms-vscode-cpptools"
-      "vscode-extension-ms-vscode-remote-remote-ssh"
-      "vscode-extension-github-copilot"
-      "vscode-extension-github-copilot-chat"
-    ];
+  nixpkgs.config = {
+    # Combined predicate: keep the legacy name whitelist, and also accept
+    # packages whose licenses are CUDA-related EULAs.
+    allowUnfreePredicate = let
+      ensureList = x: if builtins.isList x then x else [ x ];
+      legacyNames = [
+        "cnijfilter2"
+        "unrar"
+        # Nvidia
+        "nvidia-x11"
+        "nvidia-settings"
+        # Apple
+        "apple_cursor"
+        "obsidian"
+        # VSCode
+        "vscode"
+        "vscode-extension-ms-vscode-cpptools"
+        "vscode-extension-ms-vscode-remote-remote-ssh"
+        "vscode-extension-github-copilot"
+        "vscode-extension-github-copilot-chat"
+      ];
+    in
+    package:
+    (builtins.elem (lib.getName package) legacyNames)
+    || builtins.all (
+      license:
+      license.free
+      || builtins.elem license.shortName [
+        "CUDA EULA"
+        "cuDNN EULA"
+      ]
+    ) (ensureList package.meta.license);
+
+    cudaForwardCompat = true;
+    cudaSupport = true;
+  };
 
   programs.ssh.startAgent = true;
 
