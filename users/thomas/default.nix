@@ -127,10 +127,11 @@ in
 
   programs.git = {
     enable = true;
-    userName = "Thomas Bouvier";
-    userEmail = "contact@thomas-bouvier.io";
 
-    extraConfig = {
+    settings = {
+      user.name = "Thomas Bouvier";
+      user.email = "contact@thomas-bouvier.io";
+
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
       url = {
