@@ -88,7 +88,7 @@ in
     kdePackages.kdenlive
 
     # Entertainment
-    ryujinx-greemdev
+    ryubing
     nicotine-plus
     gpodder
     mixxx
