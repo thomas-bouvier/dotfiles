@@ -135,6 +135,12 @@
         "vscode-extension-ms-vscode-remote-remote-ssh"
         "vscode-extension-github-copilot"
         "vscode-extension-github-copilot-chat"
+        # CUDA tools (for remote development)
+        "cuda_cccl"
+        "cuda_cudart"
+        "cuda_nvcc"
+        "nsight_systems"
+        "nsight_compute"
       ];
     in
     package:
@@ -147,9 +153,6 @@
         "cuDNN EULA"
       ]
     ) (ensureList package.meta.license);
-
-    cudaForwardCompat = true;
-    cudaSupport = true;
   };
 
   programs.ssh.startAgent = true;

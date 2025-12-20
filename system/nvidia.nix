@@ -1,5 +1,8 @@
 { config, ... }:
 {
+  # Enable CUDA support for packages on machines with NVIDIA GPUs
+  nixpkgs.config.cudaSupport = true;
+  nixpkgs.config.cudaForwardCompat = true;
 
   # Enable OpenGL
   hardware.graphics = {
