@@ -76,9 +76,16 @@
     # Enable the Flakes feature and the accompanying new nix command-line tool
     experimental-features = [ "nix-command" "flakes" ];
 
-    # Flox
-    trusted-substituters = [ "https://cache.flox.dev" ];
-    trusted-public-keys = [ "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs=" ];
+    trusted-substituters = [
+      "https://cache.nixos.org"
+      "https://cache.nixos-cuda.org"
+      "https://cache.flox.dev"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+      "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs="
+    ];
 
     # Optimise the store after each and every build (for the built path)
     auto-optimise-store = true;
