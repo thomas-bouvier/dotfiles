@@ -89,6 +89,7 @@ in
 
     # Entertainment
     ryubing
+    luanti
     nicotine-plus
     gpodder
     mixxx
