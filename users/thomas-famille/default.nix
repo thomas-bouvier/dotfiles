@@ -60,6 +60,7 @@ in
     docker
     docker-compose
     jq
+    nix-output-monitor
     unrar
 
     # Theme
