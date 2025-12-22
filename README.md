@@ -87,10 +87,6 @@ Limitations:
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 - (nixos) new generations are sometimes [not pushed into the boot menu](https://nixos.wiki/wiki/Bootloader#New_generations_are_not_in_the_boot_menu).
 
-These would be nice to have:
-
-- I would like to install the [Ophirofox](https://ophirofox.ophir.dev/) extension, which is not available on the Mozilla store.
-
 These are not fully integrated yet:
 
 - SDDM doesn't offer a keyboard layout selection, which is very annoying for non-US keyboard users. SDDM should be incubated into Plasma [at some point](https://invent.kde.org/plasma/plasma-desktop/-/issues/91).
