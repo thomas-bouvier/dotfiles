@@ -67,6 +67,7 @@ in
     jq
     nix-output-monitor
     unrar
+    nh
 
     # Development
     python312

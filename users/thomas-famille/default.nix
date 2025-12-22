@@ -62,6 +62,7 @@ in
     jq
     nix-output-monitor
     unrar
+    nh
 
     # Theme
     nordic
