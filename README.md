@@ -79,6 +79,7 @@ nix-collect-garbage --delete-older-than 30d
 
 Limitations:
 
+- (cudaSupport) Setting `cudaSupport = false` causes Librewolf to be rebuilt every time, so we add an overlay preventing this (https://github.com/NixOS/nixpkgs/issues/457218)
 - (DNS4EU) I should find a way to enable DNSoverTLS with DNS4EU
 - (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (nixos) error during stage 1: can’t mount `/mnt-root`
