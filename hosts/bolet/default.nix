@@ -53,7 +53,15 @@
     {
       device = "/.swapfile";
     }
+    {
+      device = "/storage/swapfile2";
+      size = 100 * 1024; # 100GB
+    }
   ];
+  zramSwap = {
+    enable = true;
+    memoryPercent = 90;
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
