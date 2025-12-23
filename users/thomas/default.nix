@@ -88,6 +88,7 @@ in
     # Graphics
     inkscape
     kdePackages.kdenlive
+    qgis
 
     # Entertainment
     ryubing
