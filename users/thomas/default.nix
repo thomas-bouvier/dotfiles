@@ -91,6 +91,7 @@ in
     qgis
 
     # Entertainment
+    qbittorrent
     ryubing
     luanti
     nicotine-plus
