@@ -68,6 +68,7 @@ in
     nix-output-monitor
     unrar
     nh
+    git-filter-repo
 
     # Development
     python312
