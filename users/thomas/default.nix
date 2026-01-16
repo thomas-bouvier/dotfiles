@@ -62,10 +62,7 @@ in
     age
     htop
     sops
-    docker
-    docker-compose
     jq
-    nix-output-monitor
     unrar
     nh
     git-filter-repo
@@ -78,6 +75,11 @@ in
     hugo
     marimo
     cudaPackages.nsight_systems
+
+    # Virtualisation
+    dive
+    podman
+    podman-compose
 
     # Android
     android-tools

@@ -13,7 +13,7 @@ in
   users.users.thomas = {
     isNormalUser = true;
     initialPassword = "pw123";
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "podman" ]; # Enable ‘sudo’ for the user.
 
     icon = ./thomas/assets/avatar.png;
 

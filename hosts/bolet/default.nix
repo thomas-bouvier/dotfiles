@@ -7,9 +7,10 @@
 
       # We need Nvidia drivers
       ../../system/nvidia.nix
-
       # We need printing drivers
       ../../system/printing.nix
+      # We need virtualisation capabilities
+      ../../system/virtualisation.nix
 
       # Users
       ../../users/thomas.nix

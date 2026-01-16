@@ -5,6 +5,9 @@
         (modulesPath + "/installer/scan/not-detected.nix")
         ../../system/configuration.nix
 
+        # We need virtualisation capabilities
+        ../../system/virtualisation.nix
+
         # Users
         ../../users/thomas.nix
     ];
