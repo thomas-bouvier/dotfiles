@@ -69,7 +69,6 @@
         # Theming
         pkief.material-icon-theme
 
-        github.copilot
         github.copilot-chat
       ]
       ++ (with pkgs.nix-vscode-extensions.open-vsx; [
@@ -82,6 +81,7 @@
         # Theming
         "workbench.colorTheme" = "Nord Deep";
         "workbench.iconTheme" = "material-icon-theme";
+        "chat.viewSessions.orientation" = "stacked";
         "editor.fontFamily" = "'JetBrains Mono', 'monospace', monospace";
         "editor.fontSize" = 13;
         "explorer.confirmDelete" = true;
