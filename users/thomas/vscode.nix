@@ -47,34 +47,26 @@
       enableExtensionUpdateCheck = false;
 
       extensions = with pkgs.vscode-extensions; [
-        charliermarsh.ruff
-        vscodevim.vim
-
-        # Nix
-        jnoortheen.nix-ide
-
-        # C++
         ms-vscode.cpptools
+        github.copilot-chat
+      ]
+      ++ (with pkgs.nix-vscode-extensions.open-vsx-release; [
+        # IDE
+        vscodevim.vim
+        marlosirapuan.nord-deep
+        mk12.better-git-line-blame
+        bierner.markdown-preview-github-styles
+        pkief.material-icon-theme
 
         # Python
         ms-python.python
-        ms-python.black-formatter
-        ms-toolsai.jupyter
+        charliermarsh.ruff
         matangover.mypy
-        bierner.github-markdown-preview
-
-        # Webdev
-        vue.volar
-
-        # Theming
-        pkief.material-icon-theme
-
-        github.copilot-chat
-      ]
-      ++ (with pkgs.nix-vscode-extensions.open-vsx; [
-        marlosirapuan.nord-deep
         marimo-team.vscode-marimo
-        mk12.better-git-line-blame
+
+        # Languages
+        jnoortheen.nix-ide
+        vue.volar
       ]);
 
       userSettings = {
