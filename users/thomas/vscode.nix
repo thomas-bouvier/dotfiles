@@ -53,6 +53,7 @@
       ++ (with pkgs.nix-vscode-extensions.open-vsx-release; [
         # IDE
         vscodevim.vim
+        ms-vscode-remote.remote-ssh
         marlosirapuan.nord-deep
         mk12.better-git-line-blame
         bierner.markdown-preview-github-styles

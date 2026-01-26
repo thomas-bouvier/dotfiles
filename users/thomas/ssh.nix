@@ -40,6 +40,12 @@
         user = "tbouvier";
         forwardAgent = true;
       };
+
+      "odeai-server" = {
+        hostname = "odeai-server.ddns.net";
+        user = "thomas";
+        port = 6422;
+      };
     };
   };
 }
