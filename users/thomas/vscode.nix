@@ -6,41 +6,7 @@
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = false;
-    package = pkgs.vscode;
-
-    # This patch is needed to enable GitHub Copilot Chat in VSCodium.
-    # https://github.com/VSCodium/vscodium/discussions/1487
-    # https://github.com/jtrrll/dotfiles/blob/main/modules/dotfiles/editors/vscode.nix
-    #package = pkgs.unstable.vscodium.overrideAttrs (old: {
-    #  nativeBuildInputs =
-    #    (old.nativeBuildInputs or [])
-    #    ++ [
-    #      pkgs.jq
-    #      pkgs.uutils-coreutils-noprefix
-    #    ];
-    #  postInstall =
-    #    (old.postInstall or "")
-    #    + (let
-    #      vscodeProductJSON = "lib/vscode/resources/app/product.json";
-    #      vscodiumProductJSON = "lib/vscode/resources/app/product.json";
-    #    in ''
-    #      product_file="$out/${vscodiumProductJSON}"
-
-    #      if [ -f "$product_file" ]; then
-    #        printf "Patching product.json to enable GitHub Copilot Chat\n"
-    #
-    #      tmp_file="$product_file.tmp"
-
-    #         jq --slurpfile vscode "${pkgs.vscode}/${vscodeProductJSON}" '
-    #          .defaultChatAgent = $vscode[0]["defaultChatAgent"]
-    #        ' "$product_file" > "$tmp_file"
-
-    #        mv "$tmp_file" "$product_file"
-    #      else
-    #        printf "product.json not found at %s\n" "$product_file"
-    #      fi
-    #    '');
-    #});
+    package = pkgs.unstable.vscodium;
 
     profiles.default = {
       enableUpdateCheck = false;
@@ -80,6 +46,7 @@
         "explorer.confirmDelete" = true;
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
+        "chat.disableAIFeatures" = false;
       };
     };
   };
