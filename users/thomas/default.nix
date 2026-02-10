@@ -68,7 +68,7 @@ in
     git-filter-repo
 
     # Development
-    python312
+    python313
     mypy
     uv
     go

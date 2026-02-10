@@ -21,18 +21,11 @@
 
   services.resolved = {
     enable = true;
-    dnsovertls = "false";
-    dnssec = "false";
 
-    # Configure dns0.eu with .local domain resolution
-    extraConfig = ''
-      [Resolve]
-      DNS=86.54.11.13
-      DNS=86.54.11.213
-      DNS=2a13:1001::86.54.11.13
-      DNS=2a13:1001::86.54.11.213
-      # Allow local resolution to bypass encrypted DNS
-      # Domains=~. local
-    '';
+    settings.Resolve = {
+      DNSOverTLS = false;
+      DNSSEC = false;
+      DNS = [ "86.54.11.13" "86.54.11.213" "2a13:1001::86.54.11.13" "2a13:1001::86.54.11.213" ];
+    };
   };
 }

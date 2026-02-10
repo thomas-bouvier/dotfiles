@@ -91,14 +91,6 @@
       commonOverlays = [
         nur.overlays.default
         nix-vscode-extensions.overlays.default
-        # Disable CUDA for onnxruntime in librewolf (not needed for browser)
-        (final: prev: {
-          librewolf-unwrapped = prev.librewolf-unwrapped.override (attrs: {
-            onnxruntime = attrs.onnxruntime.override (_: {
-              cudaSupport = false;
-            });
-          });
-        })
       ];
 
       mkUnstableOverlay = pkgs: (final: prev: {
