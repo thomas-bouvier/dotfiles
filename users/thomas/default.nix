@@ -39,6 +39,22 @@ in
     };
   };
 
+  # Earth View - random Google Earth wallpapers
+  services.earth-view = {
+    enable = true;
+    interval = null;
+    imageDirectory = ".earth-view";
+    display = "fill";
+    enableXinerama = true;
+    autoStart = false;
+    gc = {
+      enable = false;
+      keep = 10;
+      interval = null;
+      sizeThreshold = "0";
+    };
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [

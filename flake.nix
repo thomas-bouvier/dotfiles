@@ -61,6 +61,8 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    earth-view.url = "github:nicolas-goudry/earth-view";
   };
 
   outputs =
@@ -79,6 +81,7 @@
       nur,
       my-secrets,
       nix-vscode-extensions,
+      earth-view,
       ...
     }@inputs:
     let
@@ -130,6 +133,7 @@
               sharedModules = [
                 plasma-manager.homeModules.plasma-manager
                 inputs.sops-nix.homeManagerModules.sops
+                inputs.earth-view.homeManagerModules.earth-view
               ];
             };
           }
@@ -206,6 +210,7 @@
               sharedModules = [
                 plasma-manager.homeModules.plasma-manager
                 inputs.sops-nix.homeManagerModules.sops
+                inputs.earth-view.homeManagerModules.earth-view
               ];
             };
           }
