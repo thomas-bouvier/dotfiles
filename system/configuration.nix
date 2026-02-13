@@ -108,6 +108,8 @@
       devenv
       tailscale
       wget
+      util-linux
+      exfat
     ];
 
     sessionVariables = {
