@@ -42,7 +42,7 @@ in
   # Earth View - random Google Earth wallpapers
   services.earth-view = {
     enable = true;
-    interval = null;
+    interval = "24h";
     imageDirectory = ".earth-view";
     display = "fill";
     enableXinerama = true;
