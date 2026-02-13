@@ -4,7 +4,9 @@ My declarative, reproducible system built using [Lix](https://lix.systems/).
 
 ## Installation
 
-If you set up a new machine you should probably [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key pair. Put your keys in `/home/thomas/.ssh/`.
+Please follow some installation instructions in [INSTALL.md](INSTALL.md).
+
+If you set up a new machine you should probably [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key pair. Put your keys in `/home/thomas/.ssh/` once you're logged in in your new machine.
 
 Put your age keys here:
 
@@ -16,12 +18,18 @@ To rebuild the system:
 
 ```console
 nixos-rebuild switch --flake . --sudo
+
+# Or, better
+nh os switch .
 ```
 
 To rebuild a remote system locally, and deploy it:
 
 ```console
 nixos-rebuild switch --flake .#coprin --target-host thomas@192.168.1.30 --sudo
+
+# Or, better
+nh os switch . -H coprin --target-host thomas@coprin.local
 ```
 
 ### Apple Silicon machine
@@ -75,16 +83,22 @@ Delete all generations older than a specific period (e.g. 30 days):
 nix-collect-garbage --delete-older-than 30d
 ```
 
+These commands are run altogether when using:
+
+```console
+nh clean all --keep-since 30d
+```
+
 ## Future work
 
 Limitations:
 
-- (DNS4EU) I should find a way to enable DNSoverTLS with DNS4EU
-- (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (nixos) error during stage 1: can’t mount `/mnt-root`
-- (zotero) Zotero is [not available yet on aarch64 platforms](https://github.com/zotero/zotero/issues/3515).
-- (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 - (nixos) new generations are sometimes [not pushed into the boot menu](https://nixos.wiki/wiki/Bootloader#New_generations_are_not_in_the_boot_menu).
+- (DNS4EU) I should find a way to enable DNSOverTLS with DNS4EU
+- (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
+- (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
+- (zotero) Zotero is [not available yet on aarch64 platforms](https://github.com/zotero/zotero/issues/3515).
 
 These are not fully integrated yet:
 
