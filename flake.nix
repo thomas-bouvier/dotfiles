@@ -62,7 +62,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    earth-view.url = "github:nicolas-goudry/earth-view";
+    earth-view = {
+      url = "github:nicolas-goudry/earth-view";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -82,6 +89,7 @@
       my-secrets,
       nix-vscode-extensions,
       earth-view,
+      disko,
       ...
     }@inputs:
     let
@@ -198,6 +206,44 @@
           lix-module.nixosModules.default
           ./hosts/amanite/default.nix
           stylix.nixosModules.stylix
+
+          # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit my-secrets;
+              };
+
+              sharedModules = [
+                plasma-manager.homeModules.plasma-manager
+                inputs.sops-nix.homeManagerModules.sops
+                inputs.earth-view.homeManagerModules.earth-view
+              ];
+            };
+          }
+        ];
+      };
+
+      nixosConfigurations.cladosporium = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+        };
+
+        modules = [
+          (
+            { pkgs, ... }:
+            {
+              nixpkgs.overlays = commonOverlays ++ [ (mkUnstableOverlay pkgs) ];
+            }
+          )
+
+          flox.nixosModules.flox
+          lix-module.nixosModules.default
+          ./hosts/cladosporium/default.nix
+          stylix.nixosModules.stylix
+          disko.nixosModules.disko
 
           # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
           home-manager.nixosModules.home-manager

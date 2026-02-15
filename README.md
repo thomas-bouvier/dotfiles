@@ -1,12 +1,12 @@
 # Lix dotfiles
 
-My declarative, reproducible system built using [Lix](https://lix.systems/).
+My declarative, reproducible [NixOS](https://nixos.org/) system built using [Lix](https://lix.systems/). My configuration is designed to support multiple hosts—including an Apple Silicon MacBook—and multiple users, some of whom are reused across different hosts. It also incorporates advanced features such as LUKS encryption via `disko` and secrets management with `sops`. I've aimed for a balance between readability and completeness.
 
 ## Installation
 
-Please follow some installation instructions in [INSTALL.md](INSTALL.md).
+Please follow my installation instructions in [INSTALL.md](INSTALL.md).
 
-If you set up a new machine you should probably [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key pair. Put your keys in `/home/thomas/.ssh/` once you're logged in in your new machine.
+If you set up a new machine you should probably [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key pair. Put your keys in `/home/thomas/.ssh/` once you're logged in in your new machine. Don't forget to set up a new password for your user using `passwd`.
 
 Put your age keys here:
 
@@ -14,13 +14,13 @@ Put your age keys here:
 vim /home/thomas/.config/sops/age/keys.txt
 ```
 
-To rebuild the system:
+Now you are ready to clone this configuration. Update my user `thomas` with yours. Once you are ready, rebuild the system:
 
 ```console
-nixos-rebuild switch --flake . --sudo
+nixos-rebuild switch --flake .#host --sudo
 
 # Or, better
-nh os switch .
+nh os switch . -H host
 ```
 
 To rebuild a remote system locally, and deploy it:
@@ -32,9 +32,11 @@ nixos-rebuild switch --flake .#coprin --target-host thomas@192.168.1.30 --sudo
 nh os switch . -H coprin --target-host thomas@coprin.local
 ```
 
-### Apple Silicon machine
+If you run out of memory, add parameters `--cores x` and `--max-jobs x` to the build command.
 
-Copy the peripheral firmware files off the EFI system partition (e.g. on the installation ISO `mkdir -p /mnt/etc/nixos/firmware && cp /mnt/boot/asahi/{all_firmware.tar.gz,kernelcache*} /mnt/etc/nixos/firmware`). Then, once a NixOS is installed, copy these firmware files to the current configuration `cp /mnt/etc/nixos/firmware* <current_config>/system/asahi-firmware`.
+## Available hosts
+
+This configuration supports multiple hosts as documented in [`hosts/README.md`](hosts/README.md).
 
 ## Manual configuration
 
@@ -103,7 +105,6 @@ Limitations:
 These are not fully integrated yet:
 
 - SDDM doesn't offer a keyboard layout selection, which is very annoying for non-US keyboard users. SDDM should be incubated into Plasma [at some point](https://invent.kde.org/plasma/plasma-desktop/-/issues/91).
-- [Pinned favorites in kickoff menu](https://github.com/nix-community/plasma-manager/issues/376) is not supported by `plasma-manager` yet.
 
 ## Some resources I found useful
 

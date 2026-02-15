@@ -1,4 +1,4 @@
-# Hints for the first installation
+# Installation instructions
 
 You should probably follow the [NixOS manual](https://nixos.org/manual/nixos/stable/index.html#sec-installation). I share my own notes for reference.
 
@@ -145,12 +145,32 @@ main = {
 # ...
 ```
 
+Set a LUKS password in `/tmp/secret.key`:
+
+```console
+echo password > /tmp/secret.key
+```
+
 The following step will partition and format your disk, and mount it to `/mnt`.
 
 **Please note: This will erase any existing data on your disk.**
 
 ```console
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/disko-configuration.nix
+```
+
+You should see a confirmation input and several output lines around partitioning and formatting the disks(see below), and don’t worry if you receive an error (for isntance you forgot to add the password file) ‘cause you can re-run disko multiple times. If you are uncertain about the outcome, you can always check the disko command’s return with `echo $?`:
+
+```console
+[..]
++ mountpoint=
++ type=btrfs
++ findmnt /dev/mapper/nixos /mnt/nix
++ mount /dev/mapper/nixos /mnt/nix -o compress=zstd -o noatime -o ssd -o space_cache=v2 -o user_subvol_rm_allowed -o subvol=@nix -o X-mount.mkdir
++ rm -rf /tmp/nix-shell-2791-0/tmp.jzrZ2yCjqz
+
+$ echo $?
+0
 ```
 
 After the command has run, your file system should have been formatted and
@@ -167,7 +187,11 @@ The output should look like this if your disk name is `nvme0n1`.
 /dev/nvme0n1p2 on /mnt/boot type vfat (rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro)
 ```
 
-## NixOS installation
+## Apple Silicon machine
+
+Copy the peripheral firmware files off the EFI system partition (e.g. on the installation ISO `mkdir -p /mnt/etc/nixos/firmware && cp /mnt/boot/asahi/{all_firmware.tar.gz,kernelcache*} /mnt/etc/nixos/firmware`).
+
+## First NixOS installation
 
 Your disks have now been formatted and mounted, and you are ready to complete
 the NixOS installation as described in the
@@ -175,6 +199,20 @@ the NixOS installation as described in the
 see the section headed "**Installing**", Steps 3 onwards. 
 
 ### You did not use Disko
+
+```console
+sudo nixos-generate-config --root /mnt
+```
+
+Set an `initialPassword` for your user.
+
+git
+experimental-features nix-command and flakes
+
+```console
+sudo nixos-install
+reboot
+```
 
 ### You used Disko
 
@@ -250,3 +288,9 @@ f) Finish the installation and reboot your machine,
 sudo nixos-install
 reboot
 ```
+
+## Complete installation
+
+Once logged in in NixOS, clone this repository in the location of your choice `<current_config>` and follow steps documented in [README.md](README.md).
+
+If you use an Apple Silicon machine, don't forget to copy your firmware files to the current configuration `cp /mnt/etc/nixos/firmware* <current_config>/system/asahi-firmware`.
