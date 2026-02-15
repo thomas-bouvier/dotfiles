@@ -101,6 +101,7 @@ in
     android-tools
 
     # Research
+    zotero
     texliveFull
     texstudio
 
@@ -146,7 +147,7 @@ in
     (writeShellScriptBin "ide" (builtins.readFile ./assets/ide))
   ]
   ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [
-    zotero
+    # List packages not compatible with aarch64 here
   ] else [ ]);
 
   programs.git = {

@@ -100,7 +100,6 @@ Limitations:
 - (DNS4EU) I should find a way to enable DNSOverTLS with DNS4EU
 - (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
-- (zotero) Zotero is [not available yet on aarch64 platforms](https://github.com/zotero/zotero/issues/3515).
 
 These are not fully integrated yet:
 
