@@ -43,6 +43,7 @@ in
   # environment.
   home.packages = with pkgs; [
     # Everyday life
+    mattermost-desktop
     thunderbird
     obsidian
     vlc
