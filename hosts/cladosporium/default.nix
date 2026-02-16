@@ -9,6 +9,8 @@
       ../../system/nvidia.nix
       # We need virtualisation capabilities
       ../../system/virtualisation.nix
+      # Enable Guix on this machine :)
+      ../../system/guix.nix
 
       # Users
       ../../users/thomas-work.nix
