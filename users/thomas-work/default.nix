@@ -7,12 +7,14 @@ in
   imports = [
     (import ../thomas/atuin.nix { inherit config pkgs; secretsPath = secretsPath; })
     ../thomas/konsole.nix
-    ../thomas/librewolf.nix
     ../thomas/plasma.nix
     ../thomas/ssh.nix
     ../thomas/tmux.nix
     ../thomas/vscode.nix
     ../thomas/zsh.nix
+
+    # Specific Librewolf config
+    ./librewolf.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

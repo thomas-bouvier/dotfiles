@@ -7,7 +7,7 @@
     profiles = {
       default = {
         id = 0;
-        isDefault = true;
+        isDefault = false;
 
         search = {
           force = true; # Override default search engines
@@ -37,6 +37,37 @@
                   "https://www.youtube.com/results?search_query={searchTerms}";
               }];
               definedAliases = [ "!y" ];
+            };
+          };
+          default = "Kagi";
+          privateDefault = "Kagi";
+        };
+      };
+
+      work = {
+        id = 1;
+        isDefault = true;
+
+        search = {
+          force = true; # Override default search engines
+
+          engines = {
+            "Kagi" = {
+              urls = [{
+                template = "https://kagi.com/search";
+                params = [ { name = "q"; value = "{searchTerms}"; } ];
+              }];
+              icon = "https://assets.kagi.com/v1/kagi_assets/logos/yellow_3.svg";
+              updateInterval = 24 * 60 * 60 * 1000; # Daily
+              definedAliases = [ "!k" ];
+            };
+
+            "GitHub" = {
+              urls = [{
+                template =
+                  "https://github.com/search?q={searchTerms}&type=repositories";
+              }];
+              definedAliases = [ "!gh" ];
             };
           };
           default = "Kagi";
