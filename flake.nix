@@ -104,26 +104,21 @@
         nix-vscode-extensions.overlays.default
       ];
 
-      mkUnstableOverlay = pkgs: (final: prev: {
-        unstable = import nixpkgs-unstable {
-          inherit (pkgs) system;
-        };
-      });
+      mkUnstableOverlay = final: prev: {
+        unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+      };
     in
     {
       nixosConfigurations.bolet = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
         };
 
         modules = [
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = commonOverlays ++ [ (mkUnstableOverlay pkgs) ];
-            }
-          )
+          {
+            nixpkgs.hostPlatform = "x86_64-linux";
+            nixpkgs.overlays = commonOverlays ++ [ mkUnstableOverlay ];
+          }
 
           flox.nixosModules.flox
           lix-module.nixosModules.default
@@ -149,18 +144,15 @@
       };
 
       nixosConfigurations.coprin = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
         };
 
         modules = [
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = commonOverlays ++ [ (mkUnstableOverlay pkgs) ];
-            }
-          )
+          {
+            nixpkgs.hostPlatform = "x86_64-linux";
+            nixpkgs.overlays = commonOverlays ++ [ mkUnstableOverlay ];
+          }
 
           flox.nixosModules.flox
           lix-module.nixosModules.default
@@ -185,21 +177,18 @@
       };
 
       nixosConfigurations.amanite = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
         specialArgs = {
           inherit inputs;
         };
 
         modules = [
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = commonOverlays ++ [
-                (mkUnstableOverlay pkgs)
-                apple-silicon.overlays.apple-silicon-overlay
-              ];
-            }
-          )
+          {
+            nixpkgs.hostPlatform = "aarch64-linux";
+            nixpkgs.overlays = commonOverlays ++ [
+              mkUnstableOverlay
+              apple-silicon.overlays.apple-silicon-overlay
+            ];
+          }
 
           flox.nixosModules.flox
           apple-silicon.nixosModules.apple-silicon-support
@@ -226,18 +215,15 @@
       };
 
       nixosConfigurations.cladosporium = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
         };
 
         modules = [
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = commonOverlays ++ [ (mkUnstableOverlay pkgs) ];
-            }
-          )
+          {
+            nixpkgs.hostPlatform = "x86_64-linux";
+            nixpkgs.overlays = commonOverlays ++ [ mkUnstableOverlay ];
+          }
 
           flox.nixosModules.flox
           lix-module.nixosModules.default
