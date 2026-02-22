@@ -32,12 +32,12 @@ in
   };
 
   # Stylix configuration for user-specific wallpaper
-  stylix = {
-    image = pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/thomas-bouvier/wallpapers/main/ecmwf.png";
-      sha256 = "sha256-m9DzW+B5As/FemMObk2Kll+Nf2B3uYaHD8EXJl0w+pU=";
-    };
-  };
+  #stylix = {
+  #  image = pkgs.fetchurl {
+  #    url = "https://raw.githubusercontent.com/thomas-bouvier/wallpapers/main/ecmwf.png";
+  #    sha256 = "sha256-m9DzW+B5As/FemMObk2Kll+Nf2B3uYaHD8EXJl0w+pU=";
+  #  };
+  #};
 
   # Earth View - random Google Earth wallpapers
   services.earth-view = {
