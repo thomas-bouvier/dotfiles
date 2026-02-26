@@ -28,7 +28,7 @@
         # Python
         ms-python.python
         charliermarsh.ruff
-        matangover.mypy
+        astral-sh.ty
         marimo-team.vscode-marimo
 
         # Languages
