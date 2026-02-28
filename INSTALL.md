@@ -124,6 +124,9 @@ layout:
 
 ```console
 cd /tmp
+curl https://raw.githubusercontent.com/thomas-bouvier/my-dotfiles/main/hosts/cladosporium/disko-configuration.nix -o /tmp/disko-configuration.nix
+
+# Alternatively
 curl https://raw.githubusercontent.com/nix-community/disko/master/example/luks-btrfs-subvolumes.nix -o /tmp/disko-configuration.nix
 ```
 
