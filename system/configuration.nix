@@ -105,11 +105,13 @@
       zsh
       tmux
       git
-      devenv
       tailscale
       wget
       util-linux
       exfat
+      usbutils
+      pciutils
+      libcamera
     ];
 
     sessionVariables = {
