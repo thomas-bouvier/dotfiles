@@ -100,6 +100,7 @@ Limitations:
 - (DNS4EU) I should find a way to enable DNSOverTLS with DNS4EU
 - (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
+- (vscodium) [VSCodium is unable to install extensions onto remotes](https://github.com/NixOS/nixpkgs/issues/275669)
 
 These are not fully integrated yet:
 
