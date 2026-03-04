@@ -81,6 +81,7 @@ in
     dive
     podman
     podman-compose
+    apptainer
 
     # Research
     zotero

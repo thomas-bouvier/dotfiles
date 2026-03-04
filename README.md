@@ -101,6 +101,7 @@ Limitations:
 - (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 - (vscodium) [VSCodium is unable to install extensions onto remotes](https://github.com/NixOS/nixpkgs/issues/275669)
+- (apptainer) can't build containers on btrfs systems `Unable to create build: failed to find mount point for /tmp: no parent mount point found`
 
 These are not fully integrated yet:
 

@@ -96,6 +96,7 @@ in
     dive
     podman
     podman-compose
+    apptainer
 
     # Android
     android-tools
