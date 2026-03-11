@@ -70,6 +70,7 @@ in
     kdePackages.filelight
     kdePackages.kompare
     kdePackages.partitionmanager
+    kdePackages.kamoso
     libreoffice-qt6-fresh
 
     # Command line

@@ -61,8 +61,8 @@
       defaultShared = true;
     };
 
-    # Enable sound.
-    pulseaudio.enable = false;
+    # Enable sound and camera.
+    pipewire.enable = true;
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
@@ -147,6 +147,11 @@
         "cuda_nvcc"
         "nsight_systems"
         "nsight_compute"
+        # Crap by Intel for cameras
+        "ipu6-camera-bins"
+        "ipu6-camera-bins-unstable"
+        "ivsc-firmware"
+        "ivsc-firmware-unstable"
       ];
     in
     package:
