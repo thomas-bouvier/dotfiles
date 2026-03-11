@@ -64,7 +64,7 @@ in
     obsidian
     localsend
     vlc
-    signal-desktop-bin
+    signal-desktop
     kdePackages.kcharselect
     kdePackages.kfind
     kdePackages.filelight
