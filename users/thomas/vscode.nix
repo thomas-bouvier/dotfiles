@@ -6,6 +6,7 @@
   programs.vscode = {
     enable = true;
     package = pkgs.unstable.vscodium;
+    mutableExtensionsDir = false;
 
     profiles.default = {
       enableUpdateCheck = false;

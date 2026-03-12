@@ -44,14 +44,9 @@
   hardware = {
     ipu6 = {
       enable = true;
-      platform = "ipu6epmtl";  # or "ipu6ep"
+      platform = "ipu6epmtl";  # mtl stands for Meteor Lake
     };
-
-    firmware = with pkgs; [
-      ivsc-firmware
-    ];
   };
-  services.v4l2-relayd.instances.ipu6.enable = lib.mkForce false;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
