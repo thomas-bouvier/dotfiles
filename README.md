@@ -95,8 +95,6 @@ nh clean all --keep-since 30d
 
 Limitations:
 
-- (nixos) error during stage 1: can’t mount `/mnt-root`
-- (nixos) new generations are sometimes [not pushed into the boot menu](https://nixos.wiki/wiki/Bootloader#New_generations_are_not_in_the_boot_menu).
 - (DNS4EU) I should find a way to enable DNSOverTLS with DNS4EU
 - (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
@@ -114,3 +112,4 @@ These are not fully integrated yet:
 - [NixOS Secrets Management](https://www.youtube.com/watch?v=6EMNHDOY-wo) by EmergentMind
 - [Flakes + Home Manager Multiuser/Multihost Configuration](https://www.youtube.com/watch?v=e8vzW5Y8Gzg) by Chris McDonough
 - [NixOS on Apple Silicon](https://yusef.napora.org/blog/nixos-asahi/) by sef
+- [Moving the store](https://nixos.wiki/wiki/Storage_optimization#Moving_the_store)

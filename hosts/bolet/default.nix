@@ -44,6 +44,13 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
   
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-label/NIX";
+      fsType = "ext4";
+      neededForBoot = true;
+      options = [ "noatime" ];
+    };
+
   fileSystems."/storage" =
     { device = "/dev/disk/by-label/STORAGE";
       fsType = "ext4";

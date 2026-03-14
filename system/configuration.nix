@@ -117,6 +117,7 @@
       usbutils
       pciutils
       libcamera
+      efibootmgr
     ];
 
     sessionVariables = {
