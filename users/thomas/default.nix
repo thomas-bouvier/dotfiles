@@ -106,6 +106,7 @@ in
     zotero
     texliveFull
     texstudio
+    quarto
 
     # Graphics
     inkscape

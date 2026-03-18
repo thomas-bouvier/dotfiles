@@ -88,6 +88,7 @@ in
     zotero
     texliveFull
     texstudio
+    quarto
 
     # Theme
     nordic
