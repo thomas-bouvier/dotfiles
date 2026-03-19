@@ -77,6 +77,7 @@ in
     marimo
     guix
     cudaPackages.nsight_systems
+    gh
 
     # Virtualisation
     dive

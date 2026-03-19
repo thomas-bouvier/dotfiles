@@ -92,6 +92,7 @@ in
     hugo
     marimo
     cudaPackages.nsight_systems
+    gh
 
     # Virtualisation
     dive
