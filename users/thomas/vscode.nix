@@ -14,7 +14,17 @@
 
       extensions = with pkgs.vscode-extensions; [
         ms-vscode.cpptools
-        github.copilot-chat
+      ]
+      # There are incompatibilities between VSCodium and the copilot-chat
+      # extension, so I bump the extension version myself.
+      # https://marketplace.visualstudio.com/items/GitHub.copilot-chat/changelog
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "copilot-chat";
+          publisher = "GitHub";
+          version = "0.38.2";
+          sha256 = "sha256-olyNllBAPQo7ZwbTQJ3GjRhSkfZ/iRv4jXM74hXjNwM=";
+        }
       ]
       ++ (with pkgs.nix-vscode-extensions.open-vsx-release; [
         # IDE
