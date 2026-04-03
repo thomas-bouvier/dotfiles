@@ -56,6 +56,7 @@ in
     kdePackages.partitionmanager
     kdePackages.kamoso
     libreoffice-qt6-fresh
+    chromium
 
     # Command line
     neovim
