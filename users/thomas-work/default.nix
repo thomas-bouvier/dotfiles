@@ -77,6 +77,7 @@ in
     hugo
     marimo
     guix
+    emacs
     cudaPackages.nsight_systems
     gh
 
