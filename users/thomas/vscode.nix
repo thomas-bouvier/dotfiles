@@ -44,6 +44,7 @@
         # Languages
         jnoortheen.nix-ide
         vue.volar
+        tsyesika.guile-scheme-enhanced
       ]);
 
       userSettings = {
