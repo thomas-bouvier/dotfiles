@@ -8,6 +8,8 @@
 (setq use-package-always-defer t
       use-package-always-ensure t)
 
+(set-face-attribute 'default nil :height 110)
+
 (use-package vertico
   :ensure t
   :init
@@ -48,6 +50,7 @@
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (setq-default fill-column 80)
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+(global-hl-line-mode 1)
 
 (electric-pair-mode 1)
 (delete-selection-mode 1)
@@ -112,6 +115,87 @@
    ("M-f" . dirvish-history-go-forward)
    ("M-b" . dirvish-history-go-backward)
    ("M-e" . dirvish-emerge-menu)))
+
+(use-package corfu
+  :bind
+  (:map
+   corfu-map
+   ([remap next-line] . nil)
+   ([remap previous-line] . nil)
+   ("<up>" . nil)
+   ("<down>" . nil)
+   ("RET" . nil)
+   ("M-<" . corfu-first)
+   ("M->" . corfu-last)
+   ("C-SPC" . corfu-insert-separator)
+   ("C-M-m" . corfu-move-to-minibuffer)
+   ("C-M-g" . corfu-quit))
+  :config
+  (setq corfu-cycle t
+        corfu-auto t
+        corfu-on-exact-match nil
+        corfu-max-width 200
+        corfu-popupinfo-max-width 200
+        tab-always-indent 'complete)
+
+  (defun corfu-move-to-minibuffer ()
+    (interactive)
+    (pcase completion-in-region--data
+      (`(,beg ,end ,table ,pred ,extras)
+       (let ((completion-extra-properties extras)
+             completion-cycle-threshold completion-cycling)
+         (consult-completion-in-region beg end table pred)))))
+
+  (add-to-list 'corfu-continue-commands #'corfu-move-to-minibuffer)
+
+  (setq global-corfu-minibuffer t)
+
+  ;; NOTE: the upstream version tries to scroll the other window. This does not
+  ;; make much sense since we have another keybinding configured for that.
+  (defun my/corfu-popupinfo-scroll-up (&optional n)
+    "Scroll text of info popup window upward N lines.
+
+If ARG is omitted or nil, scroll upward by a near full screen.
+See `scroll-up' for details.  If the info popup is not visible,
+the other window is scrolled."
+    (interactive "p")
+    (when (corfu-popupinfo--visible-p)
+      (with-selected-frame corfu-popupinfo--frame
+        (with-current-buffer " *corfu-popupinfo*"
+          (scroll-up n)))))
+
+  (advice-add #'corfu-popupinfo-scroll-up :override #'my/corfu-popupinfo-scroll-up)
+
+  ;; Eshell configuration.
+  (defun corfu-send-eshell (&rest _)
+    "Send completion candidate when inside comint/eshell."
+    (cond
+     ((and (derived-mode-p 'eshell-mode) (fboundp 'eshell-send-input))
+      (eshell-send-input))
+     ((and (derived-mode-p 'comint-mode)  (fboundp 'comint-send-input))
+      (comint-send-input))))
+
+  (advice-add #'corfu-insert :after #'corfu-send-eshell)
+
+  (dolist (hook '(shell-mode-hook eshell-mode-hook))
+    (add-hook hook
+              (lambda ()
+                (setq-local corfu-auto nil)
+                (corfu-mode 1))))
+  :init
+  (if (daemonp)
+      (dolist (fn '(global-corfu-mode corfu-history-mode corfu-popupinfo-mode))
+        (add
+	 -hook 'server-after-make-frame-hook fn))
+    (global-corfu-mode 1)
+    (corfu-history-mode 1)
+    (corfu-popupinfo-mode 1)))
+
+(use-package nerd-icons-corfu
+  :after corfu
+  :demand t
+  :config
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 (use-package orderless
   :demand t
@@ -267,11 +351,33 @@ ORIG-FUN will be wrapped by this advice."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(consult dirvish magit marginalia nerd-icons nerd-icons-completion nord-theme
-	     orderless vertico)))
+   '(consult corfu dirvish magit marginalia nerd-icons nerd-icons-completion
+	     nerd-icons-corfu nord-theme orderless vertico)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(define-key global-map (kbd "C-M-g") #'my/keyboard-quit-dwim)
+
+(use-package window
+  :ensure nil
+  :bind
+  ([remap split-window-right] . my/split-window-right)
+  ([remap split-window-below] . my/split-window-below)
+  :config
+  (defun my/split-window-right (&optional size window-to-split)
+    (interactive `(,(when current-prefix-arg
+                      (prefix-numeric-value current-prefix-arg))
+                   ,(selected-window)))
+    (select-window (split-window-right size window-to-split)))
+
+  (defun my/split-window-below (&optional size window-to-split)
+    (interactive `(,(when current-prefix-arg
+                      (prefix-numeric-value current-prefix-arg))
+                   ,(selected-window)))
+    (select-window (split-window-below size window-to-split))))
+
+(winner-mode 1)
+(windmove-default-keybindings '(control meta))

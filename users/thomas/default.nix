@@ -84,6 +84,7 @@ in
     unrar
     nh
     git-filter-repo
+    ripgrep
 
     # Development
     python313
