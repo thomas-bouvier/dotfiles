@@ -65,6 +65,7 @@
   (nerd-icons-completion-mode 1))
 
 (use-package dired
+  :ensure nil
   :config
   (setq dired-listing-switches
         "-l --almost-all --human-readable --group-directories-first --no-group")
