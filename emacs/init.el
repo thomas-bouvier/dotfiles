@@ -42,6 +42,13 @@
   :config
   (setq shell-kill-buffer-on-exit t))
 
+(use-package vterm
+  :ensure nil
+  :bind ("C-c t" . vterm)
+  :config
+  (setq vterm-max-scrollback 10000
+        vterm-kill-buffer-on-exit t))
+
 (setq use-short-answers t
       confirm-kill-emacs #'yes-or-no-p
       enable-recursive-minibuffers t)
