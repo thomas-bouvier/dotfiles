@@ -107,8 +107,6 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    (writeShellScriptBin "g5k" (builtins.readFile ../thomas/assets/g5k))
-    (writeShellScriptBin "ide" (builtins.readFile ../thomas/assets/ide))
   ]
   ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [
     # List packages not compatible with aarch64 here
