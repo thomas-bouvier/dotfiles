@@ -22,8 +22,8 @@
         {
           name = "copilot-chat";
           publisher = "GitHub";
-          version = "0.38.2";
-          sha256 = "sha256-olyNllBAPQo7ZwbTQJ3GjRhSkfZ/iRv4jXM74hXjNwM=";
+          version = "0.40.1";
+          sha256 = "sha256-wVxryUaW53xU4zZKU4t1pZaAB7BFIOkkcng91JnCLOk=";
         }
       ]
       ++ (with pkgs.nix-vscode-extensions.open-vsx-release; [
