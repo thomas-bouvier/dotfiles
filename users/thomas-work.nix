@@ -24,9 +24,7 @@ in
   # to the Nix daemon, such as the ability to specify additional binary
   # caches. You can also specify groups by prefixing them with @; for
   # instance, @wheel means all users in the wheel group.
-  nix.extraOptions = ''
-    trusted-users = root thomas
-  '';
+  nix.settings.trusted-users = [ "root" "thomas" ];
 
   # Home-manager configuration
   home-manager = {
