@@ -71,6 +71,7 @@ in
     kdePackages.kompare
     kdePackages.partitionmanager
     kdePackages.kamoso
+    kdePackages.krecorder
     libreoffice-qt6-fresh
     chromium
 
