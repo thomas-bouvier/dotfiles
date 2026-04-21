@@ -116,7 +116,6 @@
       exfat
       usbutils
       pciutils
-      libcamera
       efibootmgr
     ];
 
