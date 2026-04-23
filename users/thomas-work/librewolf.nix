@@ -163,9 +163,6 @@
       # Trying to make screen sharing, cameras, and microphones work
       "media.webrtc.camera.allow-pipewire" = true;
       "media.webrtc.capture.allow-pipewire" = true;
-      "media.peerconnection.ice.default_address_only" = false;
-      "media.gmp-provider.enabled" = true;
-      "media.gmp-gmpopenh264.enabled" = true;
     };
   };
 }

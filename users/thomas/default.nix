@@ -74,6 +74,7 @@ in
     kdePackages.krecorder
     libreoffice-qt6-fresh
     chromium
+    pavucontrol
 
     # Command line
     neovim
