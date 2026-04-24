@@ -34,6 +34,15 @@
     peripheralFirmwareDirectory = ../../system/asahi-firmware;
   };
 
+  hardware.graphics.package =
+    # Workaround for Mesa 26.0.5 regression
+    # https://github.com/nix-community/nixos-apple-silicon/issues/447
+    # https://gitlab.freedesktop.org/mesa/mesa/-/work_items/15288
+    (import (fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/df26bc59d3c7cd52e4005dfe9843b1e7b0554de1.tar.gz";
+      sha256 = "sha256-Tmp0nu2JTMHHOuV20ElkPduB0IuZaG3pBjrYPDx79u8=";
+    }) { localSystem = pkgs.stdenv.hostPlatform; }).mesa;
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/bfa5b39e-5d73-4ec5-ba59-b9e6200a2162";
       fsType = "ext4";
