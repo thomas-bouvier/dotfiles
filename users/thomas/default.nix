@@ -7,6 +7,7 @@ in
   imports = [
     (import ./atuin.nix { inherit config pkgs; secretsPath = secretsPath; })
     ./konsole.nix
+    ./opencode.nix
     ./librewolf.nix
     ./plasma.nix
     ./ssh.nix

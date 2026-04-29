@@ -64,6 +64,13 @@
 
 (use-package magit)
 
+(use-package ai-code
+  :config
+  (ai-code-set-backend 'opencode)
+  ;; Optional: use a narrower transient menu on smaller frames
+  ;; (setq ai-code-menu-layout 'two-columns)
+  (global-set-key (kbd "C-c a") #'ai-code-menu))
+
 (use-package nerd-icons)
 (use-package nerd-icons-completion
   :hook

@@ -7,6 +7,7 @@ in
   imports = [
     (import ../thomas/atuin.nix { inherit config pkgs; secretsPath = secretsPath; })
     ../thomas/konsole.nix
+    ../thomas/opencode.nix
     ../thomas/plasma.nix
     ../thomas/ssh.nix
     ../thomas/tmux.nix
