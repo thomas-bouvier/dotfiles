@@ -8,7 +8,7 @@
 (setq use-package-always-defer t
       use-package-always-ensure t)
 
-(set-face-attribute 'default nil :height 110)
+(set-face-attribute 'default nil :height 100)
 
 (use-package vertico
   :ensure t
@@ -65,6 +65,7 @@
 (use-package magit)
 
 (use-package ai-code
+  :demand t
   :config
   (ai-code-set-backend 'opencode)
   ;; Optional: use a narrower transient menu on smaller frames
