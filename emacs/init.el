@@ -42,21 +42,42 @@
   :config
   (setq shell-kill-buffer-on-exit t))
 
-(use-package vterm
-  :ensure nil
+(use-package eat
   :demand t
-  :bind ("C-c t" . vterm)
+  :bind ("C-c t" . eat)
   :config
-  (setq vterm-max-scrollback 10000
-        vterm-kill-buffer-on-exit t))
+  (setq eat-kill-buffer-on-exit t
+        eat-term-name "xterm-256color"
+        eat-enable-blinking-text t)
+  (setenv "COLORTERM" "truecolor")
 
-;; Open vterm as the landing screen on startup
+  ;; Map the 16 ANSI colors to your Emacs theme (Nord) so terminal
+  ;; output matches the rest of Emacs
+  (custom-set-faces
+   '(eat-term-color-0  ((t (:foreground "#3B4252" :background "#3B4252"))))  ; black
+   '(eat-term-color-1  ((t (:foreground "#BF616A" :background "#BF616A"))))  ; red
+   '(eat-term-color-2  ((t (:foreground "#A3BE8C" :background "#A3BE8C"))))  ; green
+   '(eat-term-color-3  ((t (:foreground "#EBCB8B" :background "#EBCB8B"))))  ; yellow
+   '(eat-term-color-4  ((t (:foreground "#81A1C1" :background "#81A1C1"))))  ; blue
+   '(eat-term-color-5  ((t (:foreground "#B48EAD" :background "#B48EAD"))))  ; magenta
+   '(eat-term-color-6  ((t (:foreground "#88C0D0" :background "#88C0D0"))))  ; cyan
+   '(eat-term-color-7  ((t (:foreground "#E5E9F0" :background "#E5E9F0"))))  ; white
+   '(eat-term-color-8  ((t (:foreground "#4C566A" :background "#4C566A"))))  ; bright black
+   '(eat-term-color-9  ((t (:foreground "#BF616A" :background "#BF616A"))))  ; bright red
+   '(eat-term-color-10 ((t (:foreground "#A3BE8C" :background "#A3BE8C"))))  ; bright green
+   '(eat-term-color-11 ((t (:foreground "#EBCB8B" :background "#EBCB8B"))))  ; bright yellow
+   '(eat-term-color-12 ((t (:foreground "#81A1C1" :background "#81A1C1"))))  ; bright blue
+   '(eat-term-color-13 ((t (:foreground "#B48EAD" :background "#B48EAD"))))  ; bright magenta
+   '(eat-term-color-14 ((t (:foreground "#8FBCBB" :background "#8FBCBB"))))  ; bright cyan
+   '(eat-term-color-15 ((t (:foreground "#ECEFF4" :background "#ECEFF4")))))); bright white
+
+;; Open eat as the landing screen on startup
 (add-hook 'emacs-startup-hook
           (lambda ()
             (when (and (not (daemonp))
                        ;; Only if no files were passed on the command line
                        (= (length command-line-args) 1))
-              (vterm))))
+              (eat))))
 
 (setq use-short-answers t
       confirm-kill-emacs #'yes-or-no-p
