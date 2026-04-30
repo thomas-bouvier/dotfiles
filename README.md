@@ -1,6 +1,17 @@
 # Lix dotfiles
 
-My declarative, reproducible [NixOS](https://nixos.org/) system built using [Lix](https://lix.systems/). My configuration is designed to support multiple hosts—including an Apple Silicon MacBook—and multiple users, some of whom are reused across different hosts. It also incorporates advanced features such as LUKS encryption via `disko` and secrets management with `sops`. I've aimed for a balance between readability and completeness.
+My declarative, reproducible [NixOS](https://nixos.org/) system built using [Lix](https://lix.systems/). My configuration is designed to support the following:
+
+- Multiple hosts, including an Apple Silicon MacBook (mine has an M2 Max chips) ;
+- Multiple users, some of whom are reused across different hosts ;
+- Variants of users ;
+- A beautiful KDE Plasma desktop with theme Nord ;
+- LibreWolf which I spent some time hardening ;
+- My Emacs config including OpenCode with a plugin to use your Claude Code API key ;
+- LUKS encryption via `disko` ;
+- Secrets management with `sops`.
+
+I've aimed for a balance between readability and completeness.
 
 ## Installation
 
@@ -95,7 +106,8 @@ nh clean all --keep-since 30d
 
 Limitations:
 
-- (DNS4EU) I should find a way to enable DNSOverTLS with DNS4EU
+- (nixos) This issue (pretty harmless) https://www.reddit.com/r/AsahiLinux/comments/10j9byn/does_anyone_know_what_causes_this_bootup_issue_i/
+- (dns4eu) I should find a way to enable DNSOverTLS with DNS4EU
 - (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 - (vscodium) [VSCodium is unable to install extensions onto remotes](https://github.com/NixOS/nixpkgs/issues/275669)
