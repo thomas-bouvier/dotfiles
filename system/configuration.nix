@@ -108,7 +108,6 @@
     systemPackages = with pkgs; [
       vim
       zsh
-      tmux
       git
       tailscale
       wget

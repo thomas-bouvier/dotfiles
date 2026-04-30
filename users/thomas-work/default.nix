@@ -10,7 +10,6 @@ in
     ../thomas/opencode.nix
     ../thomas/plasma.nix
     ../thomas/ssh.nix
-    ../thomas/tmux.nix
     ../thomas/vscode.nix
     ../thomas/zsh.nix
 

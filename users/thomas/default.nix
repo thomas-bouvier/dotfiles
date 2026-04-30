@@ -11,7 +11,6 @@ in
     ./librewolf.nix
     ./plasma.nix
     ./ssh.nix
-    ./tmux.nix
     ./vscode.nix
     ./zsh.nix
   ];

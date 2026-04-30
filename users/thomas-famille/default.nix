@@ -10,7 +10,6 @@ in
     ../thomas/librewolf.nix
     ../thomas/plasma.nix
     ../thomas/ssh.nix
-    ../thomas/tmux.nix
     ../thomas/zsh.nix
   ];
 
