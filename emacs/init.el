@@ -44,10 +44,19 @@
 
 (use-package vterm
   :ensure nil
+  :demand t
   :bind ("C-c t" . vterm)
   :config
   (setq vterm-max-scrollback 10000
         vterm-kill-buffer-on-exit t))
+
+;; Open vterm as the landing screen on startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (when (and (not (daemonp))
+                       ;; Only if no files were passed on the command line
+                       (= (length command-line-args) 1))
+              (vterm))))
 
 (setq use-short-answers t
       confirm-kill-emacs #'yes-or-no-p
@@ -62,7 +71,18 @@
 (electric-pair-mode 1)
 (delete-selection-mode 1)
 
-(use-package magit)
+(use-package magit
+  :demand t
+  :config
+  ;; When switching projects with C-x p p, open magit + dirvish sidebar
+  (defun my/project-switch-magit (project-dir)
+    "Open magit-status and dirvish-side for PROJECT-DIR."
+    (interactive (list (project-root (project-current t))))
+    (let ((default-directory project-dir))
+      (magit-status project-dir)
+      (dirvish-side project-dir)))
+
+  (setq project-switch-commands #'my/project-switch-magit))
 
 (use-package ai-code
   :demand t
@@ -102,7 +122,7 @@
      ("t" "~/.local/share/Trash/files/" "TrashCan")))
   :config
   ;; (dirvish-peek-mode)             ; Preview files in minibuffer
-  ;; (dirvish-side-follow-mode)      ; similar to `treemacs-follow-mode'
+  (dirvish-side-follow-mode)        ; sidebar follows the current buffer's directory
   (setq dirvish-mode-line-format
         '(:left (sort symlink) :right (omit yank index)))
   (setq dirvish-attributes           ; The order *MATTERS* for some attributes
@@ -113,6 +133,7 @@
   (setq dirvish-large-directory-threshold 20000)
   :bind ; Bind `dirvish-fd|dirvish-side|dirvish-dwim' as you see fit
   (("C-c f" . dirvish)
+   ("C-c s" . dirvish-side)
    :map dirvish-mode-map               ; Dirvish inherits `dired-mode-map'
    (";"   . dired-up-directory)        ; So you can adjust `dired' bindings here
    ("?"   . dirvish-dispatch)          ; [?] a helpful cheatsheet
