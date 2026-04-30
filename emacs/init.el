@@ -84,13 +84,9 @@
 
   (setq project-switch-commands #'my/project-switch-magit))
 
-(use-package ai-code
-  :demand t
-  :config
-  (ai-code-set-backend 'opencode)
-  ;; Optional: use a narrower transient menu on smaller frames
-  ;; (setq ai-code-menu-layout 'two-columns)
-  (global-set-key (kbd "C-c a") #'ai-code-menu))
+(use-package opencode
+  :vc (:url "https://codeberg.org/sczi/opencode.el.git" :rev :newest)
+  :bind ("C-c a" . opencode))
 
 (use-package nerd-icons)
 (use-package nerd-icons-completion
