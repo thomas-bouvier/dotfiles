@@ -105,6 +105,11 @@
 (use-package magit
   :demand t
   :config
+  ;; Open files/hunks in the other window instead of the current one
+  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  (define-key magit-hunk-section-map (kbd "RET") #'magit-diff-visit-file-other-window)
+  (define-key magit-file-section-map (kbd "RET") #'magit-diff-visit-file-other-window)
+
   ;; When switching projects with C-x p p, open magit + dirvish sidebar
   (defun my/project-switch-magit (project-dir)
     "Open magit-status and dirvish-side for PROJECT-DIR."
@@ -155,7 +160,10 @@ Tracks them in `my/magit-diff-files' for use with consult."
 
 (use-package opencode
   :vc (:url "https://codeberg.org/sczi/opencode.el.git" :rev :newest)
-  :bind ("C-c a" . opencode))
+  :bind ("C-c a" . opencode)
+  :config
+  (add-to-list 'display-buffer-alist
+               '("\\*OpenCode" (display-buffer-same-window))))
 
 (use-package nerd-icons)
 (use-package nerd-icons-completion
