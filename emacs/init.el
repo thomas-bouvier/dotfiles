@@ -92,6 +92,16 @@
 (electric-pair-mode 1)
 (delete-selection-mode 1)
 
+(use-package diff-hl
+  :demand t
+  :bind
+  ("C-c g n" . diff-hl-next-hunk)
+  ("C-c g p" . diff-hl-previous-hunk)
+  :config
+  (global-diff-hl-mode 1)
+  ;; Update indicators after magit operations
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+
 (use-package magit
   :demand t
   :config

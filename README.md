@@ -1,13 +1,14 @@
-# Lix dotfiles
+# NixOS (Lix) dotfiles
 
 My declarative, reproducible [NixOS](https://nixos.org/) system built using [Lix](https://lix.systems/). My configuration is designed to support the following:
 
-- Multiple hosts, including an Apple Silicon MacBook (mine has an M2 Max chips) ;
+- Multiple hosts, including an Apple Silicon MacBook (mine has a M2 Max chip) ;
 - Multiple users, some of whom are reused across different hosts ;
 - Variants of users ;
-- A beautiful KDE Plasma desktop with theme Nord ;
+- A beautiful KDE Plasma desktop with [theme Nord](https://www.nordtheme.com/) applied everywhere ;
 - LibreWolf which I spent some time hardening ;
 - My Emacs config including OpenCode with a plugin to use your Claude Code API key ;
+- Shell synchronisation via `atuin` ;
 - LUKS encryption via `disko` ;
 - Secrets management with `sops`.
 
