@@ -15,11 +15,6 @@ in
     ./zsh.nix
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "thomas";
-  home.homeDirectory = "/home/thomas";
-
   # Configure sops location
   # https://github.com/Mic92/sops-nix?tab=readme-ov-file#use-with-home-manager
   sops = {
@@ -55,107 +50,119 @@ in
     };
   };
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    # Everyday life
-    anki
-    thunderbird
-    obsidian
-    localsend
-    vlc
-    signal-desktop
-    kdePackages.kcharselect
-    kdePackages.kfind
-    kdePackages.filelight
-    kdePackages.kompare
-    kdePackages.partitionmanager
-    kdePackages.kamoso
-    kdePackages.krecorder
-    libreoffice-qt6-fresh
-    chromium
-    pavucontrol
+  home = {
+    # Home Manager needs a bit of information about you and the paths it should
+    # manage.
+    username = "thomas";
+    homeDirectory = "/home/thomas";
 
-    # Command line
-    neovim
-    eza
-    age
-    htop
-    sops
-    jq
-    unrar
-    nh
-    git-filter-repo
-    ripgrep
+    # Emacs configuration
+    file.".emacs.d/init.el".source = ../../emacs/init.el;
+    file.".emacs.d/early-init.el".source = ../../emacs/early-init.el;
 
-    # Development
-    python313
-    mypy
-    uv
-    go
-    hugo
-    marimo
-    ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
-    cudaPackages.nsight_systems
-    gh
+    # The home.packages option allows you to install Nix packages into your
+    # environment.
+    packages = with pkgs; [
+      # Everyday life
+      anki
+      thunderbird
+      obsidian
+      localsend
+      vlc
+      signal-desktop
+      kdePackages.kcharselect
+      kdePackages.kfind
+      kdePackages.filelight
+      kdePackages.kompare
+      kdePackages.partitionmanager
+      kdePackages.kamoso
+      kdePackages.krecorder
+      libreoffice-qt6-fresh
+      chromium
+      pavucontrol
 
-    # Virtualisation
-    dive
-    podman
-    podman-compose
-    apptainer
+      # Command line
+      neovim
+      eza
+      age
+      htop
+      sops
+      jq
+      unrar
+      nh
+      git-filter-repo
+      ripgrep
 
-    # Android
-    android-tools
+      # Development
+      python313
+      mypy
+      uv
+      go
+      hugo
+      marimo
+      ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
+      cudaPackages.nsight_systems
+      gh
 
-    # Research
-    zotero
-    texliveFull
-    texstudio
-    quarto
+      # Virtualisation
+      dive
+      podman
+      podman-compose
+      apptainer
 
-    # Graphics
-    inkscape
-    kdePackages.kdenlive
-    qgis
+      # Android
+      android-tools
 
-    # Entertainment
-    qbittorrent
-    ryubing
-    luanti
-    nicotine-plus
-    gpodder
-    mixxx
+      # Research
+      zotero
+      texliveFull
+      texstudio
+      quarto
 
-    # Audio
-    kdePackages.elisa
-    yt-dlp
-    audacity
-    ffmpeg
+      # Graphics
+      inkscape
+      kdePackages.kdenlive
+      qgis
 
-    # Theme
-    nordic
-    (whitesur-icon-theme.override {
-      alternativeIcons = true;
-      boldPanelIcons = true;
-    })
+      # Entertainment
+      qbittorrent
+      ryubing
+      luanti
+      nicotine-plus
+      gpodder
+      mixxx
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+      # Audio
+      kdePackages.elisa
+      yt-dlp
+      audacity
+      ffmpeg
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ]
-  ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [
-    # List packages not compatible with aarch64 here
-  ] else [ ]);
+      # Theme
+      nordic
+      (whitesur-icon-theme.override {
+        alternativeIcons = true;
+        boldPanelIcons = true;
+      })
+    ]
+    ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [
+      # List packages not compatible with aarch64 here
+    ] else [ ]);
+
+    sessionVariables = {
+      EDITOR = "vim";
+      VISUAL = "vim";
+    };
+
+    # This value determines the Home Manager release that your configuration is
+    # compatible with. This helps avoid breakage when a new Home Manager release
+    # introduces backwards incompatible changes.
+    #
+    # You should not change this value, even if you update Home Manager. If you do
+    # want to update the value, then make sure to first check the Home Manager
+    # release notes.
+    stateVersion = "24.05"; # Please read the comment before changing.
+  };
 
   xdg = {
     mimeApps = {
@@ -189,36 +196,6 @@ in
     };
   };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/thomas/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
-  };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
 }
