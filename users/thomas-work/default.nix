@@ -143,6 +143,7 @@ in
 
   programs.git = {
     enable = true;
+    signing.format = "openpgp";
 
     settings = {
       user.name = "Thomas Bouvier";
@@ -150,6 +151,7 @@ in
 
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
+
       url = {
         "git@github.com:" = {
           insteadOf = "https://github.com/";
