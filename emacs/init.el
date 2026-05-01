@@ -103,7 +103,45 @@
       (magit-status project-dir)
       (dirvish-side project-dir)))
 
-  (setq project-switch-commands #'my/project-switch-magit))
+  (setq project-switch-commands #'my/project-switch-magit)
+
+  ;; Open all files from a magit diff buffer and track them for consult
+  (defvar my/magit-diff-files nil
+    "List of file buffers opened from the last magit diff.")
+
+  (defun my/magit-diff-open-all-files ()
+    "Open all files listed in the current magit diff buffer.
+Tracks them in `my/magit-diff-files' for use with consult."
+    (interactive)
+    (unless (derived-mode-p 'magit-diff-mode 'magit-status-mode
+                             'magit-revision-mode 'magit-merge-preview-mode)
+      (user-error "Not in a magit diff buffer"))
+    (let* ((topdir (magit-toplevel))
+           (files (or (magit-region-values 'file t)
+                      ;; Iterative BFS over magit section tree
+                      (let ((queue (list magit-root-section))
+                            result)
+                        (while queue
+                          (let ((sec (pop queue)))
+                            (when (eq (oref sec type) 'file)
+                              (push (oref sec value) result))
+                            (setq queue (nconc queue
+                                              (copy-sequence (oref sec children))))))
+                        (delete-dups (nreverse result))))))
+      (unless files
+        (user-error "No files found in diff"))
+      (setq my/magit-diff-files nil)
+      (dolist (file files)
+        (let ((buf (find-file-noselect (expand-file-name file topdir))))
+          (push buf my/magit-diff-files)))
+      (setq my/magit-diff-files (nreverse my/magit-diff-files))
+      ;; Switch to the first file
+      (switch-to-buffer (car my/magit-diff-files))
+      (message "Opened %d diff files (use C-x b < d to navigate)"
+               (length my/magit-diff-files))))
+
+  :bind (:map magit-diff-mode-map
+         ("C-c o" . my/magit-diff-open-all-files)))
 
 (use-package opencode
   :vc (:url "https://codeberg.org/sczi/opencode.el.git" :rev :newest)
@@ -355,6 +393,23 @@ the other window is scrolled."
   ;; Optionally make narrowing help available in the minibuffer.
   ;; You may want to use `embark-prefix-help-command' or which-key instead.
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
+
+  ;; Buffer source for files opened from magit diff
+  (defvar consult--source-magit-diff-files
+    `(:name "Diff Files"
+      :narrow ?d
+      :category buffer
+      :state ,#'consult--buffer-state
+      :items ,(lambda ()
+                (when (bound-and-true-p my/magit-diff-files)
+                  (delq nil
+                        (mapcar (lambda (buf)
+                                  (and (buffer-live-p buf)
+                                       (buffer-name buf)))
+                                my/magit-diff-files)))))
+    "Consult buffer source for magit diff files.")
+
+  (add-to-list 'consult-buffer-sources 'consult--source-magit-diff-files 'append)
 )
 
 (use-package simple
