@@ -433,5 +433,12 @@ ORIG-FUN will be wrapped by this advice."
                    ,(selected-window)))
     (select-window (split-window-below size window-to-split))))
 
+(use-package buffer-move
+  :bind
+  ("C-c w <left>"  . buf-move-left)
+  ("C-c w <right>" . buf-move-right)
+  ("C-c w <up>"    . buf-move-up)
+  ("C-c w <down>"  . buf-move-down))
+
 (winner-mode 1)
 (windmove-default-keybindings '(control meta))
