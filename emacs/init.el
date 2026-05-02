@@ -5,6 +5,16 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
+;; Home-manager symlinks init.el into /nix/store/ which is read-only.
+;; Redirect auto-save files, backups, and custom-file to writable locations.
+(setq auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "auto-save/") t)))
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups/"))))
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 (setq use-package-always-defer t
       use-package-always-ensure t)
 
@@ -471,21 +481,6 @@ ORIG-FUN will be wrapped by this advice."
    ((bound-and-true-p iedit-mode)
     (iedit-mode -1))))
 
-(define-key global-map (kbd "C-M-g") #'my/keyboard-quit-dwim)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(consult corfu dirvish magit marginalia nerd-icons nerd-icons-completion
-	     nerd-icons-corfu nord-theme orderless vertico)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 (define-key global-map (kbd "C-M-g") #'my/keyboard-quit-dwim)
 
 (use-package window
