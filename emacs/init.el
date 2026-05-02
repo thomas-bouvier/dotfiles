@@ -134,6 +134,22 @@
   (defvar my/magit-diff-files nil
     "List of file buffers opened from the last magit diff.")
 
+  (defun my/first-changed-line (file)
+    "Get the first changed line number in FILE compared to HEAD using git diff."
+    (let* ((default-directory (magit-toplevel))
+           (output (shell-command-to-string
+                    (format "git diff --unified=0 -- %s" file)))
+           (hunk-lines (split-string output "\n"))
+           first-line)
+      (dolist (line hunk-lines)
+        (when (string-match "^@@ -[0-9]*,+[0-9]* \\+\\([0-9]*\\)," line)
+          (let ((line-num (string-to-number (match-string 1 line))))
+            (unless (zerop line-num)
+              (if first-line
+                  (setq first-line (min first-line line-num))
+                (setq first-line line-num))))))
+      first-line))
+
   (defun my/magit-diff-open-all-files ()
     "Open all files listed in the current magit diff buffer.
 Tracks them in `my/magit-diff-files' for use with consult."
@@ -157,8 +173,16 @@ Tracks them in `my/magit-diff-files' for use with consult."
         (user-error "No files found in diff"))
       (setq my/magit-diff-files nil)
       (dolist (file files)
-        (let ((buf (find-file-noselect (expand-file-name file topdir))))
-          (push buf my/magit-diff-files)))
+        (let* ((full-path (expand-file-name file topdir))
+               (buf (find-file-noselect full-path))
+               (first-line (my/first-changed-line file)))
+          (push buf my/magit-diff-files)
+          (with-current-buffer buf
+            (when (fboundp 'diff-hl-update)
+              (diff-hl-update))
+            (when first-line
+              (goto-char (point-min))
+              (forward-line (max 0 (- first-line 1 10)))))))
       (setq my/magit-diff-files (nreverse my/magit-diff-files))
       ;; Switch to the first file
       (switch-to-buffer (car my/magit-diff-files))
