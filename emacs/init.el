@@ -517,13 +517,15 @@ ORIG-FUN will be wrapped by this advice."
     (interactive `(,(when current-prefix-arg
                       (prefix-numeric-value current-prefix-arg))
                    ,(selected-window)))
-    (select-window (split-window-right size window-to-split)))
+    (select-window (split-window-right size window-to-split))
+    (balance-windows))
 
   (defun my/split-window-below (&optional size window-to-split)
     (interactive `(,(when current-prefix-arg
                       (prefix-numeric-value current-prefix-arg))
                    ,(selected-window)))
-    (select-window (split-window-below size window-to-split))))
+    (select-window (split-window-below size window-to-split))
+    (balance-windows)))
 
 (use-package buffer-move
   :bind
