@@ -536,3 +536,44 @@ ORIG-FUN will be wrapped by this advice."
 
 (winner-mode 1)
 (windmove-default-keybindings '(control meta))
+
+(use-package modern-tab-bar
+  :vc (:url "https://github.com/aaronjensen/emacs-modern-tab-bar.git" :rev :newest)
+  :init
+  (setq tab-bar-show t
+        tab-bar-new-button nil
+        tab-bar-close-button-show nil)
+
+  (with-eval-after-load 'modern-tab-bar
+    ;; Spacing between tabs
+    (setq modern-tab-bar-separator (propertize "   " 'face 'modern-tab-bar-separator)
+          modern-tab-bar-tab-horizontal-padding 4)
+
+    (custom-set-faces
+     '(modern-tab-bar ((t (:inherit default
+                           :box nil
+                           :background unspecified
+                           :underline "#3B4252"))))
+     '(modern-tab-bar-tab ((t (:background "#4C566A"
+                                   :foreground "#ECEFF4"
+                                   :box (:line-width 1 :color "#4C566A")))))
+     '(modern-tab-bar-tab-inactive ((t (:foreground "#D8DEE9"
+                                            :box (:line-width 1 :color "#434C5E")))))
+     '(modern-tab-bar-tab-highlight ((t (:background "#434C5E"))))
+     '(modern-tab-bar-separator ((t (:foreground unspecified
+                                         :height 1.0
+                                         :inherit modern-tab-bar))))
+     '(tab-bar ((t (:inherit modern-tab-bar))))
+     '(tab-bar-tab ((t (:inherit modern-tab-bar-tab))))
+     '(tab-bar-tab-inactive ((t (:inherit modern-tab-bar-tab-inactive))))
+     '(tab-bar-tab-highlight ((t (:inherit modern-tab-bar-tab-highlight))))))
+
+  (defun my/tab-bar-padding ()
+    "Add padding row below tab bar."
+    (propertize "\n" 'face 'modern-tab-bar))
+
+  (setq tab-bar-format '(tab-bar-format-tabs
+                         modern-tab-bar-suffix
+                         my/tab-bar-padding))
+
+  (modern-tab-bar-mode 1))
