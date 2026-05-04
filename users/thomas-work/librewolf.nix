@@ -88,10 +88,17 @@
 
       "identity.fxaccounts.enabled" = true;
 
+      # Disable all form autofill subsystems
       "dom.forms.autocomplete.formautofill" = false;
       "dom.payments.defaults.saveAddress" = false;
-
       "browser.formfill.enable" = false;
+      "extensions.formautofill.addresses.enabled" = false;
+      "extensions.formautofill.creditCards.enabled" = false;
+      "extensions.formautofill.emails.enabled" = false;
+      "extensions.formautofill.heuristics.enabled" = false;
+      "signon.formlessCapture.enabled" = false;
+      "privacy.clearOnShutdown.formdata" = true;
+
       "browser.tabs.loadInBackground" = true;
       "browser.toolbars.bookmarks.visibility" = "newtab";
 
