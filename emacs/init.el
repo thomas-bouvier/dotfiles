@@ -197,7 +197,10 @@ Tracks them in `my/magit-diff-files' for use with consult."
   :bind ("C-c a" . opencode)
   :config
   (add-to-list 'display-buffer-alist
-               '("\\*OpenCode" (display-buffer-same-window))))
+               '("\\*OpenCode" (display-buffer-same-window)))
+  ;; Use anthropic/claude-opus-4-6 by default
+  (setq opencode-last-model '((providerID . "anthropic")
+                              (modelID . "claude-opus-4-6"))))
 
 (use-package nerd-icons)
 (use-package nerd-icons-completion
