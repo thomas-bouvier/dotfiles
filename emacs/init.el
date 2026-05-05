@@ -7,10 +7,16 @@
 
 ;; Home-manager symlinks init.el into /nix/store/ which is read-only.
 ;; Redirect auto-save files, backups, and custom-file to writable locations.
-(setq auto-save-file-name-transforms
-      `((".*" ,(concat user-emacs-directory "auto-save/") t)))
-(setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory "backups/"))))
+(let ((auto-save-dir (concat user-emacs-directory "auto-save/"))
+      (backup-dir (concat user-emacs-directory "backups/")))
+  (unless (file-directory-p auto-save-dir)
+    (make-directory auto-save-dir t))
+  (unless (file-directory-p backup-dir)
+    (make-directory backup-dir t))
+  (setq auto-save-file-name-transforms
+        `((".*" ,auto-save-dir t)))
+  (setq backup-directory-alist
+        `(("." . ,backup-dir))))
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (when (file-exists-p custom-file)
   (load custom-file))
