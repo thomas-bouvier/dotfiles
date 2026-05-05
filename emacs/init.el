@@ -585,4 +585,13 @@ ORIG-FUN will be wrapped by this advice."
                          modern-tab-bar-suffix
                          my/tab-bar-padding))
 
+  (defun my/tab-bar-tab-name-project ()
+    "Name the tab after the current project, or fall back to the current buffer."
+    (let ((project (project-current)))
+      (if project
+          (file-name-nondirectory (directory-file-name (project-root project)))
+        (tab-bar-tab-name-current))))
+
+  (setq tab-bar-tab-name-function #'my/tab-bar-tab-name-project)
+
   (modern-tab-bar-mode 1))
