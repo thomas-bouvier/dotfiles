@@ -84,7 +84,7 @@ in
       hugo
       marimo
       guix
-      ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
+      emacs-pgtk
       cudaPackages.nsight_systems
       gh
 

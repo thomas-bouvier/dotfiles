@@ -100,7 +100,7 @@ in
       go
       hugo
       marimo
-      ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs: [ epkgs.vterm ]))
+      emacs-pgtk
       cudaPackages.nsight_systems
       gh
 
