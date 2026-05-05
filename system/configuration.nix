@@ -134,18 +134,18 @@
         # Nvidia
         "nvidia-x11"
         "nvidia-settings"
+        "nvidia-kernel-modules"
+        "cuda_cccl"
+        "cuda_cudart"
+        "cuda_nvcc"
+        "nsight_systems"
+        "nsight_compute"
         # Apple
         "apple_cursor"
         "obsidian"
         # VSCode
         "vscode-extension-ms-vscode-cpptools"
         "vscode-extension-ms-vscode-remote-remote-ssh"
-        # CUDA tools (for remote development)
-        "cuda_cccl"
-        "cuda_cudart"
-        "cuda_nvcc"
-        "nsight_systems"
-        "nsight_compute"
         # Crap by Intel for cameras
         "ipu6-camera-bins"
         "ipu6-camera-bins-unstable"
