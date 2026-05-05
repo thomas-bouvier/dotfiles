@@ -60,8 +60,19 @@
 
 (use-package eat
   :demand t
-  :bind ("C-c t" . eat)
+  :bind ("C-c t" . eat-new)
   :config
+  (defun eat-new ()
+    "Open a new eat terminal buffer every time."
+    (interactive)
+    (let ((buf (generate-new-buffer "*eat*")))
+      (pop-to-buffer-same-window buf)
+      (eat-mode)
+      (eat-exec buf (buffer-name buf) "/usr/bin/env" nil
+                (list "sh" "-c" (or explicit-shell-file-name
+                                    (getenv "ESHELL")
+                                    shell-file-name)))))
+
   (setq eat-kill-buffer-on-exit t
         eat-term-name "xterm-256color"
         eat-enable-blinking-text t)
