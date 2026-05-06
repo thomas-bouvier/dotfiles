@@ -67,6 +67,14 @@ atuin sync
 
 Just open Obsidian, login and sync everything including community plugins and settings (`Active community plugin list` and `Installed community plugins` options). Wait for the end of the synchronization, and restart the app.
 
+### OpenCode
+
+If running OpenCode from outside Emacs, use the following command to connect to the local server:
+
+```console
+opencode attach http://localhost:4096
+```
+
 ### Tailscale
 
 Connect your machine to your Tailscale network and authenticate in your browser:
