@@ -98,13 +98,7 @@
    '(eat-term-color-14 ((t (:foreground "#8FBCBB" :background "#8FBCBB"))))  ; bright cyan
    '(eat-term-color-15 ((t (:foreground "#ECEFF4" :background "#ECEFF4")))))); bright white
 
-;; Open eat as the landing screen on startup
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (when (and (not (daemonp))
-                       ;; Only if no files were passed on the command line
-                       (= (length command-line-args) 1))
-              (eat))))
+
 
 (setq use-short-answers t
       confirm-kill-emacs #'yes-or-no-p
