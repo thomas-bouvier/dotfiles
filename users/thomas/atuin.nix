@@ -12,6 +12,7 @@
       auto_sync = true;
       sync_frequency = "5m";
       key_path = config.sops.secrets.atuin_key.path;
+      inline_height = 0;
     };
   };
 
