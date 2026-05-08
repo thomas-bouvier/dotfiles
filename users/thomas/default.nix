@@ -79,7 +79,6 @@ in
       kdePackages.krecorder
       libreoffice-qt6-fresh
       chromium
-      pavucontrol
 
       # Command line
       neovim
@@ -92,6 +91,8 @@ in
       nh
       git-filter-repo
       ripgrep
+      rclone
+      scaleway-cli
 
       # Development
       python313
