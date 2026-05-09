@@ -549,7 +549,7 @@ ORIG-FUN will be wrapped by this advice."
   ("C-c w <down>"  . buf-move-down))
 
 (winner-mode 1)
-(windmove-default-keybindings '(control meta))
+(windmove-default-keybindings 'meta)
 
 (use-package modern-tab-bar
   :vc (:url "https://github.com/aaronjensen/emacs-modern-tab-bar.git" :rev :newest)
