@@ -126,10 +126,10 @@
 (use-package magit
   :demand t
   :config
-  ;; Open files/hunks in the other window instead of the current one
+  ;; Open files/hunks in the same window (replacing the magit buffer)
   (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-  (define-key magit-hunk-section-map (kbd "RET") #'magit-diff-visit-file-other-window)
-  (define-key magit-file-section-map (kbd "RET") #'magit-diff-visit-file-other-window)
+  (define-key magit-hunk-section-map (kbd "RET") #'magit-diff-visit-file)
+  (define-key magit-file-section-map (kbd "RET") #'magit-diff-visit-file)
 
   ;; When switching projects with C-x p p, open magit + dirvish sidebar
   (defun my/project-switch-magit (project-dir)
