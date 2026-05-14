@@ -110,6 +110,7 @@ in
       podman
       podman-compose
       apptainer
+      opentofu
 
       # Android
       android-tools
