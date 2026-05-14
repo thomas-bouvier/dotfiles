@@ -36,6 +36,14 @@ in
     };
   };
 
+  # Emacs daemon - starts automatically at login
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+    client.enable = true;
+    defaultEditor = true;
+  };
+
   home = {
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
@@ -112,8 +120,7 @@ in
     ] else [ ]);
 
     sessionVariables = {
-      EDITOR = "vim";
-      VISUAL = "vim";
+      # EDITOR and VISUAL are set by services.emacs.defaultEditor to emacsclient
     };
 
     # This value determines the Home Manager release that your configuration is

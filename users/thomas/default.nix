@@ -34,6 +34,14 @@ in
   #  };
   #};
 
+  # Emacs daemon - starts automatically at login
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+    client.enable = true;
+    defaultEditor = true;
+  };
+
   # Earth View - random Google Earth wallpapers
   services.earth-view = {
     enable = true;
@@ -152,8 +160,7 @@ in
     ] else [ ]);
 
     sessionVariables = {
-      EDITOR = "vim";
-      VISUAL = "vim";
+      # EDITOR and VISUAL are set by services.emacs.defaultEditor to emacsclient
     };
 
     # This value determines the Home Manager release that your configuration is
