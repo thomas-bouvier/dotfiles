@@ -24,6 +24,12 @@
 (setq use-package-always-defer t
       use-package-always-ensure t)
 
+(defun my/set-terminal-title (title)
+  "Set the terminal tab title via OSC 30 (Konsole) and OSC 2 (standard)."
+  (when (not (display-graphic-p))
+    (send-string-to-terminal (format "\e]30;%s\e\\" title))
+    (send-string-to-terminal (format "\e]2;%s\e\\" title))))
+
 (set-face-attribute 'default nil :height 100)
 
 (use-package vertico
@@ -140,7 +146,10 @@
     (interactive (list (project-root (project-current t))))
     (let ((default-directory project-dir))
       (magit-status project-dir)
-      (dirvish-side project-dir)))
+      (dirvish-side project-dir)
+      ;; Set the Konsole tab title to the project name
+      (my/set-terminal-title
+       (file-name-nondirectory (directory-file-name project-dir)))))
 
   (setq project-switch-commands #'my/project-switch-magit)
 
