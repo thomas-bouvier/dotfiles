@@ -49,7 +49,10 @@
 
 (use-package nord-theme
   :init
-  (load-theme 'nord t))
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook
+                (lambda () (load-theme 'nord t)))
+    (load-theme 'nord t)))
 
 
 (setq comint-prompt-read-only t)
@@ -343,8 +346,7 @@ the other window is scrolled."
   :init
   (if (daemonp)
       (dolist (fn '(global-corfu-mode corfu-history-mode corfu-popupinfo-mode))
-        (add
-	 -hook 'server-after-make-frame-hook fn))
+        (add-hook 'server-after-make-frame-hook fn))
     (global-corfu-mode 1)
     (corfu-history-mode 1)
     (corfu-popupinfo-mode 1)))
