@@ -611,3 +611,7 @@ ORIG-FUN will be wrapped by this advice."
   (setq tab-bar-tab-name-function #'my/tab-bar-tab-name-project)
 
   (modern-tab-bar-mode 1))
+
+;; YAML syntax highlighting
+(use-package yaml-mode
+  :mode "\\.ya?ml\\'")
