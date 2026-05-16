@@ -32,6 +32,15 @@
 
 (set-face-attribute 'default nil :height 100)
 
+;; Prefer side-by-side (left/right) splits over top/bottom
+(setq split-height-threshold nil)
+(setq split-width-threshold 80)
+
+;; When displaying a buffer in another window, reuse an existing one
+;; instead of creating new splits
+(setq display-buffer-base-action
+      '((display-buffer-reuse-window display-buffer-use-some-window)))
+
 (use-package vertico
   :ensure t
   :init
@@ -140,6 +149,7 @@
   (define-key magit-hunk-section-map (kbd "RET") #'magit-diff-visit-file)
   (define-key magit-file-section-map (kbd "RET") #'magit-diff-visit-file)
 
+
   ;; When switching projects with C-x p p, open magit + dirvish sidebar
   (defun my/project-switch-magit (project-dir)
     "Open magit-status and dirvish-side for PROJECT-DIR."
@@ -173,10 +183,11 @@
                 (setq first-line line-num))))))
       first-line))
 
-  (defun my/magit-diff-open-all-files ()
+  (defun my/magit-diff-open-all-files (&optional other-window)
     "Open all files listed in the current magit diff buffer.
-Tracks them in `my/magit-diff-files' for use with consult."
-    (interactive)
+Tracks them in `my/magit-diff-files' for use with consult.
+With prefix argument OTHER-WINDOW, display the first file in the other window."
+    (interactive "P")
     (unless (derived-mode-p 'magit-diff-mode 'magit-status-mode
                              'magit-revision-mode 'magit-merge-preview-mode)
       (user-error "Not in a magit diff buffer"))
@@ -208,12 +219,16 @@ Tracks them in `my/magit-diff-files' for use with consult."
               (forward-line (max 0 (- first-line 1 10)))))))
       (setq my/magit-diff-files (nreverse my/magit-diff-files))
       ;; Switch to the first file
-      (switch-to-buffer (car my/magit-diff-files))
+      (if other-window
+          (switch-to-buffer-other-window (car my/magit-diff-files))
+        (switch-to-buffer (car my/magit-diff-files)))
       (message "Opened %d diff files (use C-x b < d to navigate)"
                (length my/magit-diff-files))))
 
-  :bind (:map magit-diff-mode-map
-         ("C-c o" . my/magit-diff-open-all-files)))
+  :bind ((:map magit-diff-mode-map
+          ("C-c o" . my/magit-diff-open-all-files))
+         (:map magit-status-mode-map
+          ("C-c o" . my/magit-diff-open-all-files))))
 
 (use-package opencode
   :vc (:url "https://codeberg.org/sczi/opencode.el.git" :rev :newest)
