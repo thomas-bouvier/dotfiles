@@ -29,21 +29,26 @@ Once in the UEFI menu, make sure that:
 Boot the machine from this USB drive.
 
 > [!TIP]
-> If installing for an Apple Silicon machine. Run the script referenced at https://asahilinux.org/ from macOS. Then, select `Shrink macOS as much as (safely) possible` > `Install an OS into free space` and `UEFI environment only (m1n1 + U-Boot + ESP)`. Name it `NixOS` when asked. Follow these [instructions](https://github.com/nix-community/nixos-apple-silicon/blob/main/docs/uefi-standalone.md).
+> If installing for an Apple Silicon machine, run the script referenced at https://asahilinux.org/ from macOS. Then, select `Shrink macOS as much as (safely) possible` > `Install an OS into free space` and `UEFI environment only (m1n1 + U-Boot + ESP)`. Name it `NixOS` when asked. Follow these [instructions](https://github.com/nix-community/nixos-apple-silicon/blob/main/docs/uefi-standalone.md).
+
+> [!WARNING]
+> If installing for an Apple Silicon machine, during `alx.sh`, take note of the `EFI PARTUUID:`. This will be useful later.
 
 ## Once on the live USB
 
 The US layout is chosen by default.
 
-```console
+```bash
 sudo loadkeys mod-dh-ansi-us
 ```
 
 For other layouts like French or German, use `loadkeys fr` or `loadkeys de`.
 
-We'll enable internet access before partitioning. Just run `nmtui`. Alternatively, use something like that:
+We'll enable internet access before partitioning. Just run `nmtui`.
 
-```console
+Alternatively, use `wpa_supplicant` like that:
+
+```bash
 sudo systemctl start wpa_supplicant
 wpa_cli
 add_network
@@ -52,6 +57,16 @@ set_network 0 psk ""
 set_network 0 key_mgmt WPA-PSK
 enable_network 0
 quit
+```
+
+Or `iwd`, if previous programs are not available:
+
+```bash
+iwctl
+device list
+station <name> get-networks
+station <name> connect <ssid>
+exit
 ```
 
 ## Partitioning
@@ -73,6 +88,9 @@ NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
 nvme0n1     259:0    0   1,8T  0 disk
 ```
 
+> [!WARNING]
+> If installing for an Apple Silicon machine, read [this](https://github.com/nix-community/nixos-apple-silicon/blob/main/docs/uefi-standalone.md#partitioning-and-formatting) instead. Different steps may apply.
+
 We'll use `fdisk` to partition the disk:
 
 ```console
@@ -81,30 +99,9 @@ sudo fdisk /dev/nvme0n1
 
 You can hit `m` to list available commands.
 
-Create partitions and swapfile...
-
-Generate the configuration files `configuration.nix` and `hardware-configuration.nix` as follows:
-
-```console
-sudo nixos-generate-config --root /mnt
-```
-
-You can then edit the produced configuration:
-
-```console
-ls /mnt/etc/nixos
-vim /mnt/etc/nixos/configuration.nix
-```
-
-Once you are done with a configuration, install the new machine as follows:
-
-```console
-sudo nixos-install
-```
+Create partitions and swapfile: a [useful video](https://youtu.be/axOxLJ4BWmY?si=rQWfBgPNd2M-YcjC&t=291) for this step.
 
 ### Disko partitioning
-
-As we will be using Disko to partition our system, we can safely get rid of the `fileSystems` and `swapDevices` definitions in `hardware-configuration.nix`.
 
 Once in the NixOS shell, identify the name of your system disk by using the `lsblk` command as follows:
 
@@ -120,29 +117,34 @@ nvme0n1     259:0    0   1,8T  0 disk
 ```
 
 In this example, an empty NVME SSD with 2TB space is shown with the disk name
-"nvme0n1". Make a note of the disk name as you will need it later.
+`nvme0n1`. Make a note of the disk name as you will need it later.
 
-Your configuration needs to be saved on the new machine for example
-as `/tmp/disko-configuration.nix`. You can do this using the `curl` command to download
-from the url you noted above, using the `-o` option to save the file as
-disk-config.nix. Your commands would look like this if you had chosen the hybrid
-layout:
+Let us adapt a templated Disko configuration at `/tmp/disko-configuration.nix`. Download
+a base config from one of the following locations using the `-o` option to save the file as
+`disko-configuration.nix`:
 
-```console
-cd /tmp
+```bash
+# To reuse the configuration of the cladosporium host (LUKS + btrfs)
 curl https://raw.githubusercontent.com/thomas-bouvier/my-dotfiles/main/hosts/cladosporium/disko-configuration.nix -o /tmp/disko-configuration.nix
+# To reuse the configuration of the golmotte host (Apple Silicon + btrfs)
+curl https://raw.githubusercontent.com/thomas-bouvier/my-dotfiles/main/hosts/golmotte/disko-configuration.nix -o /tmp/disko-configuration.nix
 
-# Alternatively
+# Alternatively, use upstream Disko config (btfrs)
+curl https://raw.githubusercontent.com/nix-community/disko/master/example/btrfs-subvolumes.nix -o /tmp/disko-configuration.nix
+# Upstream Disko config (LUKS + btrfs)
 curl https://raw.githubusercontent.com/nix-community/disko/master/example/luks-btrfs-subvolumes.nix -o /tmp/disko-configuration.nix
 ```
 
-Inside the `disko-configuration.nix` the device needs to point to the correct disk name. Open the configuration in your favorite editor i.e.:
+> [!WARNING]
+> Be careful if you prepare an Apple Silicon machine. You should not touch any of the partitions created by `alx.sh`. Honestly this is a bit tricky. The risk is to have to DFU restore the machine if you mess with the existing UUIDs.
 
-```console
-nano /tmp/disko-configuration.nix
+Inside the `disko-configuration.nix` the device needs to point to the correct disk name (adjust the `device` if needed). Open the configuration in your favorite editor i.e.:
+
+```bash
+vim /tmp/disko-configuration.nix
 ```
 
-Replace `<disk-name>` with the name of your disk obtained in Step 1.
+Replace `<disk-name>` with the name of your disk obtained earlier.
 
 ```nix
 # ...
@@ -154,9 +156,16 @@ main = {
 # ...
 ```
 
-Set a LUKS password in `/tmp/secret.key`:
+> [!WARNING]
+> Extra work is needed for Apple Silicon machines as one should not mess up what `alx.sh` has done for us. The following commands apply to Apple Silicon machines only.
 
-```console
+Apple Silicon users: stop and read [this](https://github.com/nix-community/nixos-apple-silicon/blob/main/docs/uefi-standalone.md#partitioning-and-formatting). One should not damage the GPT partition table, first partition (`iBootSystemContainer`), or the last partition (`RecoveryOSContainer`) otherwise we'll end up making the machine unbootable.
+
+Let us use `ls -l /dev/disk/by-partuuid/` to match up the existing partitions' UUIDs. The `uuid = "<partuuid>"` attribute of [all macOS-related partitions](https://github.com/thomas-bouvier/my-dotfiles/blob/bc47489e182d067c73e192140d91381a4268e6be/hosts/golmotte/disko-configuration.nix#L19-L56) should be set manually. In particular, the EFI UUID MUST match the `alx.sh` output we obtained at the very beginning of this README.
+
+Apple Silicon or not, if you used LUKS, set a LUKS password in `/tmp/secret.key`:
+
+```bash
 echo password > /tmp/secret.key
 ```
 
@@ -164,11 +173,15 @@ The following step will partition and format your disk, and mount it to `/mnt`.
 
 **Please note: This will erase any existing data on your disk.**
 
-```console
+```bash
+# Non-Apple Silicon machine
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/disko-configuration.nix
+
+# Apple Silicon machine
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode format,mount /tmp/disko-configuration.nix
 ```
 
-You should see a confirmation input and several output lines around partitioning and formatting the disks(see below), and don’t worry if you receive an error (for isntance you forgot to add the password file) ‘cause you can re-run disko multiple times. If you are uncertain about the outcome, you can always check the disko command’s return with `echo $?`:
+You should see a confirmation input and several output lines around partitioning and formatting the disks (see below), and don’t worry if you receive an error (for instance you forgot to add the password file) because one can re-run disko multiple times. If you are uncertain about the outcome, you can always check the disko command’s return with `echo $?` (should be `0`):
 
 ```console
 [..]
@@ -182,10 +195,9 @@ $ echo $?
 0
 ```
 
-After the command has run, your file system should have been formatted and
-mounted. You can verify this by running the following command:
+After the command has run, your filesystem should have been formatted and mounted. You can verify this by running the following command:
 
-```console
+```bash
 mount | grep /mnt
 ```
 
@@ -209,14 +221,25 @@ see the section headed "**Installing**", Steps 3 onwards.
 
 ### You did not use Disko
 
+Generate the configuration files `configuration.nix` and `hardware-configuration.nix` as follows:
+
 ```console
 sudo nixos-generate-config --root /mnt
 ```
 
-Set an `initialPassword` for your user.
+You can then edit the produced configuration:
 
-git
-experimental-features nix-command and flakes
+```console
+ls /mnt/etc/nixos
+vim /mnt/etc/nixos/configuration.nix
+```
+
+You can now edit `configuration.nix` as per your requirements. Set an `initialPassword` for your user, set a hostname, install `git`, a wifi backend and experimental-features nix-command and flakes.
+
+> [!WARNING]
+> Additional steps are [needed](https://github.com/nix-community/nixos-apple-silicon/blob/main/docs/uefi-standalone.md#nixos-configuration) for Apple Silicon machines. The `apple-silicon-support` module should be imported. Also, specify the path to peripheral firmware files as follows: `hardware.asahi.peripheralFirmwareDirectory = ./firmware;`.
+
+Once you are done with a configuration, install the new machine as follows:
 
 ```console
 sudo nixos-install
@@ -231,34 +254,24 @@ to include the partitioning and formatting configurations that you copied into
 generate information about your file systems. When you are configuring the
 system as per Step 4 of the manual, you should:
 
-a) Include the `no-filesystems` switch when using the `nixos-generate-config`
+Include the `no-filesystems` switch when using the `nixos-generate-config`
 command to generate an initial `configuration.nix`. You will be supplying the
-file system configuration details from `disk-config.nix`. Your CLI command to
+file system configuration details from the `disko-configuration.nix` we prepared earlier. Your CLI command to
 generate the configuration will be:
 
 ```console
 sudo nixos-generate-config --no-filesystems --root /mnt
 ```
 
-This will create the file `configuration.nix` in `/mnt/etc/nixos`.
-
-b) Move the `disko` configuration to /etc/nixos
+This will create the file `configuration.nix` in `/mnt/etc/nixos`. Move the `disko` configuration to `/etc/nixos`:
 
 ```console
 mv /tmp/disko-configuration.nix /mnt/etc/nixos
 ```
 
-c) You can now edit `configuration.nix` as per your requirements. This is
-described in Step 4 of the manual. For more information about configuring your
-system, refer to the NixOS manual.
-[Chapter 6, Configuration Syntax](https://nixos.org/manual/nixos/stable/index.html#sec-configuration-syntax)
-describes the NixOS configuration syntax, and
-[Appendix A, Configuration Options](https://nixos.org/manual/nixos/stable/options.html)
-gives a list of available options. You can find also find a minimal example of a
-NixOS configuration in the manual:
-[Example: NixOS Configuration](https://nixos.org/manual/nixos/stable/index.html#ex-config).
+You can now edit `configuration.nix` as per your requirements. Set an `initialPassword` for your user, set a hostname, install `git`, a wifi backend and experimental-features nix-command and flakes.
 
-d) When editing `configuration.nix`, you will need to add the `disko` NixOS
+As we used Disko, one need to add the `disko` NixOS
 module and `disko-configuration.nix` to the imports section. This section will already
 include the file `./hardware-configuration.nix`, and you can add the new entries
 just below this. This section will now include:
@@ -272,26 +285,10 @@ imports =
  ];
 ```
 
-e) If you chose the hybrid-partition scheme, then choose `grub` as a bootloader,
-otherwise follow the recommendations in Step 4 of the **Installation** section
-of the NixOS manual. The following configuration for `grub` works for both EFI
-and BIOS systems. Add this to your configuration.nix, commenting out the
-existing lines that configure `systemd-boot`. The entries will look like this:
+> [!WARNING]
+> Additional steps are [needed](https://github.com/nix-community/nixos-apple-silicon/blob/main/docs/uefi-standalone.md#nixos-configuration) for Apple Silicon machines. The `apple-silicon-support` module should be imported. Also, specify the path to peripheral firmware files as follows: `hardware.asahi.peripheralFirmwareDirectory = ./firmware;`.
 
-**Note:** It's not necessary to set `boot.loader.grub.device` here, since Disko
-will take care of that automatically.
-
-```nix
-# ...
-   #boot.loader.systemd-boot.enable = true;
-   #boot.loader.efi.canTouchEfiVariables = true;
-   boot.loader.grub.enable = true;
-   boot.loader.grub.efiSupport = true;
-   boot.loader.grub.efiInstallAsRemovable = true;
-# ...
-```
-
-f) Finish the installation and reboot your machine,
+Once you are done with a configuration, install the new machine as follows:
 
 ```console
 sudo nixos-install
@@ -300,6 +297,6 @@ reboot
 
 ## Complete installation
 
-Once logged in in NixOS, clone this repository in the location of your choice `<current_config>` and follow steps documented in [README.md](README.md).
+Once logged in in NixOS, clone this repository `git clone git@github.com:thomas-bouvier/my-dotfiles.git` at the location of your choice `<current_config>` and follow steps documented in [README.md](README.md).
 
-If you use an Apple Silicon machine, don't forget to copy your firmware files to the current configuration `cp /mnt/etc/nixos/firmware* <current_config>/system/asahi-firmware`.
+If you use an Apple Silicon machine, don't forget to copy your firmware files to the current configuration `cp /etc/nixos/firmware* <current_config>/system/asahi-firmware`.

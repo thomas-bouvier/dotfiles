@@ -3,9 +3,11 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/nvme0n1"; # adapt if needed
+
         content = {
           type = "gpt";
+
           partitions = {
             ESP = {
               size = "512M";
@@ -17,8 +19,10 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
+
             luks = {
               size = "100%";
+
               content = {
                 type = "luks";
                 name = "crypted";
@@ -27,6 +31,7 @@
                 settings = {
                   allowDiscards = true;
                 };
+
                 content = {
                   type = "btrfs";
                   extraArgs = [ "-f" ];
@@ -54,7 +59,7 @@
                     };
                     "/swap" = {
                       mountpoint = "/.swapfile";
-                      swap.swapfile.size = "50GB";
+                      swap.swapfile.size = "50G";
                     };
                   };
                 };
