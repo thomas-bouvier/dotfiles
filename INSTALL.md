@@ -2,21 +2,24 @@
 
 You should probably follow the [NixOS manual](https://nixos.org/manual/nixos/stable/index.html#sec-installation). I share my own notes for reference.
 
-Download the [minimal ISO NixOS image](https://nixos.org/download/), and create a bootable USB drive following the instructions in [Section "Booting from a USB flash drive"](https://nixos.org/manual/nixos/stable/index.html#sec-booting-from-usb) of the NixOS manual. Identify your USB stick:
+Download the [minimal ISO NixOS image](https://nixos.org/download/), and create a bootable USB drive following the instructions in [Section "Booting from a USB flash drive"](https://nixos.org/manual/nixos/stable/index.html#sec-booting-from-usb) of the NixOS manual.
+
+> [!TIP]
+> If installing for an Apple Silicon machine, you should download an ISO from [here](https://github.com/nix-community/nixos-apple-silicon/releases) instead.
+
+Identify your USB stick (the USB stick should not have been mounted):
 
 ```console
 lsblk
 ```
 
-Copy the ISO to the USB stick (replace $DISK with your USB stick, it should be a `disk` not a `part`):
+Copy the ISO to the USB stick (replace <DISK> with your USB stick, it should be a `disk` not a `part`):
 
 ```console
-sudo dd if=<ISO_FILE> of=$DISK bs=4M status=progress
+sudo dd if=<ISO_FILE> of=<DISK> bs=4M status=progress
 ```
 
-In the UEFI menu, make sure that:
-
-Once in the menu:
+Once in the UEFI menu, make sure that:
 
 - Ensure Safe (Secure) Boot is Disabled.
 - Ensure Fast Boot is Disabled.
@@ -24,6 +27,9 @@ Once in the menu:
 - Ensure Boot from USB is Enabled.
 
 Boot the machine from this USB drive.
+
+> [!TIP]
+> If installing for an Apple Silicon machine. Run the script referenced at https://asahilinux.org/ from macOS. Then, select `Shrink macOS as much as (safely) possible` > `Install an OS into free space` and `UEFI environment only (m1n1 + U-Boot + ESP)`. Name it `NixOS` when asked. Follow these [instructions](https://github.com/nix-community/nixos-apple-silicon/blob/main/docs/uefi-standalone.md).
 
 ## Once on the live USB
 
