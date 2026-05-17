@@ -60,7 +60,6 @@ in
       kdePackages.kfind
       kdePackages.filelight
       kdePackages.kompare
-      kdePackages.partitionmanager
       libreoffice-qt6-fresh
 
       # Command line
