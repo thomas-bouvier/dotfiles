@@ -11,6 +11,7 @@
 
 {
   imports = [
+    ./apptainer.nix
     ./bluetooth.nix
     ./stylix.nix
     ./tailscale.nix
@@ -35,11 +36,6 @@
       "en_US.UTF-8/UTF-8"
       "fr_FR.UTF-8/UTF-8"
     ];
-  };
-
-  programs.singularity = {
-    enable = true;
-    package = pkgs.apptainer;
   };
 
   services = {
