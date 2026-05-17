@@ -2,19 +2,24 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
-      ./bluetooth.nix
-      ./stylix.nix
-      ./tailscale.nix
-      ./networking.nix
-    ];
+    ./bluetooth.nix
+    ./stylix.nix
+    ./tailscale.nix
+    ./networking.nix
+  ];
 
   # Enable system modules
   bluetooth.enable = true;
-  
+
   stylix = {
     enable = true;
     #targets.qt.platform = "kde6";
@@ -25,7 +30,10 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = ["en_US.UTF-8/UTF-8" "fr_FR.UTF-8/UTF-8"];
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "fr_FR.UTF-8/UTF-8"
+    ];
   };
 
   programs.singularity = {
@@ -79,7 +87,10 @@
   # Nix settings
   nix.settings = {
     # Enable the Flakes feature and the accompanying new nix command-line tool
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     trusted-substituters = [
       "https://cache.nixos.org"
@@ -126,43 +137,44 @@
   nixpkgs.config = {
     # Combined predicate: keep the legacy name whitelist, and also accept
     # packages whose licenses are CUDA-related EULAs.
-    allowUnfreePredicate = let
-      ensureList = x: if builtins.isList x then x else [ x ];
-      legacyNames = [
-        "cnijfilter2"
-        "unrar"
-        # Nvidia
-        "nvidia-x11"
-        "nvidia-settings"
-        "nvidia-kernel-modules"
-        "cuda_cccl"
-        "cuda_cudart"
-        "cuda_nvcc"
-        "nsight_systems"
-        "nsight_compute"
-        # Apple
-        "apple_cursor"
-        "obsidian"
-        # VSCode
-        "vscode-extension-ms-vscode-cpptools"
-        "vscode-extension-ms-vscode-remote-remote-ssh"
-        # Crap by Intel for cameras
-        "ipu6-camera-bins"
-        "ipu6-camera-bins-unstable"
-        "ivsc-firmware"
-        "ivsc-firmware-unstable"
-      ];
-    in
-    package:
-    (builtins.elem (lib.getName package) legacyNames)
-    || builtins.all (
-      license:
-      license.free
-      || builtins.elem license.shortName [
-        "CUDA EULA"
-        "cuDNN EULA"
-      ]
-    ) (ensureList package.meta.license);
+    allowUnfreePredicate =
+      let
+        ensureList = x: if builtins.isList x then x else [ x ];
+        legacyNames = [
+          "cnijfilter2"
+          "unrar"
+          # Nvidia
+          "nvidia-x11"
+          "nvidia-settings"
+          "nvidia-kernel-modules"
+          "cuda_cccl"
+          "cuda_cudart"
+          "cuda_nvcc"
+          "nsight_systems"
+          "nsight_compute"
+          # Apple
+          "apple_cursor"
+          "obsidian"
+          # VSCode
+          "vscode-extension-ms-vscode-cpptools"
+          "vscode-extension-ms-vscode-remote-remote-ssh"
+          # Crap by Intel for cameras
+          "ipu6-camera-bins"
+          "ipu6-camera-bins-unstable"
+          "ivsc-firmware"
+          "ivsc-firmware-unstable"
+        ];
+      in
+      package:
+      (builtins.elem (lib.getName package) legacyNames)
+      || builtins.all (
+        license:
+        license.free
+        || builtins.elem license.shortName [
+          "CUDA EULA"
+          "cuDNN EULA"
+        ]
+      ) (ensureList package.meta.license);
   };
 
   programs.ssh.startAgent = true;

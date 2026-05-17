@@ -1,11 +1,19 @@
-{ config, pkgs, my-secrets, ... }:
+{
+  config,
+  pkgs,
+  my-secrets,
+  ...
+}:
 
 let
   secretsPath = builtins.toString my-secrets;
 in
 {
   imports = [
-    (import ../thomas/atuin.nix { inherit config pkgs; secretsPath = secretsPath; })
+    (import ../thomas/atuin.nix {
+      inherit config pkgs;
+      secretsPath = secretsPath;
+    })
     ../thomas/konsole.nix
     ../thomas/opencode.nix
     ../thomas/plasma.nix
@@ -56,68 +64,75 @@ in
 
     # The home.packages option allows you to install Nix packages into your
     # environment.
-    packages = with pkgs; [
-      # Everyday life
-      mattermost-desktop
-      thunderbird
-      obsidian
-      vlc
-      kdePackages.kcharselect
-      kdePackages.kfind
-      kdePackages.filelight
-      kdePackages.kompare
-      kdePackages.partitionmanager
-      kdePackages.kamoso
-      kdePackages.krecorder
-      libreoffice-qt6-fresh
-      chromium
+    packages =
+      with pkgs;
+      [
+        # Everyday life
+        mattermost-desktop
+        thunderbird
+        obsidian
+        vlc
+        kdePackages.kcharselect
+        kdePackages.kfind
+        kdePackages.filelight
+        kdePackages.kompare
+        kdePackages.partitionmanager
+        kdePackages.kamoso
+        kdePackages.krecorder
+        libreoffice-qt6-fresh
+        chromium
 
-      # Command line
-      neovim
-      eza
-      age
-      htop
-      sops
-      jq
-      unrar
-      nh
-      git-filter-repo
-      ripgrep
+        # Command line
+        neovim
+        eza
+        age
+        htop
+        sops
+        jq
+        unrar
+        nh
+        git-filter-repo
+        ripgrep
 
-      # Development
-      python313
-      mypy
-      uv
-      go
-      hugo
-      marimo
-      guix
-      emacs-pgtk
-      cudaPackages.nsight_systems
-      gh
+        # Development
+        python313
+        mypy
+        uv
+        go
+        hugo
+        marimo
+        guix
+        emacs-pgtk
+        cudaPackages.nsight_systems
+        gh
 
-      # Virtualisation
-      dive
-      podman
-      podman-compose
-      apptainer
+        # Virtualisation
+        dive
+        podman
+        podman-compose
+        apptainer
 
-      # Research
-      zotero
-      texliveFull
-      texstudio
-      quarto
+        # Research
+        zotero
+        texliveFull
+        texstudio
+        quarto
 
-      # Theme
-      nordic
-      (whitesur-icon-theme.override {
-        alternativeIcons = true;
-        boldPanelIcons = true;
-      })
-    ]
-    ++ (if stdenv.hostPlatform.system != "aarch64-linux" then [
-      # List packages not compatible with aarch64 here
-    ] else [ ]);
+        # Theme
+        nordic
+        (whitesur-icon-theme.override {
+          alternativeIcons = true;
+          boldPanelIcons = true;
+        })
+      ]
+      ++ (
+        if stdenv.hostPlatform.system != "aarch64-linux" then
+          [
+            # List packages not compatible with aarch64 here
+          ]
+        else
+          [ ]
+      );
 
     sessionVariables = {
       # EDITOR and VISUAL are set by services.emacs.defaultEditor to emacsclient

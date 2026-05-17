@@ -40,7 +40,7 @@
         hostname = "access.grid5000.fr";
         forwardAgent = false;
       };
-  
+
       "*.g5k" = {
         host = "*.g5k";
         user = "tbouvier";

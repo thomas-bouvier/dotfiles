@@ -1,27 +1,39 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      ../../system/configuration.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ../../system/configuration.nix
 
-      # We need Nvidia drivers
-      ../../system/nvidia.nix
-      # We need printing drivers
-      ../../system/printing.nix
-      # We need virtualisation capabilities
-      ../../system/virtualisation.nix
+    # We need Nvidia drivers
+    ../../system/nvidia.nix
+    # We need printing drivers
+    ../../system/printing.nix
+    # We need virtualisation capabilities
+    ../../system/virtualisation.nix
 
-      # Users
-      ../../users/thomas.nix
-    ];
+    # Users
+    ../../users/thomas.nix
+  ];
 
   boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "usb_storage"
+      "usbhid"
+      "sd_mod"
+    ];
     initrd.kernelModules = [ ];
 
     kernelModules = [ "kvm-amd" ];
@@ -33,29 +45,35 @@
 
   networking.hostName = "bolet";
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-label/ROOT";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/ROOT";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
-  
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-label/NIX";
-      fsType = "ext4";
-      neededForBoot = true;
-      options = [ "noatime" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/BOOT";
+    fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
+  };
 
-  fileSystems."/storage" =
-    { device = "/dev/disk/by-label/STORAGE";
-      fsType = "ext4";
-      options = [ "users" "nofail" ]; 
-    };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-label/NIX";
+    fsType = "ext4";
+    neededForBoot = true;
+    options = [ "noatime" ];
+  };
+
+  fileSystems."/storage" = {
+    device = "/dev/disk/by-label/STORAGE";
+    fsType = "ext4";
+    options = [
+      "users"
+      "nofail"
+    ];
+  };
 
   swapDevices = [
     {

@@ -1,4 +1,9 @@
-{ config, pkgs, secretsPath, ... }:
+{
+  config,
+  pkgs,
+  secretsPath,
+  ...
+}:
 {
   programs.atuin = {
     enable = true;

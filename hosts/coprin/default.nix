@@ -1,24 +1,37 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      ../../system/configuration.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ../../system/configuration.nix
 
-      # We need printing drivers
-      ../../system/printing.nix
+    # We need printing drivers
+    ../../system/printing.nix
 
-      # Users
-      ../../users/thomas-famille.nix
-      ../../users/famille.nix
-    ];
+    # Users
+    ../../users/thomas-famille.nix
+    ../../users/famille.nix
+  ];
 
   boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 
-    initrd.availableKernelModules = [ "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" "sdhci_acpi" ];
+    initrd.availableKernelModules = [
+      "ahci"
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+      "sdhci_acpi"
+    ];
     initrd.kernelModules = [ ];
 
     kernelModules = [ "kvm-intel" ];
@@ -41,16 +54,19 @@
     services.sudo.sshAgentAuth = true;
   };
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-label/ROOT";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/ROOT";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/BOOT";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/BOOT";
+    fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
+  };
 
   swapDevices = [
     {

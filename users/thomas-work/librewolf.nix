@@ -1,4 +1,9 @@
-{ config, pkgs, nur, ... }:
+{
+  config,
+  pkgs,
+  nur,
+  ...
+}:
 
 {
   programs.librewolf = {
@@ -14,28 +19,37 @@
 
           engines = {
             "Kagi" = {
-              urls = [{
-                template = "https://kagi.com/search";
-                params = [ { name = "q"; value = "{searchTerms}"; } ];
-              }];
+              urls = [
+                {
+                  template = "https://kagi.com/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
               icon = "https://assets.kagi.com/v1/kagi_assets/logos/yellow_3.svg";
               updateInterval = 24 * 60 * 60 * 1000; # Daily
               definedAliases = [ "!k" ];
             };
 
             "GitHub" = {
-              urls = [{
-                template =
-                  "https://github.com/search?q={searchTerms}&type=repositories";
-              }];
+              urls = [
+                {
+                  template = "https://github.com/search?q={searchTerms}&type=repositories";
+                }
+              ];
               definedAliases = [ "!gh" ];
             };
 
             youtube = {
-              urls = [{
-                template =
-                  "https://www.youtube.com/results?search_query={searchTerms}";
-              }];
+              urls = [
+                {
+                  template = "https://www.youtube.com/results?search_query={searchTerms}";
+                }
+              ];
               definedAliases = [ "!y" ];
             };
           };
@@ -53,20 +67,28 @@
 
           engines = {
             "Kagi" = {
-              urls = [{
-                template = "https://kagi.com/search";
-                params = [ { name = "q"; value = "{searchTerms}"; } ];
-              }];
+              urls = [
+                {
+                  template = "https://kagi.com/search";
+                  params = [
+                    {
+                      name = "q";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
               icon = "https://assets.kagi.com/v1/kagi_assets/logos/yellow_3.svg";
               updateInterval = 24 * 60 * 60 * 1000; # Daily
               definedAliases = [ "!k" ];
             };
 
             "GitHub" = {
-              urls = [{
-                template =
-                  "https://github.com/search?q={searchTerms}&type=repositories";
-              }];
+              urls = [
+                {
+                  template = "https://github.com/search?q={searchTerms}&type=repositories";
+                }
+              ];
               definedAliases = [ "!gh" ];
             };
           };

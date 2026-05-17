@@ -1,11 +1,19 @@
-{ config, pkgs, my-secrets, ... }:
+{
+  config,
+  pkgs,
+  my-secrets,
+  ...
+}:
 
 let
   secretsPath = builtins.toString my-secrets;
 in
 {
   imports = [
-    (import ../thomas/atuin.nix { inherit config pkgs; secretsPath = secretsPath; })
+    (import ../thomas/atuin.nix {
+      inherit config pkgs;
+      secretsPath = secretsPath;
+    })
     ../thomas/konsole.nix
     ../thomas/librewolf.nix
     ../thomas/plasma.nix

@@ -1,4 +1,9 @@
-{ config, pkgs, nur, ... }:
+{
+  config,
+  pkgs,
+  nur,
+  ...
+}:
 let
   nord-konsole-theme = pkgs.fetchFromGitHub {
     repo = "konsole";

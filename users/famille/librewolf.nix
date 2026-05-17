@@ -1,4 +1,9 @@
-{ config, pkgs, nur, ... }:
+{
+  config,
+  pkgs,
+  nur,
+  ...
+}:
 
 {
   programs.librewolf = {
@@ -12,9 +17,11 @@
 
         engines = {
           "qwant" = {
-            urls = [{
-              template = "https://www.qwant.com/?q={searchTerms}";
-            }];
+            urls = [
+              {
+                template = "https://www.qwant.com/?q={searchTerms}";
+              }
+            ];
             icon = "https://upload.wikimedia.org/wikipedia/commons/2/2b/Qwant-Icone-2022.svg";
             updateInterval = 24 * 60 * 60 * 1000;
             definedAliases = [ "!q" ];
@@ -26,7 +33,7 @@
       };
     };
 
-    languagePacks = ["fr"];
+    languagePacks = [ "fr" ];
 
     settings = {
       "intl.accept_languages" = "fr,en-US";

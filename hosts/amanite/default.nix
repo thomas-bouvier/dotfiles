@@ -1,34 +1,43 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
-        (modulesPath + "/installer/scan/not-detected.nix")
-        ../../system/configuration.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ../../system/configuration.nix
 
-        # We need virtualisation capabilities
-        ../../system/virtualisation.nix
+    # We need virtualisation capabilities
+    ../../system/virtualisation.nix
 
-        # Users
-        ../../users/thomas.nix
+    # Users
+    ../../users/thomas.nix
+  ];
+
+  networking.hostName = "amanite";
+
+  boot = {
+    # Use the systemd-boot EFI boot loader.
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = false;
+
+    initrd.availableKernelModules = [
+      "usb_storage"
+      "sdhci_pci"
     ];
+    initrd.kernelModules = [ ];
 
-    networking.hostName = "amanite";
+    kernelModules = [ ];
+    extraModulePackages = [ ];
 
-    boot = {
-        # Use the systemd-boot EFI boot loader.
-        loader.systemd-boot.enable = true;
-        loader.efi.canTouchEfiVariables = false;
-
-        initrd.availableKernelModules = [ "usb_storage" "sdhci_pci" ];
-        initrd.kernelModules = [ ];
-
-        kernelModules = [ ];
-        extraModulePackages = [ ];
-
-        extraModprobeConfig = ''
-            options hid_apple iso_layout=0
-        '';
-    };
+    extraModprobeConfig = ''
+      options hid_apple iso_layout=0
+    '';
+  };
 
   hardware.asahi = {
     peripheralFirmwareDirectory = ../../system/asahi-firmware;
@@ -43,21 +52,26 @@
       sha256 = "sha256-Tmp0nu2JTMHHOuV20ElkPduB0IuZaG3pBjrYPDx79u8=";
     }) { localSystem = pkgs.stdenv.hostPlatform; }).mesa;
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/bfa5b39e-5d73-4ec5-ba59-b9e6200a2162";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/bfa5b39e-5d73-4ec5-ba59-b9e6200a2162";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/80E1-1516";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/80E1-1516";
+    fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
+  };
 
-  swapDevices = [{
-    device = "/swapfile";
-    size = 60 * 1024; # 60GB
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 60 * 1024; # 60GB
+    }
+  ];
   zramSwap = {
     enable = true;
     memoryPercent = 90;

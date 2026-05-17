@@ -1,30 +1,43 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
-      (modulesPath + "/installer/scan/not-detected.nix")
-      ../../system/configuration.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ../../system/configuration.nix
 
-      # We need Nvidia drivers
-      ../../system/nvidia.nix
-      # We need virtualisation capabilities
-      ../../system/virtualisation.nix
-      # Enable Guix on this machine :)
-      ../../system/guix.nix
+    # We need Nvidia drivers
+    ../../system/nvidia.nix
+    # We need virtualisation capabilities
+    ../../system/virtualisation.nix
+    # Enable Guix on this machine :)
+    ../../system/guix.nix
 
-      # Users
-      ../../users/thomas-work.nix
+    # Users
+    ../../users/thomas-work.nix
 
-      # Partitioning
-      ./disko-configuration.nix
-    ];
+    # Partitioning
+    ./disko-configuration.nix
+  ];
 
   boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 
-    initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "thunderbolt"
+      "nvme"
+      "usb_storage"
+      "sd_mod"
+      "rtsx_pci_sdmmc"
+    ];
     initrd.kernelModules = [ ];
 
     kernelModules = [ "kvm-intel" ];
@@ -44,7 +57,7 @@
   hardware = {
     ipu6 = {
       enable = true;
-      platform = "ipu6epmtl";  # mtl stands for Meteor Lake
+      platform = "ipu6epmtl"; # mtl stands for Meteor Lake
     };
   };
 

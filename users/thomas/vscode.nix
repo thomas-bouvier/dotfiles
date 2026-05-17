@@ -12,40 +12,42 @@
       enableUpdateCheck = false;
       enableExtensionUpdateCheck = false;
 
-      extensions = with pkgs.vscode-extensions; [
-        ms-vscode.cpptools
-      ]
-      # There are incompatibilities between VSCodium and the copilot-chat
-      # extension, so I bump the extension version myself.
-      # https://marketplace.visualstudio.com/items/GitHub.copilot-chat/changelog
-      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "copilot-chat";
-          publisher = "GitHub";
-          version = "0.40.1";
-          sha256 = "sha256-wVxryUaW53xU4zZKU4t1pZaAB7BFIOkkcng91JnCLOk=";
-        }
-      ]
-      ++ (with pkgs.nix-vscode-extensions.open-vsx-release; [
-        # IDE
-        vscodevim.vim
-        jeanp413.open-remote-ssh
-        marlosirapuan.nord-deep
-        mk12.better-git-line-blame
-        bierner.markdown-preview-github-styles
-        pkief.material-icon-theme
+      extensions =
+        with pkgs.vscode-extensions;
+        [
+          ms-vscode.cpptools
+        ]
+        # There are incompatibilities between VSCodium and the copilot-chat
+        # extension, so I bump the extension version myself.
+        # https://marketplace.visualstudio.com/items/GitHub.copilot-chat/changelog
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "copilot-chat";
+            publisher = "GitHub";
+            version = "0.40.1";
+            sha256 = "sha256-wVxryUaW53xU4zZKU4t1pZaAB7BFIOkkcng91JnCLOk=";
+          }
+        ]
+        ++ (with pkgs.nix-vscode-extensions.open-vsx-release; [
+          # IDE
+          vscodevim.vim
+          jeanp413.open-remote-ssh
+          marlosirapuan.nord-deep
+          mk12.better-git-line-blame
+          bierner.markdown-preview-github-styles
+          pkief.material-icon-theme
 
-        # Python
-        ms-python.python
-        charliermarsh.ruff
-        astral-sh.ty
-        marimo-team.vscode-marimo
+          # Python
+          ms-python.python
+          charliermarsh.ruff
+          astral-sh.ty
+          marimo-team.vscode-marimo
 
-        # Languages
-        jnoortheen.nix-ide
-        vue.volar
-        tsyesika.guile-scheme-enhanced
-      ]);
+          # Languages
+          jnoortheen.nix-ide
+          vue.volar
+          tsyesika.guile-scheme-enhanced
+        ]);
 
       userSettings = {
         # Theming
