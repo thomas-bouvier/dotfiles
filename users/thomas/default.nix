@@ -106,6 +106,7 @@ in
         jq
         unrar
         nh
+        wl-clipboard
         git-filter-repo
         ripgrep
         rclone

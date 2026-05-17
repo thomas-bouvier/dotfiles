@@ -627,6 +627,15 @@ ORIG-FUN will be wrapped by this advice."
 
   (modern-tab-bar-mode 1))
 
+;; System clipboard integration in terminal mode (uses wl-copy/wl-paste on Wayland)
+;; Ensure WAYLAND_DISPLAY is set (emacs daemon starts before the env is inherited)
+(unless (getenv "WAYLAND_DISPLAY")
+  (setenv "WAYLAND_DISPLAY" "wayland-0"))
+(use-package xclip
+  :demand t
+  :config
+  (xclip-mode 1))
+
 ;; YAML syntax highlighting
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")
