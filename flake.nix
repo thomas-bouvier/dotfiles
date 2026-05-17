@@ -70,6 +70,11 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -90,10 +95,12 @@
       nix-vscode-extensions,
       earth-view,
       disko,
+      git-hooks,
       ...
     }@inputs:
     let
-      forAllSystems = function:
+      forAllSystems =
+        function:
         nixpkgs.lib.genAttrs [
           "x86_64-linux"
           "aarch64-linux"
@@ -248,5 +255,28 @@
           }
         ];
       };
+
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
+
+      checks = forAllSystems (pkgs: {
+        pre-commit-check = git-hooks.lib.${pkgs.system}.run {
+          src = self;
+          hooks = {
+            nixfmt-rfc-style.enable = true;
+          };
+        };
+      });
+
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShellNoCC {
+          packages = [
+            pkgs.nixfmt-tree
+          ]
+          ++ self.checks.${pkgs.system}.pre-commit-check.enabledPackages;
+          shellHook = ''
+            ${self.checks.${pkgs.system}.pre-commit-check.shellHook}
+          '';
+        };
+      });
     };
 }
