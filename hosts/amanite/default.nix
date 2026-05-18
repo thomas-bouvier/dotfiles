@@ -13,6 +13,8 @@
 
     # We need virtualisation capabilities
     ../../system/virtualisation.nix
+    # We need printing drivers
+    ../../system/printing.nix
 
     # Users
     ../../users/thomas.nix
