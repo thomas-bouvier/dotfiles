@@ -256,6 +256,44 @@
         ];
       };
 
+      nixosConfigurations.golmotte = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+        };
+
+        modules = [
+          {
+            nixpkgs.hostPlatform = "aarch64-linux";
+            nixpkgs.overlays = commonOverlays ++ [
+              mkUnstableOverlay
+              apple-silicon.overlays.apple-silicon-overlay
+            ];
+          }
+
+          flox.nixosModules.flox
+          apple-silicon.nixosModules.apple-silicon-support
+          lix-module.nixosModules.default
+          ./hosts/golmotte/default.nix
+          stylix.nixosModules.stylix
+          disko.nixosModules.disko
+
+          # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              extraSpecialArgs = {
+                inherit my-secrets;
+              };
+
+              sharedModules = [
+                plasma-manager.homeModules.plasma-manager
+                inputs.sops-nix.homeManagerModules.sops
+              ];
+            };
+          }
+        ];
+      };
+
       formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
 
       checks = forAllSystems (pkgs: {
