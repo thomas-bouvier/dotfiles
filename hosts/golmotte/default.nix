@@ -12,7 +12,7 @@
     ../../system/configuration.nix
 
     # We need printing drivers
-    #../../system/printing.nix
+    ../../system/printing.nix
 
     # Users
     ../../users/thomas-famille.nix
