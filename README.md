@@ -2,7 +2,7 @@
 
 My declarative, reproducible [NixOS](https://nixos.org/) system built using [Lix](https://lix.systems/). My configuration is designed to support the following:
 
-- Multiple hosts, including an Apple Silicon MacBook (mine has a M2 Max chip) ;
+- Multiple hosts, including an Apple Silicon MacBook (mine has a M2 Max chip) and an Apple Silicon Mac Mini ;
 - Multiple users, some of whom are reused across different hosts ;
 - Variants of users ;
 - A beautiful KDE Plasma desktop with [theme Nord](https://www.nordtheme.com/) applied everywhere ;
@@ -20,7 +20,7 @@ Please follow my installation instructions in [INSTALL.md](INSTALL.md).
 
 If you set up a new machine you should probably [generate](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) a new SSH key pair. Put your keys in `/home/thomas/.ssh/` once you're logged in in your new machine. Don't forget to set up a new password for your user using `passwd`.
 
-Put your age keys here:
+Put your `age` keys here:
 
 ```console
 vim /home/thomas/.config/sops/age/keys.txt
@@ -56,7 +56,7 @@ Some packages require manual configuration.
 
 ### Atuin
 
-If you imported age keys, just login to retrieve your shell history:
+If you imported `age` keys, just login to retrieve your shell history:
 
 ```console
 atuin login
