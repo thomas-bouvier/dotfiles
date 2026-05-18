@@ -234,7 +234,7 @@ ls /mnt/etc/nixos
 vim /mnt/etc/nixos/configuration.nix
 ```
 
-You can now edit `configuration.nix` as per your requirements. Set an `initialPassword` for your user, set a hostname, install `git`, a wifi backend and experimental-features nix-command and flakes.
+You can now edit `configuration.nix` as per your requirements. Set an `initialPassword` for your user, set a hostname, install `git`, configure a wifi backend.
 
 > [!WARNING]
 > Additional steps are [needed](https://github.com/nix-community/nixos-apple-silicon/blob/main/docs/uefi-standalone.md#nixos-configuration) for Apple Silicon machines. The `apple-silicon-support` module should be imported. Also, specify the path to peripheral firmware files as follows: `hardware.asahi.peripheralFirmwareDirectory = ./firmware;`.
@@ -269,7 +269,7 @@ This will create the file `configuration.nix` in `/mnt/etc/nixos`. Move the `dis
 mv /tmp/disko-configuration.nix /mnt/etc/nixos
 ```
 
-You can now edit `configuration.nix` as per your requirements. Set an `initialPassword` for your user, set a hostname, install `git`, a wifi backend and experimental-features nix-command and flakes.
+You can now edit `configuration.nix` as per your requirements. Set an `initialPassword` for your user, set a hostname, install `git`, configure a wifi backend.
 
 As we used Disko, one need to add the `disko` NixOS
 module and `disko-configuration.nix` to the imports section. This section will already
@@ -295,8 +295,43 @@ sudo nixos-install
 reboot
 ```
 
+> [!WARNING]
+> **Apple Silicon swap fix:** If your disko configuration includes a swap file
+> (e.g. `swap.swapfile`), it will be formatted by `mkswap` in the installer
+> environment, which uses a different kernel page size than the installed Asahi
+> kernel (4K vs 16K). Swap will silently fail to activate on first boot.
+>
+> After rebooting into your new system, reformat the swap file:
+>
+> ```
+> nix-shell -p util-linux --run "sudo mkswap /.swapfile/swapfile"
+> sudo swapon /.swapfile/swapfile
+> ```
+>
+> Verify with `swapon --show`. This only needs to be done once.
+
 ## Complete installation
 
 Once logged in in NixOS, clone this repository `git clone git@github.com:thomas-bouvier/my-dotfiles.git` at the location of your choice `<current_config>` and follow steps documented in [README.md](README.md).
 
-If you use an Apple Silicon machine, don't forget to copy your firmware files to the current configuration `cp /etc/nixos/firmware* <current_config>/system/asahi-firmware`.
+If you use an Apple Silicon machine, don't forget to copy your firmware files to the current configuration `cp /etc/nixos/firmware/* <current_config>/system/asahi-firmware`.
+
+> [!IMPORTANT]
+> **Bootstrapping with Lix:** This configuration uses Lix, but a fresh NixOS
+> install ships with stock Nix. The two handle flake lock files differently,
+> so the first rebuild requires re-locking the Lix inputs:
+>
+> ```
+> nix --experimental-features "nix-command flakes" flake lock --update-input lix --update-input lix-module
+> ```
+>
+> After the first successful rebuild, Lix replaces stock Nix and this step
+> is no longer needed.
+>
+> **Do not commit the modified `flake.lock`** back to the repo — it would
+> break machines already running Lix. Discard the change after the first
+> rebuild:
+>
+> ```
+> git checkout flake.lock
+> ```
