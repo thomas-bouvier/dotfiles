@@ -156,7 +156,9 @@
     (interactive (list (project-root (project-current t))))
     (let ((default-directory project-dir))
       (magit-status project-dir)
-      (dirvish-side project-dir)
+      (let ((main-window (selected-window)))
+        (dirvish-side project-dir)
+        (select-window main-window))
       ;; Set the Konsole tab title to the project name
       (my/set-terminal-title
        (file-name-nondirectory (directory-file-name project-dir)))))
