@@ -114,6 +114,7 @@ in
 
         # Development
         python313
+        basedpyright
         mypy
         uv
         go
