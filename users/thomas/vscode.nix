@@ -3,7 +3,7 @@
   # The Nordic package does a better job at theming VSCode
   stylix.targets.vscode.enable = false;
 
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
     package = pkgs.unstable.vscodium;
     mutableExtensionsDir = false;
@@ -16,17 +16,6 @@
         with pkgs.vscode-extensions;
         [
           ms-vscode.cpptools
-        ]
-        # There are incompatibilities between VSCodium and the copilot-chat
-        # extension, so I bump the extension version myself.
-        # https://marketplace.visualstudio.com/items/GitHub.copilot-chat/changelog
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "copilot-chat";
-            publisher = "GitHub";
-            version = "0.40.1";
-            sha256 = "sha256-wVxryUaW53xU4zZKU4t1pZaAB7BFIOkkcng91JnCLOk=";
-          }
         ]
         ++ (with pkgs.nix-vscode-extensions.open-vsx-release; [
           # IDE
