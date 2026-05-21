@@ -236,6 +236,7 @@ With prefix argument OTHER-WINDOW, display the first file in the other window."
   :vc (:url "https://codeberg.org/sczi/opencode.el.git" :rev :newest)
   :bind ("C-c a" . opencode)
   :config
+  (setq opencode-server-url "http://127.0.0.1:4096")
   (add-to-list 'display-buffer-alist
                '("\\*OpenCode" (display-buffer-same-window)))
   ;; Use anthropic/claude-opus-4-6 by default
