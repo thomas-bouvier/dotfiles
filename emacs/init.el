@@ -240,8 +240,8 @@ With prefix argument OTHER-WINDOW, display the first file in the other window."
   (add-to-list 'display-buffer-alist
                '("\\*OpenCode" (display-buffer-same-window)))
   ;; Use anthropic/claude-opus-4-6 by default
-  (setq opencode-last-model '((providerID . "anthropic")
-                              (modelID . "claude-opus-4-6"))))
+  (setq opencode-last-model '((providerID . "scaleway")
+                              (modelID . "qwen3.6-35b-a3b"))))
 
 (use-package nerd-icons)
 (use-package nerd-icons-completion

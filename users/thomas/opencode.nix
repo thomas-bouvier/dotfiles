@@ -7,7 +7,23 @@
     tui.theme = lib.mkForce "nord";
 
     settings = {
-      model = "anthropic/claude-opus-4-6";
+      model = "qwen3.6-35b-a3b";
+
+      provider = {
+        scaleway = {
+          options = {
+            apiKey = "{env:SCW_SECRET_KEY}";
+            baseURL = "https://api.scaleway.ai/v1";
+          };
+
+          models = {
+            qwen36 = {
+              name = "qwen3.6-35b-a3b";
+            };
+          };
+        };
+      };
+
       plugin = [
         "@ex-machina/opencode-anthropic-auth@1.7.5"
       ];
