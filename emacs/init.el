@@ -534,6 +534,17 @@ the other window is scrolled."
   ;; You may want to use `embark-prefix-help-command' or which-key instead.
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
 
+  ;; When inside a project, default C-x b to project-narrowed view (< p)
+  (defun my/consult-buffer-project-narrow (orig-fn &optional sources)
+    "Advice for `consult-buffer' that pre-narrows to project when in one."
+    (if (and (not sources) (consult--project-root))
+        (let ((consult--customize-alist
+               (append `((consult-buffer :initial-narrow ?p))
+                       consult--customize-alist)))
+          (funcall orig-fn sources))
+      (funcall orig-fn sources)))
+  (advice-add #'consult-buffer :around #'my/consult-buffer-project-narrow)
+
   ;; Buffer source for files opened from magit diff
   (defvar consult--source-magit-diff-files
     `(:name "Diff Files"
