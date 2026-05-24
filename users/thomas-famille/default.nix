@@ -56,6 +56,7 @@ in
       # Everyday life
       localsend
       vlc
+      kdePackages.kcalc
       kdePackages.kcharselect
       kdePackages.kfind
       kdePackages.filelight

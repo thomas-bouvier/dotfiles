@@ -88,6 +88,7 @@ in
         localsend
         vlc
         signal-desktop
+        kdePackages.kcalc
         kdePackages.kcharselect
         kdePackages.kfind
         kdePackages.filelight
