@@ -703,6 +703,14 @@ ORIG-FUN will be wrapped by this advice."
   :config
   (xclip-mode 1))
 
+;; LSP via eglot (built-in)
+(use-package eglot
+  :ensure nil
+  :hook (python-mode . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("basedpyright-langserver" "--stdio"))))
+
 ;; YAML syntax highlighting
 (use-package yaml-mode
   :mode "\\.ya?ml\\'")
