@@ -165,7 +165,7 @@
 
   (setq project-switch-commands #'my/project-switch-magit)
 
-  ;; Open all files from a magit diff buffer and track them for consult
+  ;; Open files from a magit buffer and track them for consult
   (defvar my/magit-diff-files nil
     "List of file buffers opened from the last magit diff.")
 
@@ -185,52 +185,97 @@
                 (setq first-line line-num))))))
       first-line))
 
-  (defun my/magit-diff-open-all-files (&optional other-window)
-    "Open all files listed in the current magit diff buffer.
-Tracks them in `my/magit-diff-files' for use with consult.
-With prefix argument OTHER-WINDOW, display the first file in the other window."
+  (defun my/magit-prepare-file-buffer (file topdir)
+    "Load FILE relative to TOPDIR, jump to first changed line.
+Adds the buffer to `my/magit-diff-files'.  Does not display it."
+    (let* ((full-path (expand-file-name file topdir))
+           (buf (find-file-noselect full-path))
+           (first-line (my/first-changed-line file)))
+      (cl-pushnew buf my/magit-diff-files)
+      (with-current-buffer buf
+        (when (fboundp 'diff-hl-update)
+          (diff-hl-update))
+        (when first-line
+          (goto-char (point-min))
+          (forward-line (max 0 (- first-line 1 10)))))
+      buf))
+
+  (defun my/magit-open-at-point (&optional other-window)
+    "Open the file(s) or stash at point in a magit buffer.
+If a region of file sections is selected, open all of them.
+If point is on a file or hunk section, open that file.
+If point is on a stash, show the stash diff.
+Otherwise, stay on the current magit buffer.
+With prefix argument OTHER-WINDOW, display in the other window."
     (interactive "P")
     (unless (derived-mode-p 'magit-diff-mode 'magit-status-mode
                              'magit-revision-mode 'magit-merge-preview-mode)
-      (user-error "Not in a magit diff buffer"))
+      (user-error "Not in a magit buffer"))
     (let* ((topdir (magit-toplevel))
-           (files (or (magit-region-values 'file t)
-                      ;; Iterative BFS over magit section tree
-                      (let ((queue (list magit-root-section))
-                            result)
-                        (while queue
-                          (let ((sec (pop queue)))
-                            (when (eq (oref sec type) 'file)
-                              (push (oref sec value) result))
-                            (setq queue (nconc queue
-                                              (copy-sequence (oref sec children))))))
-                        (delete-dups (nreverse result))))))
-      (unless files
-        (user-error "No files found in diff"))
-      (setq my/magit-diff-files nil)
-      (dolist (file files)
-        (let* ((full-path (expand-file-name file topdir))
-               (buf (find-file-noselect full-path))
-               (first-line (my/first-changed-line file)))
-          (push buf my/magit-diff-files)
-          (with-current-buffer buf
-            (when (fboundp 'diff-hl-update)
-              (diff-hl-update))
-            (when first-line
-              (goto-char (point-min))
-              (forward-line (max 0 (- first-line 1 10)))))))
-      (setq my/magit-diff-files (nreverse my/magit-diff-files))
-      ;; Switch to the first file
-      (if other-window
-          (switch-to-buffer-other-window (car my/magit-diff-files))
-        (switch-to-buffer (car my/magit-diff-files)))
-      (message "Opened %d diff files (use C-x b < d to navigate)"
-               (length my/magit-diff-files))))
+           (section (magit-current-section))
+           (type (and section (oref section type)))
+           ;; Check for region-selected files first
+           (region-files (magit-region-values 'file t))
+           (display-fn (if other-window
+                           #'switch-to-buffer-other-window
+                         #'switch-to-buffer)))
+      (cond
+       ;; Multiple files selected via region
+       (region-files
+        (let (last-buf)
+          (dolist (file region-files)
+            (setq last-buf (my/magit-prepare-file-buffer file topdir)))
+          ;; Only display the last buffer
+          (funcall display-fn last-buf))
+        (message "Opened %d files (use C-x b < d to navigate)"
+                 (length region-files)))
+       ;; Single file or hunk section
+       ((magit-file-at-point)
+        (funcall display-fn
+                 (my/magit-prepare-file-buffer (magit-file-at-point) topdir)))
+       ;; Stash section
+       ((eq type 'stash)
+        (magit-stash-show (oref section value)))
+       ;; Nothing specific
+       (t
+        (message "No file at point")))))
+
+  ;; Highlight the file under cursor in the dirvish sidebar.
+  ;; Uses post-command-hook to work with all navigation (n/p, arrows, etc.)
+  (defvar my/magit-dirvish--last-file nil
+    "Last file highlighted in dirvish, to avoid redundant updates.")
+
+  (defun my/magit-highlight-in-dirvish ()
+    "Update the dirvish sidebar to highlight the file at point in magit."
+    (when (and (derived-mode-p 'magit-status-mode 'magit-diff-mode
+                               'magit-revision-mode)
+               (fboundp 'dirvish-side--session-visible-p))
+      (let ((file (magit-file-at-point t)))
+        (when (and file (not (equal file my/magit-dirvish--last-file))
+                   (file-exists-p file))
+          (setq my/magit-dirvish--last-file file)
+          (when-let* ((side-win (dirvish-side--session-visible-p)))
+            (with-selected-window side-win
+              (let ((buffer-list-update-hook nil)
+                    (window-buffer-change-functions nil)
+                    (dir (file-name-directory file)))
+                (or (cl-loop for (d . _) in dired-subdir-alist
+                             if (string-prefix-p d (expand-file-name dir))
+                             return (dired-goto-subdir d))
+                    (dirvish--find-entry 'find-alternate-file dir))
+                (dirvish-winbuf-change-h side-win)
+                (ignore-errors
+                  (if (fboundp 'dirvish-subtree-expand-to)
+                      (dirvish-subtree-expand-to file)
+                    (dired-goto-file file)))
+                (dirvish--redisplay))))))))
+
+  (add-hook 'post-command-hook #'my/magit-highlight-in-dirvish)
 
   :bind ((:map magit-diff-mode-map
-          ("C-c o" . my/magit-diff-open-all-files))
+          ("C-c o" . my/magit-open-at-point))
          (:map magit-status-mode-map
-          ("C-c o" . my/magit-diff-open-all-files))))
+          ("C-c o" . my/magit-open-at-point))))
 
 (use-package opencode
   :vc (:url "https://codeberg.org/sczi/opencode.el.git" :rev :newest)
@@ -507,11 +552,19 @@ the other window is scrolled."
   (add-to-list 'consult-buffer-sources 'consult--source-magit-diff-files 'append)
 )
 
+(use-package recentf
+  :ensure nil
+  :demand t
+  :config
+  (setq recentf-max-saved-items 200)
+  (recentf-mode 1))
+
 (use-package simple
   :ensure nil
   :bind
   ("C-x k" . kill-current-buffer)
-  ("C-x K" . kill-buffer))
+  ;; Use consult-recent-file to restore killed buffers
+  ("C-x K" . consult-recent-file))
 
 ;; Taken from 'https://github.com/protesilaos/dotfiles.git'.
 (defun my/keyboard-quit-dwim (top-level)
