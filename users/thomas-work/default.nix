@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   my-secrets,
   ...
 }:
@@ -138,7 +139,8 @@ in
       );
 
     sessionVariables = {
-      # EDITOR and VISUAL are set by services.emacs.defaultEditor to emacsclient
+      EDITOR = lib.mkForce "vim";
+      VISUAL = lib.mkForce "vim";
     };
 
     # This value determines the Home Manager release that your configuration is
