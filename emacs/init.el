@@ -32,6 +32,11 @@
 
 (set-face-attribute 'default nil :height 100)
 
+;; Enable CUA rectangle selection without enabling full CUA keybindings.
+;; Bound to C-x SPC since C-RET is not distinguishable from RET in terminal.
+(cua-selection-mode 1)
+(global-set-key (kbd "C-x SPC") #'cua-rectangle-mark-mode)
+
 ;; Prefer side-by-side (left/right) splits over top/bottom
 (setq split-height-threshold nil)
 (setq split-width-threshold 80)
