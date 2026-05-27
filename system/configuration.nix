@@ -152,9 +152,6 @@
           # Apple
           "apple_cursor"
           "obsidian"
-          # VSCode
-          "vscode-extension-ms-vscode-cpptools"
-          "vscode-extension-ms-vscode-remote-remote-ssh"
           # Crap by Intel for cameras
           "ipu6-camera-bins"
           "ipu6-camera-bins-unstable"

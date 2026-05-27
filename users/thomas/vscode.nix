@@ -13,14 +13,9 @@
       enableExtensionUpdateCheck = false;
 
       extensions =
-        with pkgs.vscode-extensions;
-        [
-          ms-vscode.cpptools
-        ]
-        ++ (with pkgs.nix-vscode-extensions.open-vsx-release; [
+        with pkgs.nix-vscode-extensions.open-vsx-release; [
           # IDE
           vscodevim.vim
-          jeanp413.open-remote-ssh
           marlosirapuan.nord-deep
           mk12.better-git-line-blame
           bierner.markdown-preview-github-styles
@@ -35,8 +30,7 @@
           # Languages
           jnoortheen.nix-ide
           vue.volar
-          tsyesika.guile-scheme-enhanced
-        ]);
+        ];
 
       userSettings = {
         # Theming

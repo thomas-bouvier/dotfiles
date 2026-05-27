@@ -7,7 +7,7 @@ My declarative, reproducible [NixOS](https://nixos.org/) system built using [Lix
 - Variants of users ;
 - A beautiful KDE Plasma desktop with [theme Nord](https://www.nordtheme.com/) applied everywhere ;
 - LibreWolf which I spent some time hardening ;
-- My Emacs config including OpenCode with a plugin to use your Claude Code API key ;
+- My Emacs config including OpenCode.el ;
 - Shell synchronisation via `atuin` ;
 - LUKS encryption via `disko` ;
 - Secrets management with `sops`.
@@ -119,7 +119,6 @@ Limitations:
 - (dns4eu) I should find a way to enable DNSOverTLS with DNS4EU
 - (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
-- (vscodium) [VSCodium is unable to install extensions onto remotes](https://github.com/NixOS/nixpkgs/issues/275669)
 - (apptainer) can't build containers on btrfs systems `Unable to create build: failed to find mount point for /tmp: no parent mount point found`
 
 These are not fully integrated yet:
