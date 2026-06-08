@@ -85,6 +85,10 @@ sudo tailscale up
 
 In Dolphin (or somewhere else), use `smb://user@ip` to connect to a remote SMB share.
 
+### Printers
+
+You can add a printer from the KDE settings > `Define a connection to a printer` > `PDD file` (you should see something like `canonts3500.ppd`).
+
 ## Useful commands
 
 Optimize the Nix store by hard linking duplicate binaries. This shouldn't be needed with my current dotfiles though, as optimizations are performed automatically at build time.
