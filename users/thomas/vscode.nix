@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   # The Nordic package does a better job at theming VSCode
   stylix.targets.vscode.enable = false;
@@ -34,11 +34,10 @@
 
       userSettings = {
         # Theming
-        "workbench.colorTheme" = "Nord Deep";
+        "workbench.colorTheme" = lib.mkForce "Nord Deep";
         "workbench.iconTheme" = "material-icon-theme";
         "chat.viewSessions.orientation" = "stacked";
-        "editor.fontFamily" = "'JetBrains Mono', 'monospace', monospace";
-        "editor.fontSize" = 13;
+        "editor.fontSize" = lib.mkForce 13;
         "explorer.confirmDelete" = true;
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;

@@ -99,8 +99,6 @@ in
     stateVersion = "24.05"; # Please read the comment before changing.
   };
 
-  gtk.gtk4.theme = null;
-
   xdg = {
     mimeApps = {
       enable = true;
