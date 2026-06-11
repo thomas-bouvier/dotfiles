@@ -20,6 +20,7 @@
           mk12.better-git-line-blame
           bierner.markdown-preview-github-styles
           pkief.material-icon-theme
+          detachhead.basedpyright
 
           # Python
           ms-python.python
