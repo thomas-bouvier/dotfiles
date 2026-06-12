@@ -1,8 +1,21 @@
-{ pkgs, ... }:
+{
+  config,
+  secretsPath,
+  ...
+}:
+
+let
+  ceaSopsFile = "${secretsPath}/secrets/cea.sops.yaml";
+in
 {
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+
+    # Include the sops-rendered CEA hosts config
+    includes = [
+      config.sops.templates."ssh-cea-config".path
+    ];
 
     matchBlocks = {
       "*" = {
@@ -61,5 +74,38 @@
         port = 6422;
       };
     };
+  };
+
+  # CEA secrets from cea.sops.yaml
+  sops.secrets."cea/user" = {
+    sopsFile = ceaSopsFile;
+  };
+  sops.secrets."cea/challenger_hostname" = {
+    sopsFile = ceaSopsFile;
+  };
+  sops.secrets."cea/mandelbrot_smp_hostname" = {
+    sopsFile = ceaSopsFile;
+  };
+  sops.secrets."cea/mandelbrot_rtx_hostname" = {
+    sopsFile = ceaSopsFile;
+  };
+
+  # SSH config snippet with secrets injected at activation time
+  sops.templates."ssh-cea-config" = {
+    content = ''
+      Host challenger
+          HostName ${config.sops.placeholder."cea/challenger_hostname"}
+          User ${config.sops.placeholder."cea/user"}
+
+      Host mandelbrot-smp
+          HostName ${config.sops.placeholder."cea/mandelbrot_smp_hostname"}
+          User ${config.sops.placeholder."cea/user"}
+          ProxyJump challenger
+
+      Host mandelbrot-rtx
+          HostName ${config.sops.placeholder."cea/mandelbrot_rtx_hostname"}
+          User ${config.sops.placeholder."cea/user"}
+          ProxyJump mandelbrot-smp
+    '';
   };
 }
