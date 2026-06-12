@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, secretsPath, ... }:
 
 {
   programs.opencode = {
@@ -12,7 +12,7 @@
       provider = {
         scaleway = {
           options = {
-            apiKey = "{env:SCW_SECRET_KEY}";
+            apiKey = "{file:${config.sops.secrets.scaleway_key.path}}";
             baseURL = "https://api.scaleway.ai/v1";
           };
 
@@ -45,5 +45,9 @@
     Install = {
       WantedBy = [ "default.target" ];
     };
+  };
+
+  sops.secrets.scaleway_key = {
+    sopsFile = "${secretsPath}/secrets/scaleway.sops.yaml";
   };
 }

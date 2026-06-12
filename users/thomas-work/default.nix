@@ -18,7 +18,10 @@ in
     ../thomas/konsole.nix
     ../thomas/opencode.nix
     ../thomas/plasma.nix
-    ../thomas/ssh.nix
+    (import ../thomas/ssh.nix {
+      inherit config;
+      secretsPath = secretsPath;
+    })
     ../thomas/vscode.nix
     ../thomas/zsh.nix
 

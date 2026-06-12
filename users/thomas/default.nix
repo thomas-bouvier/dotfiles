@@ -16,10 +16,16 @@ in
       secretsPath = secretsPath;
     })
     ./konsole.nix
-    ./opencode.nix
+    (import ./opencode.nix {
+      inherit config lib;
+      secretsPath = secretsPath;
+    })
     ./librewolf.nix
     ./plasma.nix
-    ./ssh.nix
+    (import ./ssh.nix {
+      inherit config;
+      secretsPath = secretsPath;
+    })
     ./vscode.nix
     ./zsh.nix
   ];
