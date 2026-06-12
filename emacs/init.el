@@ -332,10 +332,25 @@ With prefix argument OTHER-WINDOW, display in the other window."
         '(vc-state nerd-icons collapse file-size))
   ;; open large directory (over 20000 files) asynchronously with `fd' command
   (setq dirvish-large-directory-threshold 20000)
+  (defun my/dirvish-open-at-point (&optional other-window)
+    "Open the file at point in the dirvish sidebar.
+Without prefix argument, display in the most recent non-side window.
+With prefix argument OTHER-WINDOW, display in some other window."
+    (interactive "P")
+    (let* ((file (dired-get-file-for-visit))
+           (buf (find-file-noselect file))
+           (side-win (selected-window))
+           (target (get-mru-window nil nil 'not-selected)))
+      (if other-window
+          (switch-to-buffer-other-window buf)
+        (when target
+          (select-window target)
+          (switch-to-buffer buf)))))
   :bind ; Bind `dirvish-fd|dirvish-side|dirvish-dwim' as you see fit
   (("C-c f" . dirvish)
    ("C-c s" . dirvish-side)
    :map dirvish-mode-map               ; Dirvish inherits `dired-mode-map'
+   ("C-c o" . my/dirvish-open-at-point)
    (";"   . dired-up-directory)        ; So you can adjust `dired' bindings here
    ("?"   . dirvish-dispatch)          ; [?] a helpful cheatsheet
    ("a"   . dirvish-setup-menu)        ; [a]ttributes settings:`t' toggles mtime, `f' toggles fullframe, etc.
