@@ -120,7 +120,8 @@
       tailscale
       wget
       util-linux
-      exfat
+      dosfstools
+      exfatprogs
       usbutils
       pciutils
       efibootmgr
