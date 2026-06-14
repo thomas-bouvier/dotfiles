@@ -74,7 +74,7 @@
 
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/6D89-D11D";
-    fstype = "vfat";
+    fsType = "vfat";
     options = [
       "fmask=0022"
       "dmask=0022"
