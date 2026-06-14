@@ -16,7 +16,10 @@ in
       secretsPath = secretsPath;
     })
     ../thomas/konsole.nix
-    ../thomas/opencode.nix
+    (import ../thomas/opencode.nix {
+      inherit config lib;
+      secretsPath = secretsPath;
+    })
     ../thomas/plasma.nix
     (import ../thomas/ssh.nix {
       inherit config;
