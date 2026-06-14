@@ -22,6 +22,8 @@
     ../../users/thomas.nix
   ];
 
+  networking.hostName = "bolet";
+
   boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
@@ -42,8 +44,6 @@
     # Use the latest kernel
     kernelPackages = pkgs.linuxPackages_latest;
   };
-
-  networking.hostName = "bolet";
 
   fileSystems."/" = {
     device = "/dev/disk/by-label/ROOT";

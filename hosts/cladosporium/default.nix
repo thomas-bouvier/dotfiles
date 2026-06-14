@@ -20,15 +20,30 @@
 
     # Users
     ../../users/thomas-work.nix
-
-    # Partitioning
-    ./disko-configuration.nix
   ];
 
+  networking.hostName = "cladosporium";
+
   boot = {
-    # Use the systemd-boot EFI boot loader.
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+        efiInstallAsRemovable = false;
+      };
+
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+    };
+
+    initrd.luks.devices."dm-lvm" = {
+      device = "/dev/disk/by-uuid/c39eb9dc-607a-4579-9d37-dc8381903e8c";
+      preLVM = true;
+    };
 
     initrd.availableKernelModules = [
       "xhci_pci"
@@ -38,7 +53,7 @@
       "sd_mod"
       "rtsx_pci_sdmmc"
     ];
-    initrd.kernelModules = [ ];
+    initrd.kernelModules = [ "dm-snapshot" ];
 
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
@@ -47,8 +62,31 @@
     kernelPackages = pkgs.linuxPackages_latest;
   };
 
-  networking.hostName = "cladosporium";
+  fileSystems."/" = {
+    device = "/dev/mapper/vg0-nixos";
+    fsType = "ext4";
+  };
 
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/1d744e85-8071-49ad-88af-f589dd84a2c2";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/6D89-D11D";
+    fstype = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
+  };
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 60 * 1024; # 60GB
+    }
+  ];
   zramSwap = {
     enable = true;
     memoryPercent = 90;
@@ -70,5 +108,6 @@
   # networking.interfaces.wlp1s0f0u10.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.npu.enable = true;
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
