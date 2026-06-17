@@ -122,6 +122,8 @@
       util-linux
       dosfstools
       exfatprogs
+      dracut
+      file
       usbutils
       pciutils
       efibootmgr

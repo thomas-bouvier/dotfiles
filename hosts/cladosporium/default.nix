@@ -30,8 +30,16 @@
         enable = true;
         device = "nodev";
         efiSupport = true;
-        useOSProber = true;
+        useOSProber = false;
         efiInstallAsRemovable = false;
+
+        extraEntries = ''
+          menuentry "Ubuntu" {
+            search --set=root --fs-uuid 1d744e85-8071-49ad-88af-f589dd84a2c2
+            linux /vmlinuz-7.0.0-22-generic root=UUID=17e7d813-4976-408c-a1fd-ed4f937446ac ro quiet splash
+            initrd /initrd.img-7.0.0-22-generic
+          }
+        '';
       };
 
       efi = {
