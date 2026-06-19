@@ -119,6 +119,7 @@ in
         ripgrep
         rclone
         scaleway-cli
+        step-cli
 
         # Development
         python313
