@@ -127,6 +127,7 @@
       usbutils
       pciutils
       efibootmgr
+      openssl
     ];
 
     sessionVariables = {
