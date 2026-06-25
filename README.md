@@ -121,7 +121,6 @@ Limitations:
 
 - (nixos) This issue (pretty harmless) https://www.reddit.com/r/AsahiLinux/comments/10j9byn/does_anyone_know_what_causes_this_bootup_issue_i/
 - (dns4eu) I should find a way to enable DNSOverTLS with DNS4EU
-- (librewolf) [camera and screen share do not work on video calls](https://codeberg.org/librewolf/issues/issues/2548)
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 - (apptainer) can't build containers on btrfs systems `Unable to create build: failed to find mount point for /tmp: no parent mount point found`
 
