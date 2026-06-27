@@ -104,7 +104,7 @@ in
         ripgrep
 
         # Development
-        python313
+        python314
         basedpyright
         mypy
         uv

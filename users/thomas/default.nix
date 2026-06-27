@@ -122,7 +122,7 @@ in
         step-cli
 
         # Development
-        python313
+        python314
         basedpyright
         mypy
         uv
