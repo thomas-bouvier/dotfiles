@@ -151,6 +151,7 @@ in
 
         # Graphics
         inkscape
+        gimp
         kdePackages.kdenlive
         qgis
 
