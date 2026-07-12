@@ -91,6 +91,7 @@ in
         chromium
 
         # Command line
+        curl
         neovim
         eza
         age
@@ -102,6 +103,7 @@ in
         wl-clipboard
         git-filter-repo
         ripgrep
+        oras
 
         # Development
         python314

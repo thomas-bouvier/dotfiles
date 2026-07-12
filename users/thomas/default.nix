@@ -106,6 +106,7 @@ in
         chromium
 
         # Command line
+        curl
         neovim
         eza
         age
@@ -120,6 +121,7 @@ in
         rclone
         scaleway-cli
         step-cli
+        oras
 
         # Development
         python314
