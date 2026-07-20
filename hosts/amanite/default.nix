@@ -42,6 +42,7 @@
   };
 
   hardware.asahi = {
+    enable = true;
     peripheralFirmwareDirectory = ../../system/asahi-firmware;
   };
 
