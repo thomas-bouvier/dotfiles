@@ -144,6 +144,8 @@
         legacyNames = [
           "cnijfilter2"
           "unrar"
+          "cursor"
+          "cursor-cli"
           # Nvidia
           "nvidia-x11"
           "nvidia-settings"

@@ -125,6 +125,7 @@ in
 
         # Development
         python314
+        nodejs
         basedpyright
         mypy
         uv
@@ -134,6 +135,8 @@ in
         emacs-pgtk
         cudaPackages.nsight_systems
         gh
+        code-cursor
+        cursor-cli
 
         # Virtualisation
         dive
