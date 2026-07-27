@@ -1,4 +1,8 @@
-{ config, ... }:
+{
+  config,
+  inputs,
+  ...
+}:
 {
   # Enable CUDA support for packages on machines with NVIDIA GPUs
   nixpkgs = {
@@ -8,10 +12,21 @@
     };
 
     overlays = [
-      (final: prev: {
-        onnxruntime = prev.onnxruntime.override {
-          cudaSupport = false;
-        };
+      (_final: prev: {
+        # Import onnxruntime from a clean nixpkgs evaluation without cudaSupport.
+        # Using the flake's pinned nixpkgs input ensures the derivation hash
+        # matches the binary cache, avoiding source rebuilds of onnxruntime and
+        # its reverse dependencies (e.g. librewolf).
+        #
+        # Why this is needed: `prev.onnxruntime.override { cudaSupport = false; }`
+        # does NOT produce a cache-matching derivation because the override is
+        # applied within a package set where cudaSupport=true globally, which
+        # taints transitive dependencies.
+        onnxruntime =
+          (import inputs.nixpkgs {
+            inherit (prev) system;
+            config = { };
+          }).onnxruntime;
       })
     ];
   };
