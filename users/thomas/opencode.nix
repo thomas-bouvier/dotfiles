@@ -54,9 +54,10 @@
 
       - Never post or reply to comments on GitHub on my behalf. This includes
       PR/issue comments, review comments and their replies, and reviews —
-      whether via `gh`, the GitHub REST/GraphQL API, or any MCP/tool. PR and
-      issue bodies are fine. Reading GitHub is fine. If a comment/reply
-      genuinely seems needed, draft the text and let me post it myself.
+      whether via `gh`, the GitHub REST/GraphQL API, or any MCP/tool. I don't
+      want you to publish PR or issue descriptions either. Reading GitHub is
+      fine. If a comment/reply genuinely seems needed, draft the text and let
+      me post it myself, same for PRs and issues.
 
       - Never commit code on my behalf.
 
