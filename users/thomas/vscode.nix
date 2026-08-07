@@ -31,6 +31,7 @@
           # Languages
           jnoortheen.nix-ide
           vue.volar
+          opentofu.vscode-opentofu
         ];
 
       userSettings = {
@@ -42,7 +43,7 @@
         "explorer.confirmDelete" = true;
         "files.insertFinalNewline" = true;
         "files.trimFinalNewlines" = true;
-        "chat.disableAIFeatures" = false;
+        "chat.disableAIFeatures" = true;
       };
     };
   };
