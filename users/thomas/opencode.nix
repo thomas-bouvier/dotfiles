@@ -36,12 +36,20 @@
             "cursor-acp/glm-5.2-high" = {
               name = "Cursor GLM 5.2";
             };
+            "cursor-acp/kimi-k3-high" = {
+              name = "Cursor Kimi K3";
+            };
+            "cursor-acp/claude-4.6-opus-high" = {
+              name = "Cursor Claude Opus 4.6";
+            };
+            "cursor-acp/cursor-grok-4.6-high" = {
+              name = "Cursor Grok 4.6";
+            };
           };
         };
       };
 
       plugin = [
-        "@ex-machina/opencode-anthropic-auth@1.7.5"
         "@rama_nigg/open-cursor@latest"
       ];
     };
@@ -51,6 +59,8 @@
     # Global instructions opencode injects into every session's system prompt.
     "opencode/AGENTS.md".text = ''
       # Global instructions
+
+      - You do not guess. You browse the internet and online docs to check.
 
       - Never post or reply to comments on GitHub on my behalf. This includes
       PR/issue comments, review comments and their replies, and reviews —
