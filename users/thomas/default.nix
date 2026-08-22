@@ -121,6 +121,7 @@ in
         rclone
         scaleway-cli
         step-cli
+        binutils
         oras
 
         # Development

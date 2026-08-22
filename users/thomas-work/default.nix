@@ -103,6 +103,7 @@ in
         wl-clipboard
         git-filter-repo
         ripgrep
+        binutils
         oras
 
         # Development
