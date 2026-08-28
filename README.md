@@ -119,9 +119,7 @@ nh clean all --keep-since 30d
 
 Limitations:
 
-- (signal) Signal does not launch under Asahi Linux.
-- (localsend) Fonts are not rendering under Asahi Linux https://github.com/localsend/localsend/issues/2873
-- (nixos) This issue (pretty harmless) https://www.reddit.com/r/AsahiLinux/comments/10j9byn/does_anyone_know_what_causes_this_bootup_issue_i/
+- (localsend) Fonts are not rendering under Asahi Linux https://github.com/localsend/localsend/issues/2873. A temporary overlay fixes this issue.
 - (dns4eu) I should find a way to enable DNSOverTLS with DNS4EU.
 - (librewolf) `privacy.resistFingerprinting = true` prevents media upload and Leboncoin login from working.
 

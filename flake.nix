@@ -114,6 +114,10 @@
       mkUnstableOverlay = final: prev: {
         unstable = nixpkgs-unstable.legacyPackages.${prev.system};
       };
+
+      aarch64Overlays = commonOverlays ++ [
+        (import ./overlays/localsend-aarch64-fonts.nix)
+      ];
     in
     {
       nixosConfigurations.bolet = nixpkgs.lib.nixosSystem {
@@ -191,7 +195,7 @@
         modules = [
           {
             nixpkgs.hostPlatform = "aarch64-linux";
-            nixpkgs.overlays = commonOverlays ++ [
+            nixpkgs.overlays = aarch64Overlays ++ [
               mkUnstableOverlay
               apple-silicon.overlays.apple-silicon-overlay
             ];
@@ -264,7 +268,7 @@
         modules = [
           {
             nixpkgs.hostPlatform = "aarch64-linux";
-            nixpkgs.overlays = commonOverlays ++ [
+            nixpkgs.overlays = aarch64Overlays ++ [
               mkUnstableOverlay
               apple-silicon.overlays.apple-silicon-overlay
             ];
