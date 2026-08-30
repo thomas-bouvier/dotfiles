@@ -97,6 +97,13 @@
 
       # Always ask where to download
       "browser.download.useDownloadDir" = false;
+
+      # Trying to make screen sharing, cameras, and microphones work
+      "media.webrtc.camera.allow-pipewire" = true;
+      "media.webrtc.capture.allow-pipewire" = true;
+      "media.gmp-provider.enabled" = true;
+      "media.gmp-gmpopenh264.enabled" = true;
+      "media.webrtc.hw.h264.enabled" = true;
     };
   };
 }
