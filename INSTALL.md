@@ -314,7 +314,7 @@ reboot
 
 Once logged in in NixOS, clone this repository `git clone git@github.com:thomas-bouvier/my-dotfiles.git` at the location of your choice `<current_config>` and follow steps documented in [README.md](README.md).
 
-If you use an Apple Silicon machine, don't forget to copy your firmware files to the current configuration `cp /etc/nixos/firmware/* <current_config>/system/asahi-firmware`. Actually, please also backup them in an external location.
+If you use an Apple Silicon machine, don't forget to copy firmware file `firmware.cpio` to the current configuration `cp /etc/nixos/firmware/* <current_config>/hosts/<host>/firmware/`. Actually, please also backup them in an external location.
 
 > [!IMPORTANT]
 > My configuration uses Lix, but our fresh NixOS

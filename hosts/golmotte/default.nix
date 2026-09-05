@@ -53,7 +53,7 @@
 
   hardware.asahi = {
     enable = true;
-    peripheralFirmwareDirectory = ../../system/asahi-firmware;
+    peripheralFirmwareDirectory = ./firmware;
   };
 
   #hardware.graphics.package =
