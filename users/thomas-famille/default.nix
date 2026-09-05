@@ -17,7 +17,10 @@ in
     ../thomas/konsole.nix
     ../thomas/librewolf.nix
     ../thomas/plasma.nix
-    ../thomas/ssh.nix
+    (import ../thomas/ssh.nix {
+      inherit config;
+      secretsPath = secretsPath;
+    })
     ../thomas/zsh.nix
   ];
 
