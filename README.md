@@ -38,10 +38,10 @@ nh os switch . -H host
 To rebuild a remote system locally, and deploy it:
 
 ```console
-nixos-rebuild switch --flake .#coprin --target-host thomas@192.168.1.30 --sudo
+nixos-rebuild switch --flake .#golmotte --target-host thomas@golmotte --sudo
 
 # Or, better
-nh os switch . -H coprin --target-host thomas@coprin.local
+nh os switch . -H golmotte --target-host thomas@golmotte
 ```
 
 If you run out of memory, add parameters `--cores x` and `--max-jobs x` to the build command.
